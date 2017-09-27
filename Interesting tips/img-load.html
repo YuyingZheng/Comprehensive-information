@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>图片预加载</title>
+</head>
+
+<body>
+	<p>我在等待图片的出现 <a href="http://www.jianshu.com/p/d3a02ffe94b6">解析</a></p>
+	<img id ="hold-img" src="" alt=""/>
+	<script type="text/javascript">
+		/*Method-1
+			var img = new Image();
+			img.src="img1.jpg";
+			img.onload = function(){
+				alert("image is loaded");
+			}
+			document.body.appendChild(img);*/
+		/*Method-2*/
+		function finished(step) {
+			alert(step + " is finished!");
+		}
+		/*	var img = new Image();
+			img.src = 'img1.jpg';
+			if(img.complete){ //completely available.的时候complete会变成true,并且触发load事件
+				alert("image is completed!");
+				finished("complete");
+			}else{
+				img.onload = function(){
+					alert("image is loaded!");
+					finished("onload");
+				};
+			}*/
+
+		/*正确的写法/*Method-3*/
+		var imgElmet = document.querySelector("#hold-img");
+		var img = new Image();
+		img.onload = function () { //先给img绑定它的laod事件。
+			alert("image is loaded");
+			finished("onload");
+		}
+		img.src = "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1506512497453&di=29a23611aac1284a5639996ded883e38&imgtype=jpg&src=http%3A%2F%2Fimg1.imgtn.bdimg.com%2Fit%2Fu%3D2396808201%2C570250618%26fm%3D214%26gp%3D0.jpg";
+		imgElmet.src = img.src;
+		document.body.appendChild(img);
+	</script>
+</body>
+
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+</head>
+<style type="text/css">
+textarea {
+    height: 60px;
+    width: 700px;
+}
+
+.textarea-box {
+    position: relative;
+    display: inline-block;
+}
+
+span.enter-tips {
+    position: absolute;
+    right: 5px;
+    bottom: 5px;
+    background: #e3e3e3;
+}
+
+ul {
+    list-style: none;
+    border: 1px solid red;
+    border-radius: 5px;
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+}
+
+li {
+    display: inline-block;
+    border-right: 1px solid red;
+    padding: 5px;
+    font-size: 14px;
+    color: blue;
+}
+</style>
+
+<body>
+    <div class="textarea-box">
+        <textarea>Leuk nieuws! Als je je nu met je persoonlijke aanmeldingscode aanmeldt voor Club Staatsloterij ontvang je niet alleen 30 welkomstpunten, maar we ontvangen ook allebei 30 extra punten. Hopelijk win je er direct een mooie prijs mee!asds</textarea>
+        <span class="enter-tips"><strong class="enter-num">0</strong>/<strong class="all-num">150</strong></span>
+    </div>
+    <div class="codebox">
+        <span class="personal-code">Y3AA6GsdsaX</span>
+    </div>
+</body>
+<script type="text/javascript">
+$(function() {
+    $('.enter-num').text(Math.floor($('textarea').val().length / 2));
+    $('textarea').keyup(function() {
+        var maxLength = parseInt($(".all-num").text());
+        var len = Math.floor($(this).val().length / 2);
+        $('.enter-num').text(len);
+        //判断输入是否超过140个数
+        if (parseInt($('.enter-num').text()) > maxLength) {
+            console.log(parseInt($('.enter-num').text()) + "," + maxLength);
+            var $content = $(this).val().substring(0, maxLength * 2);
+            $(this).val($content);
+            $('.enter-num').text(maxLength);
+        }
+    }).keypress(function() {
+        $('textarea').trigger('keyup');
+    });
+});
+$(function() {
+    $(".personal-code").each(function(index, element) {
+        var $codeElement = $(this);
+        var codeValue = $(this).text();
+        console.log(codeValue);
+        var codeArray = codeValue.split("");
+        console.log(codeArray.length);
+        var $codelist = $('<ul class="code-list"></ul>');
+        for (var j = 0; j < codeArray.length; j++) {
+            var item = '<li class="code-item">' + codeArray[j] + '</li>';
+            $codelist.append(item);
+        }
+        $codeElement.replaceWith($codelist);
+    });
+});
+</script>
+
+</html>

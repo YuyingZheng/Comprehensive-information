@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style type="text/css">
+        .middle-line-block {
+            text-align: center;
+        }
+        .middle-line-block:before {
+            content: '';
+            display: block;
+            height: 1px;
+            width: 100%;
+            background-color: #999;
+            position: relative;
+            top: 11px;
+            /*调节线高*/
+            left: 0;
+        }
+
+        .middle-line-text {
+            display: inline-block;
+            /*颜色需与主题大背景色一致*/
+            background: #fff;
+            padding: 0 18px 0 18px;
+            position: relative;
+            font-size: 14px;
+            line-height: 22px;
+            font-weight: 500;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="middle-line-block">
+        <span class="middle-line-text">middle-line-text</span>
+    </div>
+
+</body>
+
+</html>
