@@ -1,0 +1,40 @@
+<div class="widget widget-full-width">
+	<h3 class="title">Full width with unit "vw"</h3>
+	<div class="box">
+		<h5 class="title">关于在限宽的容器中实现全屏效果</h5>
+		<p>在Web布局中，特别是在PC端中，常常可以看到这样的设计风格：内容居中，然后Banner区全屏。这也就是标题所说的效果，限宽的容器中实现全屏效果。</p>
+		<div class="post-img">
+			<img src="assets/uploads/container-image.jpg" alt="image">
+		</div>
+		<p>简单分析一下，假设容器的宽度是960px，全屏的宽度是100vw，他们之间相差就是960px - 100vw， 但我们只需要向左拉出其值的一半，也就是(960px - 100vw) / 2。知道原理就好办了，咱们借助CSS的calc()函数，就解决一切问题了。</p>
+		<div class="code">
+			<pre class="css"><code><span class="class">.full-width</span><span class="rules"> &#123;<br><span class="rule">  <span class="property">margin-left</span>:<span class="value"> calc( (960px - 100vw) / 2)</span>;<br></span><span class="rule">  <span class="property">margin-right</span>:<span class="value"> calc( (960px - 100vw) / 2)</span>;<br></span>&#125;</span></code></pre>
+		</div>
+		<p>上面的代码，还可以优化一下。960px相当于100%，这样一来960px / 2也就相当于50%；对应的100vw / 2就变成了50vw。这样上面的代码就变成了：</p>
+		<div class="code">
+			<pre class="css"><code><span class="class">.full-width</span><span class="rules"> &#123;<br><span class="rule">  <span class="property">margin-left</span>:<span class="value"> calc(50% - 50vw)</span>;<br></span><span class="rule">  <span class="property">margin-right</span>:<span class="value"> calc(50% - 50vw)</span>;<br></span>&#125;</span></code></pre>
+		</div>
+		<br>
+		<h5 class="title">CSS Shapes</h5>
+		<div class="simple-shape">
+		  <img class="balloon" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/12005/round-balloon.png">
+		  <p>Praesent ut fermentum enim, ultricies luctus risus. Nullam auctor, turpis id gravida luctus, justo tellus euismod nulla, condimentum commodo sem purus vel arcu. Sed in arcu arcu. Fusce eget lobortis ligula. Sed mattis efficitur magna quis ultricies. Nunc tristique mattis ex sit amet dictum. Maecenas non viverra mauris.</p>
+		  
+		  <p>Phasellus auctor nec magna sit amet volutpat. Nulla lobortis massa nunc, id pellentesque nisl ultrices quis. Ut volutpat, orci ac egestas ullamcorper, arcu urna fringilla mauris, vitae efficitur turpis nulla vel est. Morbi semper sapien vitae massa scelerisque consectetur. Fusce eget diam tellus. Etiam lacinia, lacus non varius congue, erat leo aliquam mi, sit amet accumsan nunc sapien quis nisl. Donec dignissim iaculis quam, ac consectetur augue feugiat nec. In velit ligula, iaculis fringilla ex a, luctus hendrerit libero.</p>
+		  
+		  <p>Etiam lacinia, lacus non varius congue, erat leo aliquam mi, sit amet accumsan nunc sapien quis nisl. Donec dignissim iaculis quam, ac consectetur augue feugiat nec. In velit ligula, iaculis fringilla ex a, luctus hendrerit libero.</p>
+		</div>
+	</div>
+</div>
+
+<style type="text/css">
+	.simple-shape{
+		background-color: #fff;
+		padding: 30px 15px;
+	}
+	.balloon {
+    float: left;
+    width: 429px;
+    shape-outside: circle(50%);
+  }
+</style>

@@ -1,0 +1,55 @@
+<div class="widget widget-holder">
+	<h3 class="title">Useful image holder</h3>
+	<div class="box">
+		<h5 class="title">Holder.min.js</h5>
+		<p>Client-side image placeholders. <a href="http://holderjs.com">http://holderjs.com</a></p>
+		<div class="row">
+			<div class="col-t-3">
+				<img data-src="holder.js/100px100?theme=social">
+			</div>
+			<div class="col-t-3">
+				<img data-src="holder.js/100px100?theme=social">
+			</div>
+			<div class="col-t-3">
+				<img data-src="holder.js/100px100?theme=social">
+			</div>
+			<div class="col-t-3">
+				<img data-src="holder.js/100px100?theme=social">
+			</div>
+		</div>
+		<br>
+		<br>
+
+		<h5 class="title">Beautiful placeholders using images from unsplash</h5>
+		<p>Image Gallery <a href="https://unsplash.it/images">https://unsplash.it/images</a></p>
+		<div class="row">
+			<div class="col-t-3">
+				<img src="https://unsplash.it/300/?random">
+			</div>
+			<div class="col-t-3">
+				<img src="https://unsplash.it/300/?random">
+			</div>
+			<div class="col-t-3">
+				<img src="https://unsplash.it/300/?random">
+			</div>
+			<div class="col-t-3">
+				<img src="https://unsplash.it/300/?random">
+			</div>
+		</div>
+		<br>
+		<br>
+
+		<h5 class="title">Other Useful links</h5>
+		<ul>
+			<li><a href="https://juejin.im/welcome/frontend" target="_blank">掘金社区</a></li>
+			<li><a href="http://w3cplus.github.io/SassMagic/" target="_blank">SassMagic</a></li>
+			<li><a href="https://css-tricks.com/svg-sprites-use-better-icon-fonts/" target="_blank">css-tricks</a></li>
+			<li><a href="https://tympanus.net/codrops/css_reference/#section_css-function" target="_blank">CSS Reference</a></li>
+			<li><a href="http://www.w3chtml.com/css3/" target="_blank">CSS3/CSS2/CSS 教程/参考/帮助</a></li>
+			<li><a href="http://enjoycss.com/5qO" target="_blank">enjoycss</a></li>
+			<li><a href="http://lea.verou.me/css3patterns/" target="_blank">css3patterns</a></li>
+			<li><a href="http://cubic-bezier.com/#.17,.67,.83,.67" target="_blank">贝塞尔曲线</a></li>
+			<li><a href="https://daneden.github.io/animate.css/" target="_blank">animate.css</a></li>
+		</ul>
+	</div>
+</div>

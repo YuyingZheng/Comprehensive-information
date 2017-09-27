@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+@@include('views/inc/head.shtml', {"title": "FlexBox | Site name"})
+
+<body id="app">
+  @@include('views/inc/header.shtml')
+
+  <main class="main">
+  	<div class="container">
+  		@@include('views/widgets/flexbox.shtml')
+  	</div>
+  </main>
+  
+  @@include('views/inc/footer.shtml')
+  @@include('views/inc/scripts.shtml')
+</body>
+
+</html>

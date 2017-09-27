@@ -1,0 +1,69 @@
+.widget {
+  float: left;
+  width: 25%;
+  min-height: 300px;
+  margin: 0 0 .2rem;
+  box-shadow: 0 0 3px #f00;
+}
+
+.icon {
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  color: red;
+  fill: currentColor;
+  stroke: currentColor;
+  stroke-width: 0;
+}
+
+html {
+  font-size: 100px;
+}
+
+body {
+  font-size: .12rem;
+  background: #e3e3e3;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+}
+
+.gulp-box {
+  position: relative;
+  float: right;
+  width: 70%;
+  height: 350px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  font-size: 20px;
+  color: #022;
+  background: #00f;
+  box-shadow: 0 0 2px #3eaea2;
+  -webkit-transform: translate(50px, 100px);
+      -ms-transform: translate(50px, 100px);
+          transform: translate(50px, 100px);
+}
+
+.svg-demo {
+  clear: both;
+}
+
+.header-main {
+  background-image: url("/images/branding/logo.main.png");
+}
+
+@media all and (-webkit-min-device-pixel-ratio: 1.5), (min--moz-device-pixel-ratio: 1.5), (min-device-pixel-ratio: 1.5), (-webkit-min-device-pixel-ratio: 1.4375), (min-resolution: 138dpi), (-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 1.5dppx) {
+  .header-main {
+    background-image: url("/images/branding/logo.main@2x.png");
+    background-size: auto auto;
+  }
+}
+
+.footer-main {
+  background-image: url("/images/branding/logo.main.png");
+}
+
+@media all and (-webkit-min-device-pixel-ratio: 1.5), (min--moz-device-pixel-ratio: 1.5), (min-device-pixel-ratio: 1.5), (-webkit-min-device-pixel-ratio: 1.4375), (min-resolution: 138dpi), (-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 1.5dppx) {
+  .footer-main {
+    background-image: url("/images/branding/logo.main@2x.png");
+    background-size: auto auto;
+  }
+}

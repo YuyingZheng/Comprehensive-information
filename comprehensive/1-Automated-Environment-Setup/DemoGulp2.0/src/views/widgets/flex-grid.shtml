@@ -1,0 +1,163 @@
+<div class="widget widget-flex-grid">
+  <h3 class="title">Grid system with flexbox</h3>
+  <div class="box">
+    <h5 class="title">Flex Grid</h5>
+    <p>A grid system based on the flex display property. <a href="http://flexboxgrid.com/">flexboxgrid.com</a> <br><a href="http://demo.tutorialzine.com/2016/11/boostrap-4-regular-vs-flex-grid/?1-basic-grid#">What's New in the Bootstrap 4 Grid?</a></p>
+    <div class="row">
+      <div class="col-m-3 col-t-1">
+        <div class="demo">m1</div>
+      </div>
+      <div class="col-m-3 col-t-1">
+        <div class="demo">m1</div>
+      </div>
+      <div class="col-m-3 col-t-1">
+        <div class="demo">m1</div>
+      </div>
+      <div class="col-m-3 col-t-1">
+        <div class="demo">m1</div>
+      </div>
+      <div class="col-m-3 col-t-1">
+        <div class="demo">m1</div>
+      </div>
+      <div class="col-m-3 col-t-1">
+        <div class="demo">m1</div>
+      </div>
+      <div class="col-m-3 col-t-1">
+        <div class="demo">m1</div>
+      </div>
+      <div class="col-m-3 col-t-1">
+        <div class="demo">m1</div>
+      </div>
+      <div class="col-m-3 col-t-1">
+        <div class="demo">m1</div>
+      </div>
+      <div class="col-m-3 col-t-1">
+        <div class="demo">m1</div>
+      </div>
+      <div class="col-m-3 col-t-1">
+        <div class="demo">m1</div>
+      </div>
+      <div class="col-m-3 col-t-1">
+        <div class="demo">m1</div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-m-2">
+        <div class="demo">m2</div>
+      </div>
+      <div class="col-m-2">
+        <div class="demo">m2</div>
+      </div>
+      <div class="col-m-2">
+        <div class="demo">m2</div>
+      </div>
+      <div class="col-m-2">
+        <div class="demo">m2</div>
+      </div>
+      <div class="col-m-2">
+        <div class="demo">m2</div>
+      </div>
+      <div class="col-m-2">
+        <div class="demo">m2</div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-m-3">
+        <div class="demo">m3</div>
+      </div>
+      <div class="col-m-3">
+        <div class="demo">m3</div>
+      </div>
+      <div class="col-m-3">
+        <div class="demo">m3</div>
+      </div>
+      <div class="col-m-3">
+        <div class="demo">m3</div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-m-4">
+        <div class="demo">m4</div>
+      </div>
+      <div class="col-m-4">
+        <div class="demo">m4</div>
+      </div>
+      <div class="col-m-4">
+        <div class="demo">m4</div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-m-5">
+        <div class="demo">m5</div>
+      </div>
+      <div class="col-m-7">
+        <div class="demo">m7</div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-m-6">
+        <div class="demo">m6</div>
+      </div>
+      <div class="col-m-6">
+        <div class="demo">m6</div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-m-7">
+        <div class="demo">m7</div>
+      </div>
+      <div class="col-m-5">
+        <div class="demo">m5</div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-m-8">
+        <div class="demo">m8</div>
+      </div>
+      <div class="col-m-4">
+        <div class="demo">m4</div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-m-9">
+        <div class="demo">m9</div>
+      </div>
+      <div class="col-m-3">
+        <div class="demo">m3</div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-m-10">
+        <div class="demo">m10</div>
+      </div>
+      <div class="col-m-2">
+        <div class="demo">m2</div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-m-10 col-t-11">
+        <div class="demo">m11</div>
+      </div>
+      <div class="col-m-2 col-t-1">
+        <div class="demo">m1</div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-m-12">
+        <div class="demo">m12</div>
+      </div>
+    </div>
+    <br>
+    <br>
+
+    <div class="code">
+      <h6 class="title">Html</h6>
+      <pre class="xml"><code><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"row"</span>&gt;</span><br>  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"col-m-6"</span>&gt;</span>m6<span class="tag">&lt;/<span class="title">div</span>&gt;</span><br>  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"col-m-6"</span>&gt;</span>m6<span class="tag">&lt;/<span class="title">div</span>&gt;</span><br><span class="tag">&lt;/<span class="title">div</span>&gt;</span>  <br><br><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"row"</span>&gt;</span><br>  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"col-m-*"</span>&gt;</span>...<span class="tag">&lt;/<span class="title">div</span>&gt;</span><br>  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"col-m-*"</span>&gt;</span>...<span class="tag">&lt;/<span class="title">div</span>&gt;</span><br><span class="tag">&lt;/<span class="title">div</span>&gt;</span></code></pre>
+    </div>
+
+    <div class="code">
+      <h6 class="title">Css</h6>
+      <pre class="css"><code><span class="class">.row</span><span class="rules"> &#123;<br><span class="rule">  <span class="property">display</span>:<span class="value"> flex</span>;<br></span><span class="rule">  <span class="property">flex-direction</span>:<span class="value"> row</span>;<br></span><span class="rule">  <span class="property">flex-wrap</span>:<span class="value"> wrap</span>;<br></span><span class="rule">  <span class="property">box-sizing</span>:<span class="value"> border-box</span>;<br></span><span class="rule">  <span class="property">margin</span>:<span class="value"> 0 clac((-1) * (col-padding-value))</span>;<br></span>&#125;</span>  <br><br><span class="class">.col-m-*</span><span class="rules"> &#123;<br><span class="rule">  <span class="property">box-sizing</span>:<span class="value"> border-box</span>;<br></span><span class="rule">  <span class="property">padding</span>:<span class="value"> 0 (col-padding-value)</span>;<br></span><span class="rule">  <span class="property">flex</span>:<span class="value"> 0 0 ( * / 12)</span>;<br></span>&#125;</span></code></pre>
+    </div>
+  </div>
+</div>
