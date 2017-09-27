@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function MyObject() {
+            var privateVar = 10;
+
+            function privateFunction() {
+                console.log('this is a private Function!');
+            }
+            this.publicMethod = function () {
+                privateVar++;
+                console.log(privateVar);
+                privateFunction();
+            }
+        }
+        var myObject = new MyObject();
+        
+        console.log(myObject.publicMethod());
+
+        console.log(myObject.privateVar);  //undefined
+        console.log(MyObject.privateFunction()); // not a fucntion
+    </script>
+</body>
+
+</html>

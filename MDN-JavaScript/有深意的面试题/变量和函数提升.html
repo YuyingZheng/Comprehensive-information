@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //同一个标识符的情况下，变量声明与函数声明都会提升。函数声明的提升优先级大于变量声明的提升（即函数声明置顶）。
+        /** 1)函数声明会置顶
+            2)变量声明也会置顶
+            3)函数声明比变量声明更置顶：(函数在变量上面)
+            4)变量和赋值语句一起书写，在js引擎解析时，会将其拆成声明和赋值2部分，声明置顶，赋值保留在原来位置
+            5)声明过的变量不会重复声明
+         **/
+        alert(a);
+        a();
+        var a = 3;
+        function a() {
+            alert(10);
+        }
+        alert(a);
+        a = 6;
+        a();  //error
+
+        /* 实际执行过程：
+        function a(){alert(10);}
+        var a;  //JavaScript 对于重复声明不会报错。他会对后续的声明视而不见，但是会执行后续声明中变量的初始化。
+        alert(a)；
+        a();
+        a=3;
+        alert(a);
+        a=6;  //a 被重新重新初始化为number.
+        a();
+        */
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Recursion Example</title>
+    </head>
+    <body>
+        <script type="text/javascript">
+        //严格模式行不通
+            function factorial(num){
+                if (num <= 1){
+                    return 1;
+                } else {
+                    return num * arguments.callee(num-1);//arguments.callee是一个指向正在执行的函数的指针
+                }
+            }
+
+            var anotherFactorial = factorial;
+            factorial = null;
+            alert(anotherFactorial(4));  //24
+
+
+
+        </script>
+     
+    </body>
+</html>

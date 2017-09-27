@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .keycode {
+            border: 1px solid #d5d5d5;
+            min-width: 200px;
+            height: 200px;
+            font-size: 120px;
+            text-align: center;
+            line-height: 200px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            box-shadow: 0 0 4px rgb(0, 0, 0);
+            transform: translate(-50%, -50%);
+            margin: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <p class="keycode">keyCode</p>
+    <script>
+        // function test1(value){
+        //     console.log('test1:'+ value);
+        // }
+        // function test2(value){
+        //     console.log('test2:'+ value);
+        // }
+        // function test3(value){
+        //     console.log('test3:'+ value);
+        // }
+
+        // for(var i = 0; i< 5; i++){
+        //     test1(i);
+        //     console.log('neibu-1:'+i);
+        //     test2(i);
+        //     console.log('neibu-2:'+i)
+        //     test3(i);
+        // }
+        var keyCode = document.querySelector('.keycode');
+        window.onkeydown = function (e) {
+            var codeValue = e.keyCode;
+            keyCode.textContent = codeValue;
+        }
+    </script>
+</body>
+
+</html>

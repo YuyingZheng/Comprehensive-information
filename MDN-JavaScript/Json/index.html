@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Our superheroes</title>
+  <link href="https://fonts.googleapis.com/css?family=Faster+One" rel="stylesheet">
+  <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+  <header>
+  </header>
+  <section>
+  </section>
+  <script>
+    var header = document.querySelector('header');
+    var section = document.querySelector('section');
+
+    var requestUrl = 'https://mdn.github.io/learning-area/javascript/oojs/json/superheroes.json';
+    /*Json数据
+    {
+  "squadName" : "Super hero squad",
+  "homeTown" : "Metro City",
+  "formed" : 2016,
+  "secretBase" : "Super tower",
+  "active" : true,
+  "members" : [
+    {
+      "name" : "Molecule Man",
+      "age" : 29,
+      "secretIdentity" : "Dan Jukes",
+      "powers" : [
+        "Radiation resistance",
+        "Turning tiny",
+        "Radiation blast"
+      ]
+    },
+    {
+      "name" : "Madame Uppercut",
+      "age" : 39,
+      "secretIdentity" : "Jane Wilson",
+      "powers" : [
+        "Million tonne punch",
+        "Damage resistance",
+        "Superhuman reflexes"
+      ]
+    },
+    {
+      "name" : "Eternal Flame",
+      "age" : 1000000,
+      "secretIdentity" : "Unknown",
+      "powers" : [
+        "Immortality",
+        "Heat Immunity",
+        "Inferno",
+        "Teleportation",
+        "Interdimensional travel"
+      ]
+    }
+  ]
+}
+     */
+    var requestObj = new XMLHttpRequest();
+    requestObj.open('GET', requestUrl);
+    /*requestObj.responseType = 'json';*/
+    requestObj.responseType = 'text';
+    requestObj.send();
+    requestObj.onload = function () {
+      /*var responseContent= requestObj.response;*/
+      var responseContentText = requestObj.response;
+      var responseContentJson = JSON.parse(responseContentText);
+      populateHeader(responseContentJson);
+      showHeroes(responseContentJson);
+    }
+
+    function populateHeader(responseJsonObj) {
+      var myH1 = document.createElement('h1');
+      myH1.textContent = responseJsonObj['squadName'];
+      header.appendChild(myH1);
+      var myPara = document.createElement('p');
+      myPara.textContent = 'Hometown: ' + responseJsonObj['homeTown'] + ' // Formed: ' + responseJsonObj['formed'];
+      header.appendChild(myPara);
+    }
+
+    function showHeroes(responseJsonObj) {
+      var mainInfo = responseJsonObj['members'];
+
+      for (var i = 0; i < mainInfo.length; i++) {
+        var myArticle = document.createElement('article');
+        var myH2 = document.createElement('h2');
+        var infoPara1 = document.createElement('p');
+        var infoPara2 = document.createElement('p');
+        var infoPara3 = document.createElement('p');
+        var infoList = document.createElement('ul');
+        myH2.textContent = mainInfo[i].name;
+        infoPara1.textContent = 'Secret identity: ' + mainInfo[i].secretIdentity;
+        infoPara2.textContent = 'Age: ' + mainInfo[i].age;
+        infoPara3.textContent = 'Superpowers:';
+
+        var powers = mainInfo[i].powers;
+        for (var j = 0; j < powers.length; j++) {
+          var powerItem = document.createElement('li');
+          powerItem.textContent = powers[j];
+          infoList.appendChild(powerItem);
+        }
+        myArticle.appendChild(myH2);
+        myArticle.appendChild(infoPara1);
+        myArticle.appendChild(infoPara2);
+        myArticle.appendChild(infoPara3);
+        myArticle.appendChild(infoList);
+
+        section.appendChild(myArticle);
+      }
+    }
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+       
+        function SuperType(name) {
+            this.name = name;
+            this.colors = ['red', 'blue', 'green'];
+        }
+        SuperType.prototype.sayName = function () {
+            console.log('My name is ' + this.name);
+        }
+
+        function SubType(name, age) {
+            SuperType.call(this, name);
+            this.age = age;
+        }
+        // SubType.prototype等于SuperType的实例化对象。等于 SubType.prototype.colors存在。所有的SubType会共享一个这个colors属性
+        SubType.prototype = new SuperType();
+        SubType.prototype.constructor = SubType;
+
+        SubType.prototype.sayAge = function () {
+            console.log('My age is ' + this.age);
+        }
+
+        var subType = new SubType('jianbin', 25);
+    </script>
+</body>
+
+</html>

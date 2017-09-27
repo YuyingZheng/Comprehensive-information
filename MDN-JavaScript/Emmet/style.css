@@ -1,0 +1,34 @@
+div {
+     :-webkit-full-screen a {
+        display: -webkit-box;
+        display: flex
+    }
+     :-moz-full-screen a {
+        display: flex
+    }
+     :-ms-fullscreen a {
+        display: -ms-flexbox;
+        display: flex
+    }
+     :fullscreen a {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex
+    }
+}
+
+div {
+    
+    border-radius: 5px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-shadow: 1px 0 0 red;
+    box-shadow: 1px 0 0 red;
+}
+@media (-webkit-min-device-pixel-ratio: 2),
+(min-resolution: 2dppx) {
+    .image {
+        background-image: url(image@2x.png);
+    }
+}

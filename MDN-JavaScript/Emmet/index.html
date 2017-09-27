@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--X-UA-Compatible是IE8的一个专有<meta>属性,使用X-UA-Compatible标签强制IE8采用低版本方式渲染。content 属性指定页面的模式,“IE=edge”以告诉 Internet Explorer 8 使用可用的最高级别模式。-->
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <!--#page>div.logo+ul#navigation>li*5>a{Item $}  -->
+    <div id="page">
+        <div class="logo"></div>
+        <ul id="navigation">
+            <li><a href="">Item 1</a></li>
+            <li><a href="">Item 2</a></li>
+            <li><a href="">Item 3</a></li>
+            <li><a href="">Item 4</a></li>
+            <li><a href="">Item 5</a></li>
+        </ul>
+    </div>
+    <!--爬上 ^ 使用^运算符，您可以爬上一级树，并更改上下文 .栗子： div+div>p>span+em^bq-->
+    <div></div>
+    <div>
+        <p><span></span><em></em></p>
+        <blockquote></blockquote>
+    </div>
+    <!-- 分组：()  div>(header>ul>li*2>a)+footer>p-->
+    <div>
+        <header>
+            <ul>
+                <li><a href=""></a></li>
+                <li><a href=""></a></li>
+            </ul>
+        </header>
+        <footer>
+            <p></p>
+        </footer>
+    </div>
+    <!-- div#header+div.page+div#footer.class1.class2.class3 -->
+    <div id="header"></div>
+    <div class="page"></div>
+    <div id="footer" class="class1 class2 class3"></div>
+    <!-- 自定义属性[] a.link[href title='link' name]-->
+    <a href="" class="link" title="link" name=""></a>
+    <!-- 商品编号 $ ,使用@修饰符，可以更改编号方向（升序或降序）和基数（例如起始值),ul>li.item$*5 
+    div.qualifier>(ul>li.item$*5)+(ul>li.item$$$*5)+(ul>li.item$@-*5)+ul>li.item$@3*5-->
+    <div class="qualifier">
+        <ul>
+            <li class="item1"></li>
+            <li class="item2"></li>
+            <li class="item3"></li>
+            <li class="item4"></li>
+            <li class="item5"></li>
+        </ul>
+        <ul>
+            <li class="item001"></li>
+            <li class="item002"></li>
+            <li class="item003"></li>
+            <li class="item004"></li>
+            <li class="item005"></li>
+        </ul>
+        <ul>
+            <li class="item1@-"></li>
+            <li class="item2@-"></li>
+            <li class="item3@-"></li>
+            <li class="item4@-"></li>
+            <li class="item5@-"></li>
+        </ul>
+        <ul>
+            <li class="item3"></li>
+            <li class="item4"></li>
+            <li class="item5"></li>
+            <li class="item6"></li>
+            <li class="item7"></li>
+        </ul>
+    </div>
+    <!-- lorem p*4>lorem-->
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos sed dolorem, maiores nemo quisquam molestias. Ipsam
+        reprehenderit aspernatur ipsa blanditiis molestiae nesciunt qui voluptatem velit quisquam, saepe maiores ex. Ab?</p>
+    <p>Beatae cum consequuntur aperiam assumenda dignissimos dolores corrupti qui quam sapiente, ratione dolore iure, molestias
+        magnam sit? Sunt ut iste, natus, optio aut saepe ad qui alias necessitatibus labore expedita!</p>
+    <p>Repellat nihil inventore minus dolores animi? Amet tenetur eos modi culpa reprehenderit accusamus deleniti impedit facere
+        corrupti, provident nisi magnam hic aliquam debitis, natus quos pariatur quibusdam eveniet quam laudantium!</p>
+    <p>Dolorum quia sapiente velit perspiciatis in rem. Tenetur maiores inventore, nihil sunt provident aliquam omnis, sapiente
+        consequuntur ea nam asperiores! Totam provident corporis repellendus natus expedita eius nesciunt deleniti amet.</p>
+    <!-- ul.generic-list>lorem10.item*4 -->
+    <ul class="generic-list">
+        <li class="item">Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque, alias.</li>
+        <li class="item">Dolore nobis cupiditate amet! Voluptatibus dolorem soluta velit earum officia?</li>
+        <li class="item">Accusantium maiores inventore, quod quidem aliquam repudiandae dolor voluptatum quos!</li>
+        <li class="item">Eaque quia consequuntur harum ea error nobis quidem consequatur necessitatibus!</li>
+    </ul>            
+    </body>
+
+</html>

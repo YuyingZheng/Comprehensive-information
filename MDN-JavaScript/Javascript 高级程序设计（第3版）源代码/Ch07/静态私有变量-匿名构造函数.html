@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        (function () {
+            var name = '';
+
+            Person = function (value,age) {
+                name = value;
+                this.age = age;
+            }
+            Person.prototype.getName = function(){
+                return name + ",age:" + this.age;
+            }
+            Person.prototype.setName = function(value,age){
+                name = value ;
+                this.age = age;
+            }
+        })();
+        
+        var person1 = new Person('jianbin',25);
+        console.log(person1.getName());// jinbin,age:25
+        person1.setName('jianbinnew',26);
+        console.log(person1.getName());//jianbinnew,age:26
+
+        var person2 = new Person('jianbin2hao',35);
+        console.log(person2.getName());//jianbin2hao,age:35
+        console.log(person1.getName());//jianbin2hao,,age:26
+
+        person2.setName("newjianbin",45);
+        console.log(person2.getName());//newjianbin,age:45
+        console.log(person1.getName());//newjianbin,,age:26
+    </script>
+</body>
+
+</html>

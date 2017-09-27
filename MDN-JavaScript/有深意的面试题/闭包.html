@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <p>考察、异步、作用域、闭包</p>
+    <a href="http://www.qdfuns.com/notes/17398/e8a1ce8f863e8b5abb530069b388a158/page/3.html#tagsbar">解析</a>
+    <script>
+        //输出0 1 2 3 3 3
+        for (var i = 0; i < 3; i++) {
+            setTimeout(function () {
+                console.log("setTimeout-i:"+i)
+            }, 0);
+            console.log("外部i:"+i);
+        }
+        //如果想得到0 1 2.内部再加一个闭包每次传值进去。
+        for (var j = 0; j < 3;j++){
+            setTimeout((function(j){
+                return function(){
+                    console.log("setTimeout-j:"+j);
+                };
+            })(j),0);
+            console.log("外部j:"+j)
+        }
+        //最简单的方法用Let 声明变量,变量i是let声明的,当前的i只在本轮循环有效,所以每一次循环的i其实都是一个新的变量
+        for (let i = 0; i < 3; i++) {
+            setTimeout(function () {
+                console.log("setTimeout-let-i:"+i)
+            }, 0);
+            console.log("外部-let-i:"+i);
+        }
+    </script>
+</body>
+
+</html>

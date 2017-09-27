@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function inheritPrototype(Child, Parent) {
+            Child.prototype = Object.create(Parent.prototype); // 内部创建类似空函数来桥接的继承方式。
+            Child.prototype.constructor = Child;
+        }
+
+        //廖雪峰推荐的方式
+        // function inheritPrototype(Child, Parent) {
+        //     var F = function () {};
+        //     F.prototype = Parent.prototype;
+        //     Child.prototype = new F();
+        //     Child.prototype.constructor = Child;
+        // }
+
+        function SuperType(name) {
+            this.name = name;
+            this.colors = ['red', 'blue', 'green'];
+        }
+        SuperType.prototype.sayName = function () {
+            console.log('My name is ' + this.name);
+        }
+
+        function SubType(name, age) {
+            SuperType.call(this, name);
+            this.age = age;
+        }
+
+        inheritPrototype(SubType, SuperType);
+
+        SubType.prototype.sayAge = function () {
+            console.log('My age is ' + this.age);
+        }
+
+        var subType = new SubType('jianbin', 25);
+    </script>
+</body>
+
+</html>
