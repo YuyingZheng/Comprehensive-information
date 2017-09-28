@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Exercise-pulg-in-Seamless_Slide</title>
+    <style type="text/css">
+    html,
+    body {
+        padding: 0;
+        margin: 0;
+    }
+    
+    ul,
+    ul li {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+    
+    #banner,
+    #banner1 {
+        margin: 50px auto;
+        position: relative;
+        overflow: hidden;
+        width: 800px;
+        box-shadow: 5px 5px 5px #e3e3e3;
+        height: 480px;
+    }
+    
+    #banner ul,
+    #banner1 ul {
+        position: absolute;
+    }
+    
+    #banner ul li,
+    #banner1 ul li{
+        float: left;
+        display: block;
+        position: relative;
+    }
+    
+    #banner ul li img,
+    #banner1 ul li img {
+        display: block;
+        width: 100%;
+        height: 100%;
+    }
+    #banner p{
+        position: absolute;
+        top:50%;
+        right: 50%;
+        margin-top: -25px;
+        margin-right: -25px;
+        color:red;
+        font-size: 30px
+    }
+    #banner .prevBtn,
+    #banner1 .prevBtn,
+    #banner1 .nextBtn,
+    #banner .nextBtn {
+        height: 80px;
+        width: 30px;
+        background: rgba(0, 0, 0, 0.3);
+        position: absolute;
+        top: 50%;
+        margin-top: -40px;
+        font-size: 30px;
+        line-height: 80px;
+        text-align: center;
+        text-decoration: none;
+        color: white;
+        opacity: 0;
+        transition: all .5s;
+    }
+    
+    #banner .prevBtn,
+    #banner1 .prevBtn {
+        left: 0;
+    }
+    
+    #banner .nextBtn,
+    #banner1 .nextBtn {
+        right: 0;
+    }
+    
+    #banner:hover .prevBtn,#banner1:hover .prevBtn,#banner1:hover .nextBtn,
+    #banner:hover .nextBtn {
+        opacity: 1;
+    }
+    
+    .circle-wrap {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        height: 30px;
+        padding: 0 10px;
+    }
+    
+    .dot {
+        height: 15px;
+        width: 15px;
+        border-radius: 15px;
+        background: white;
+        display: inline-block;
+        margin: 5px;
+        transition: all .5s ease;
+    }
+    .dot:hover{
+        background: red;
+    }
+    .active {
+        background: red;
+    }
+    </style>
+</head>
+
+<body>
+    <div id="banner">
+        <ul id="banner-wrap">
+            <li>
+                <img src="images/1.jpg">
+                <p>test test test test </p>
+            </li>
+            <li>
+                <img src="images/2.jpg">
+            </li>
+            <li>
+                <img src="images/3.png">
+            </li>
+            <li>
+                <img src="images/4.png">
+            </li>
+            <li>
+                <img src="images/5.jpg">
+            </li>
+        </ul>
+    </div>
+    <div id="banner1">
+        <ul id="banner-wrap1">
+            <li>
+                <img src="images/1.jpg">
+            </li>
+            <li>
+                <img src="images/2.jpg">
+            </li>
+            <li>
+                <img src="images/3.png">
+            </li>
+            <li>
+                <img src="images/4.png">
+            </li>
+        </ul>
+    </div>
+</body>
+<script type="text/javascript" src='http://libs.baidu.com/jquery/2.0.0/jquery.js'></script>
+<script type="text/javascript">
+;
+(function($, window, document, undefinen) {
+    var seamlessSlide = function(element, option) {
+        var self = this;
+        this.element = element;
+        this.default = {
+            boxWrap: null,
+            nextBtn: false, //往后按钮  
+            prevBtn: false, //往前按钮
+            autoPlay: false, //自动播放
+            times: 3000, //自动轮播的时间间隔,
+            speed: 600, //点击按钮是切换的速度
+            circle: false, //小圆点    
+            circleAlign: "center", //小圆点的位置
+            circleClick: false //小圆点点击切换
+        }
+        this.options = $.extend({}, this.default, option); // 合并配置项
+        this.init();
+    }
+    seamlessSlide.prototype = {
+        init: function() {
+            var self = this;
+            this.flag = true;
+            this.wrap = $(this.options.boxWrap);
+            this.num = 1;
+            this.width = this.element.width();
+            this.height = this.element.height();
+            var firstImg = this.wrap.find('li:first-child');
+            var lastImg = this.wrap.find('li:last-child');
+            this.wrap.append(firstImg.clone());
+            this.wrap.prepend(lastImg.clone());
+            this.length = this.wrap.find('li').length;
+            this.wrap.width(this.width * this.length);
+            this.wrap.find('li').width(this.width);
+            this.wrap.find('li').height(this.height);
+            this.wrap.css({
+                'left': -self.width * self.num // 显示第一张
+            });
+
+            // 是否自动轮播
+            if (this.options.autoPlay) {
+                this.autoPlays();
+                this.element.hover(function() { // 鼠标进入和移出轮播状态
+                    clearInterval(self.time)
+                }, function() {
+                    self.autoPlays()
+                });
+            }
+            // 是否添加按钮
+            if (this.options.nextBtn) {
+                this.nextBtn();
+            }
+            if (this.options.prevBtn) {
+                this.prevBtn();
+            }
+            // 是否添加小圆点
+            if (this.options.circle) {
+                this.circle()
+            }
+            // 小圆点是否可以切换图片
+            if (this.options.circleClick) {
+                this.clickCircle();
+            }
+        },
+        //自动轮播
+        autoPlays: function() {
+            var self = this;
+            this.time = setInterval(function() {
+                self.carousel(-self.width);
+            }, self.options.times);
+        },
+        //创建按钮
+        //向下按钮
+        nextBtn: function() {
+            var self = this;
+            var ele = $("<a href='javascript:;' class='nextBtn'>></a>");
+            this.element.append(ele)
+            this.element.find($('.nextBtn')).on("click", function() {
+                self.carousel(-self.width);
+            });
+        },
+        //向上按钮
+        prevBtn: function() {
+            var self = this;
+            var ele = $("<a href='javascript:;' class='prevBtn'><</a>");
+            this.element.append(ele);
+            this.element.find($('.prevBtn')).on("click", function() {
+                self.carousel(self.width);
+            })
+        },
+        // 创建小圆点
+        circle: function() {
+            var self = this;
+            var ele = $('<div class="circle-wrap"></div>');
+            for (var i = 0; i < self.length - 2; i++) {
+                ele.append($('<a class="dot" href="#"></a>'));
+            }
+            ele.css({
+                'text-align': self.options.circleAlign
+            });
+            this.element.append(ele);
+            self.playCircle(this.num - 1);
+        },
+        //小圆点指定当前项
+        playCircle: function(num) {
+            this.element.find($('.circle-wrap .dot')).eq(num).addClass('active').siblings().removeClass('active');
+        },
+        // 点击小圆点
+        clickCircle: function() {
+            var self = this;
+            this.element.find($('.circle-wrap .dot')).on('click', function(e) {
+                e.preventDefault();
+                self.num = $(this).index() + 1;
+                self.circlePlay();
+            })
+        },
+        // 点击小圆点，图片切换
+        circlePlay: function() {
+            var self = this;
+            if (this.flag) {
+                this.flag = false;
+                $(this.options.boxWrap).stop().animate({
+                    'left': -self.num * self.width
+                }, self.options.speed, function() {
+                    self.flag = true;
+                });
+                this.playCircle(this.num - 1);
+            }
+        },
+        //轮播
+        carousel: function(offset) {
+            var self = this;
+            if (this.flag) {
+                this.flag = false;
+                if (offset < 0) {
+                    this.num++;
+                    if (this.num > this.length - 2) {
+                        this.num = 1;
+                    }
+                }
+                if (offset > 0) {
+                    this.num--;
+                    if (this.num <= 0) {
+                        this.num = this.length - 2
+                    }
+                }
+                this.playCircle(this.num - 1);
+                $(this.options.boxWrap).stop().animate({
+                    'left': $(self.options.boxWrap).position().left + offset
+                }, self.options.speed, function() {
+                    self.flag = true;
+                    if ($(self.options.boxWrap).position().left < -(self.length - 2) * self.width) {
+                        $(self.options.boxWrap).css({
+                            'left': -self.width
+                        });
+                    } else if ($(self.options.boxWrap).position().left > -self.width) {
+                        $(self.options.boxWrap).css({
+                            'left': -self.width * (self.length - 2)
+                        })
+                    }
+                });
+            }
+        },
+    };
+    $.fn.Slide = function(options) {
+        /* var self = this;*/
+        return this.each(function(index, item) {
+            new seamlessSlide($(this), options);
+        });
+    };
+})(jQuery, window, document);
+
+$(function() {
+    $('#banner').Slide({
+        boxWrap: "#banner-wrap",
+        times: 1500,
+        nextBtn: true,
+        prevBtn: true,
+        autoPlay: true,
+        circle: true,
+        circleClick: true,
+        speed:500
+    });
+    $('#banner1').Slide({
+        boxWrap: "#banner-wrap1",
+        times: 2000,
+        nextBtn: true,
+        prevBtn: true,
+        autoPlay: true,
+        circle: true,
+        circleClick: true,
+        speed:500,
+        circleAlign:"right"
+    });
+});
+</script>
+
+</html>

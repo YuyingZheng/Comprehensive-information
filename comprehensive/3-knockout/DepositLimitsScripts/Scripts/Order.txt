@@ -1,0 +1,16 @@
+jquery.js
+js.cookie.js
+bootstrap.min.js
+jquery.form.js
+jquery.validate.js
+knockout-3.4.0.js
+logger.js
+viewModelBase.js
+disableConfirmation.js
+enableConfirmation.js
+updateConfirmation.js
+errorConfirmation.js
+depositLimits.js
+app.js
+apiService.js
+messenger.js
