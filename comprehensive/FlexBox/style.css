@@ -1,0 +1,69 @@
+.flex-container {
+    height: 500px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    /* flwo-flow:flex-direction flex-wrap (默认:row no-wrap)*/
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-line-pack: stretch;
+    align-content: stretch;
+    /*  
+        align-items  对单行ITEM在交叉轴上的位置变化（没有设置align-content的话两行也是单独对每一行生效）
+        align-content:stretch的属性 会被 align-items 属性覆盖
+        align-content的属性只有在多行的时候才生效且会覆盖单行中align-items的属性（同时对多行生效）
+    */
+    padding: 20px;
+    border: 1px solid #555;
+}
+
+.item {
+    margin: 0;
+    display: inherit;
+    width: 100px;
+    min-height: 100px;
+    height: auto;
+    padding: 10px;
+    border: 1px solid red;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+
+.item:first-of-type {
+    -webkit-box-ordinal-group: 3;
+    -ms-flex-order: 2;
+    order: 2;
+    -webkit-box-flex: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+    -ms-flex:1 1 auto;
+        flex:1 1 auto;
+}
+
+.item:nth-of-type(2) {
+    -webkit-box-ordinal-group: 2;
+    -ms-flex-order: 1;
+    order: 1;
+    -ms-flex-preferred-size: 200px;
+    flex-basis: 200px;
+}
+
+.item:nth-of-type(3) {
+    -webkit-box-ordinal-group: 4;
+    -ms-flex-order: 3;
+    order: 3;
+    width: 300px;
+    -ms-flex-negative: 0;
+    flex-shrink: 0;
+}
