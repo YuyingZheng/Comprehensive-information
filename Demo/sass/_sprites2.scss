@@ -1,0 +1,32 @@
+//Method -- 2
+@import "compass/utilities/sprites";
+$sprites: sprite-map('icons2/*.png', $spacing: 10px, $layout: 'vertical');
+.icon {
+    display: inline-block;
+    background-image: sprite-url($sprites);
+    background-repeat: no-repeat;
+    &.icon-drop-black-small {
+        $iconPath: sprite-file($sprites, drop-black-small);
+        width: image-width($iconPath);
+        height: image-height($iconPath);
+        background-position: 0 nth(sprite-position($sprites, drop-black-small), 2);
+    }
+    &.icon-drop-blue-small {
+        $iconPath: sprite-file($sprites, drop-blue-small);
+        width: image-width($iconPath);
+        height: image-height($iconPath);
+        background-position: 0 nth(sprite-position($sprites, drop-blue-small), 2);
+    }
+    &.icon-drop-pink-small {
+        $iconPath: sprite-file($sprites, drop-pink-small);
+        width: image-width($iconPath);
+        height: image-height($iconPath);
+        background-position: 0 nth(sprite-position($sprites, drop-pink-small), 2);
+    }
+    &.icon-drop-yellow-small {
+        $iconPath: sprite-file($sprites, drop-yellow-small);
+        width: image-width($iconPath);
+        height: image-height($iconPath);
+        background-position: 0 nth(sprite-position($sprites, drop-yellow-small), 2);
+    }
+}

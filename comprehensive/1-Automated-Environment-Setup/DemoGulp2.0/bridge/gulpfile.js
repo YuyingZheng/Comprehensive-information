@@ -196,7 +196,6 @@ var imgSrc = '../src/assets/images/**/*.{png,jpg,gif,svg}',
     imgDest = '../dist/assets/images/',
     uploadImgSrc = '../src/assets/uploads/**/*.{png,jpg,gif,svg}',
     uploadImgDest = '../dist/assets/uploads/'
-
 gulp.task('imgmin', function () {
     var imagesFolder = gulp.src(imgSrc)
         .pipe(newer(imgDest))
@@ -222,8 +221,8 @@ gulp.task('imgmin', function () {
 //fetches external SVGs referenced in "<use>" elements.
 //Add the code to the bottom of <body> , <script defer src="js/vendors/svgxuse.min.js"></script>
 
-var iconSrc = '../src/assets/icons/*.svg',
-    iconDest = '../dist/assets/icons/';
+var iconSrc = '../src/assets/tese-icons/*.svg',
+    iconDest = '../dist/assets/tese/';
 
 gulp.task('svgicon', function() {
     return gulp.src(iconSrc)
@@ -238,7 +237,6 @@ gulp.task('svgicon', function() {
                 }]
             }
         }))
-        .pipe(rename({ prefix: 'icon-' }))
         //.pipe(gulp.dest(iconDest)) //minify and copy each icon to dist
         .pipe(svgstore())
         .pipe(gulp.dest(iconDest));
