@@ -1,0 +1,245 @@
+@charset "UTF-8";
+/* Welcome to Compass. Use this file to write IE specific override styles.
+ * Import this file using the following HTML or equivalent:
+ * <!--[if IE]>
+ *   <link href="/stylesheets/ie.css" media="screen, projection" rel="stylesheet" type="text/css" />
+ * <![endif]--> */
+/* Welcome to Compass. Use this file to define print styles.
+ * Import this file using the following HTML or equivalent:
+ * <link href="/stylesheets/print.css" media="print" rel="stylesheet" type="text/css" /> */
+/* Welcome to Compass.
+ * In this file you should write your main styles. (or centralize your imports)
+ * Import this file using the following HTML or equivalent:
+ * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  font-size: 100%;
+  vertical-align: baseline;
+}
+
+html {
+  line-height: 1;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+caption, th, td {
+  text-align: left;
+  font-weight: normal;
+  vertical-align: middle;
+}
+
+q, blockquote {
+  quotes: none;
+}
+q:before, q:after, blockquote:before, blockquote:after {
+  content: "";
+  content: none;
+}
+
+a img {
+  border: none;
+}
+
+article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
+  display: block;
+}
+
+/*! 
+    Method -- 1
+*/
+.icons-sprite, .icons-drop-black-small, .icons-drop-blue-small, .icons-drop-pink-small, .icons-drop-yellow-small, .single-sprite-drop-blue {
+  background-image: url('../images/icons-s0d98f10a72.png');
+  background-repeat: no-repeat;
+}
+
+.icons-drop-black-small {
+  background-position: 0 0;
+}
+
+.icons-drop-blue-small {
+  background-position: 0 -37px;
+}
+
+.icons-drop-pink-small {
+  background-position: 0 -74px;
+}
+
+.icons-drop-yellow-small {
+  background-position: 0 -111px;
+}
+
+.icons {
+  display: inline-block;
+  margin-right: 10px;
+  height: 37px;
+  width: 25px;
+}
+
+.single-sprite-drop-blue {
+  background-position: 0 -37px;
+}
+
+/*! 
+    Method -- 2
+*/
+.icon-method-2 {
+  display: inline-block;
+  background-image: url('../images/icons2-s9ab916b87f.png');
+  background-repeat: no-repeat;
+}
+.icon-method-2.icon-drop-black-small {
+  width: 25px;
+  height: 37px;
+  background-position: 0 0;
+}
+.icon-method-2.icon-drop-blue-small {
+  width: 25px;
+  height: 37px;
+  background-position: 0 -47px;
+}
+.icon-method-2.icon-drop-pink-small {
+  width: 25px;
+  height: 37px;
+  background-position: 0 -94px;
+}
+.icon-method-2.icon-drop-yellow-small {
+  width: 25px;
+  height: 37px;
+  background-position: 0 -141px;
+}
+
+/*! 
+    Method -- 3
+*/
+.icon-method-3 {
+  display: inline-block;
+  background-image: url('../images/icons3-se5ec6612e7.png');
+  background-repeat: no-repeat;
+}
+.icon-method-3.icon-drop-black-small {
+  width: 1.5625rem;
+  height: 2.3125rem;
+  /*
+* 完美解决移动端使用 rem 单位时 CSS Sprites 错位问题
+* (https://github.com/banricho/webLog/issues/1
+  @if $iconPosYInSprite !=0 {
+      $iconPosYInSprite: $iconPosYInSprite / ($iconHeight - $spriteHeight) * 100%;
+  }
+*/
+  background-position: 0rem 0rem;
+  background-size: 4rem 27.5625rem;
+}
+.icon-method-3.icon-drop-blue-small {
+  width: 1.5625rem;
+  height: 2.3125rem;
+  /*
+* 完美解决移动端使用 rem 单位时 CSS Sprites 错位问题
+* (https://github.com/banricho/webLog/issues/1
+  @if $iconPosYInSprite !=0 {
+      $iconPosYInSprite: $iconPosYInSprite / ($iconHeight - $spriteHeight) * 100%;
+  }
+*/
+  background-position: 0rem -2.9375rem;
+  background-size: 4rem 27.5625rem;
+}
+.icon-method-3.icon-drop-pink-small {
+  width: 1.5625rem;
+  height: 2.3125rem;
+  /*
+* 完美解决移动端使用 rem 单位时 CSS Sprites 错位问题
+* (https://github.com/banricho/webLog/issues/1
+  @if $iconPosYInSprite !=0 {
+      $iconPosYInSprite: $iconPosYInSprite / ($iconHeight - $spriteHeight) * 100%;
+  }
+*/
+  background-position: 0rem -5.875rem;
+  background-size: 4rem 27.5625rem;
+}
+.icon-method-3.icon-drop-yellow-small {
+  width: 1.5625rem;
+  height: 2.3125rem;
+  /*
+* 完美解决移动端使用 rem 单位时 CSS Sprites 错位问题
+* (https://github.com/banricho/webLog/issues/1
+  @if $iconPosYInSprite !=0 {
+      $iconPosYInSprite: $iconPosYInSprite / ($iconHeight - $spriteHeight) * 100%;
+  }
+*/
+  background-position: 0rem -8.8125rem;
+  background-size: 4rem 27.5625rem;
+}
+.icon-method-3.icon-booking {
+  width: 3.3125rem;
+  height: 3.3125rem;
+  /*
+* 完美解决移动端使用 rem 单位时 CSS Sprites 错位问题
+* (https://github.com/banricho/webLog/issues/1
+  @if $iconPosYInSprite !=0 {
+      $iconPosYInSprite: $iconPosYInSprite / ($iconHeight - $spriteHeight) * 100%;
+  }
+*/
+  background-position: 0rem -11.75rem;
+  background-size: 4rem 27.5625rem;
+}
+.icon-method-3.icon-connect {
+  width: 4rem;
+  height: 4rem;
+  /*
+* 完美解决移动端使用 rem 单位时 CSS Sprites 错位问题
+* (https://github.com/banricho/webLog/issues/1
+  @if $iconPosYInSprite !=0 {
+      $iconPosYInSprite: $iconPosYInSprite / ($iconHeight - $spriteHeight) * 100%;
+  }
+*/
+  background-position: 0rem -15.6875rem;
+  background-size: 4rem 27.5625rem;
+}
+.icon-method-3.icon-proud {
+  width: 4rem;
+  height: 3.125rem;
+  /*
+* 完美解决移动端使用 rem 单位时 CSS Sprites 错位问题
+* (https://github.com/banricho/webLog/issues/1
+  @if $iconPosYInSprite !=0 {
+      $iconPosYInSprite: $iconPosYInSprite / ($iconHeight - $spriteHeight) * 100%;
+  }
+*/
+  background-position: 0rem -20.3125rem;
+  background-size: 4rem 27.5625rem;
+}
+.icon-method-3.icon-time-cash {
+  width: 3.75rem;
+  height: 3.5rem;
+  /*
+* 完美解决移动端使用 rem 单位时 CSS Sprites 错位问题
+* (https://github.com/banricho/webLog/issues/1
+  @if $iconPosYInSprite !=0 {
+      $iconPosYInSprite: $iconPosYInSprite / ($iconHeight - $spriteHeight) * 100%;
+  }
+*/
+  background-position: 0rem -24.0625rem;
+  background-size: 4rem 27.5625rem;
+}

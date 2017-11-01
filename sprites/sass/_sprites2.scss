@@ -1,7 +1,9 @@
-//Method -- 2
+/*! 
+    Method -- 2
+*/
 @import "compass/utilities/sprites";
-$sprites: sprite-map('icons2/*.png', $spacing: 10px, $layout: 'vertical');
-.icon {
+$sprites: sprite-map('icons2/*.png', $spacing: 10px,$layout: 'vertical');//四中排列方法：vertical、horizontal、diagonal和smart。默认排列方式是vertical。
+.icon-method-2{
     display: inline-block;
     background-image: sprite-url($sprites);
     background-repeat: no-repeat;
@@ -9,24 +11,24 @@ $sprites: sprite-map('icons2/*.png', $spacing: 10px, $layout: 'vertical');
         $iconPath: sprite-file($sprites, drop-black-small);
         width: image-width($iconPath);
         height: image-height($iconPath);
-        background-position: 0 nth(sprite-position($sprites, drop-black-small), 2);
+        background-position: sprite-position($sprites, drop-black-small);
     }
     &.icon-drop-blue-small {
         $iconPath: sprite-file($sprites, drop-blue-small);
         width: image-width($iconPath);
         height: image-height($iconPath);
-        background-position: 0 nth(sprite-position($sprites, drop-blue-small), 2);
+        background-position: sprite-position($sprites, drop-blue-small);
     }
     &.icon-drop-pink-small {
         $iconPath: sprite-file($sprites, drop-pink-small);
         width: image-width($iconPath);
         height: image-height($iconPath);
-        background-position: 0 nth(sprite-position($sprites, drop-pink-small), 2);
+        background-position: sprite-position($sprites, drop-pink-small);
     }
     &.icon-drop-yellow-small {
         $iconPath: sprite-file($sprites, drop-yellow-small);
         width: image-width($iconPath);
         height: image-height($iconPath);
-        background-position: 0 nth(sprite-position($sprites, drop-yellow-small), 2);
+        background-position: sprite-position($sprites, drop-yellow-small);
     }
 }

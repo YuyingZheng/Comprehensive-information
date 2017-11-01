@@ -1,4 +1,6 @@
-//Method -- 1
+/*! 
+    Method -- 1
+*/
 @import "compass/utilities/sprites"; //导入sprites模块
 @import "icons/*.png"; //导入icons文件夹内后缀名为PNG所有图片，创建基础类icons-sprite，同时在images文件夹可以看到生成的精灵图
 @include all-icons-sprites; //混合器生成精灵图代码
