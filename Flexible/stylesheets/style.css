@@ -1,0 +1,17 @@
+html{
+    font-size: 16px;
+}
+.fovorite-item{
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: nowrap;
+        flex-wrap: nowrap;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    border-bottom: 1px solid #d0dee8;
+    margin: 20px 0;
+    -ms-flex-negative: 0;
+        flex-shrink: 0;
+}
