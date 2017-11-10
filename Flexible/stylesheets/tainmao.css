@@ -1,0 +1,526 @@
+html.expanded-main-menu {
+    overflow: hidden;
+}
+
+.header-menu-link.home-link {
+    color: #000000;
+    background: rgba(175, 175, 175, 0.93);
+}
+
+.layout-wrap .pre-nav-user-nav {
+    display: none !important;
+    visibility: hidden !important;
+}
+
+.layout-wrap .content-wrap {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    border: none;
+    border-radius: 0;
+    -webkit-box-shadow: none;
+            box-shadow: none;
+    padding: 0;
+}
+
+.home-content {
+    position: relative;
+}
+
+.home-services {
+    min-width: 320px;
+    position: relative;
+}
+
+.home-services:before,
+.home-services:after {
+    content: " ";
+    display: table;
+}
+
+.home-services:after {
+    clear: both;
+}
+
+.home-services:before {
+    content: "";
+    left: 0;
+    top: 0;
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: url(https://productimages.nimbledeals.com/nimblebuy/907a789c1210ea4a60aaaad0a9fb9127) no-repeat center;
+    background-size: cover;
+}
+
+@media (max-width:639px) {
+    .home-services:before {
+        background-position: 1% 50%;
+    }
+}
+
+.home-services-title {
+    color: #ffffff;
+    font-size: 3.5rem;
+    text-align: center;
+    line-height: 1;
+    text-transform: uppercase;
+    font-family: "SuperGroteskWebPro-Bold";
+    letter-spacing: 0.3rem;
+}
+
+@media (max-width:991px) {
+    .home-services-title {
+        font-size: 1.4rem;
+    }
+}
+
+.home-services-title-box {
+    padding: 6rem 0 10rem 0;
+    position: relative;
+}
+
+@media (max-width:991px) {
+    .home-services-title-box {
+        padding: 3.5rem 0 2.5rem 0;
+    }
+}
+
+.home-services-list {
+    display: table;
+    max-width: 991px;
+    margin: 0 auto;
+    padding-bottom: 5rem;
+}
+
+@media (max-width:639px) {
+    .home-services-list {
+        width: 100%;
+        padding: 1rem;
+        padding-bottom: 0;
+        display: block;
+    }
+}
+
+.home-services .home-service {
+    display: table-cell;
+    padding: 0 2.5rem;
+}
+
+@media (max-width:991px) {
+    .home-services .home-service {
+        padding: 0 2rem;
+    }
+}
+
+@media (max-width:991px) {
+    .home-services .home-service {
+        padding: 0 .2rem;
+    }
+}
+
+@media (max-width:639px) {
+    .home-services .home-service {
+        display: block;
+        padding: 0;
+    }
+}
+
+.home-services .home-service:first-child {
+    padding-left: 0;
+}
+
+.home-services .home-service:last-child {
+    padding-right: 0;
+}
+
+.home-information {
+    position: relative;
+    background: #ffffff;
+    z-index: 1;
+}
+
+.home-information-wrap {
+    margin: 0 auto;
+    max-width: 991px;
+}
+
+.home-information-scroll {
+    position: absolute;
+    left: 50%;
+    -webkit-transform: translate(-50%, 0);
+    transform: translate(-50%, 0);
+    top: -40px;
+}
+
+@media (max-width:991px) {
+    .home-information-scroll {
+        display: none;
+    }
+}
+
+.home-information-scroll-btn {
+    width: 85px;
+    height: 85px;
+    display: block;
+    background: url("https://productimages.nimbledeals.com/nimblebuy/bce25e18fd4f1980a1309d92e271b71") no-repeat;
+    background-position: -405px 0px;
+    -webkit-animation: pulse-down 5s ease-in infinite;
+    animation: pulse-down 5s ease-in infinite;
+    cursor: pointer;
+}
+
+.home-information-title {
+    text-align: center;
+    color: #000000;
+    text-transform: uppercase;
+    font-size: 3rem;
+    font-family: "SuperGroteskWebPro-Bold";
+    letter-spacing: 0.3rem;
+}
+
+@media (max-width:991px) {
+    .home-information-title {
+        font-size: 2.3rem;
+    }
+}
+
+@media (max-width:639px) {
+    .home-information-title {
+        font-size: 1.4rem;
+    }
+}
+
+.home-information-title-box {
+    padding: 4.5rem 0 4rem 0;
+}
+
+.home-information-sub-title {
+    text-transform: uppercase;
+    font-size: 1.28rem;
+    font-weight: 600;
+    line-height: 2;
+    font-family: "SuperGroteskWebPro-Bold";
+}
+
+@media (min-width:640px) and (max-width:991px) {
+    .home-information-sub-title {
+        white-space: nowrap;
+        font-size: 1rem;
+    }
+}
+
+.home-information-list {
+    margin-left: -0.35rem;
+    margin-right: -0.35rem;
+}
+
+.home-information-list:before,
+.home-information-list:after {
+    content: " ";
+    display: table;
+}
+
+.home-information-list:after {
+    clear: both;
+}
+
+.home-information-box {
+    text-align: center;
+    float: left;
+    width: 100%;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    position: relative;
+    min-height: 1px;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+@media (min-width:640px) {
+    .home-information-box {
+        float: left;
+        width: 33.33333333333333%;
+    }
+}
+
+.home-information-content {
+    padding: 2rem;
+    text-align: center;
+}
+
+@media (min-width:640px) and (max-width:991px) {
+    .home-information-content {
+        padding: .5rem;
+    }
+}
+
+.home-information-desc {
+    line-height: 1.5;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+@media (max-width:991px) {
+    .home-information-desc {
+        font-size: .9rem;
+    }
+}
+
+@media (min-width:640px) and (max-width:991px) {
+    .home-information-desc {
+        min-height: 60px;
+    }
+}
+
+.home-information-link {
+    text-decoration: underline;
+    font-weight: 600;
+    font-size: 1.1rem;
+    font-family: "SuperGroteskWebPro-Bold";
+}
+
+@media (max-width:991px) {
+    .home-information-link {
+        font-size: 1rem;
+    }
+}
+
+.home-information-link:hover {
+    color: #000000;
+}
+
+.home-promotions {
+    background: #f7f7f7;
+    padding: 4.5rem .5rem;
+}
+
+@media (max-width:639px) {
+    .home-promotions {
+        padding: 2.5rem .5rem;
+    }
+}
+
+.home-promotions-content {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.home-promotions-title {
+    text-align: center;
+    color: #000000;
+    text-transform: uppercase;
+    font-size: 3rem;
+    font-family: "SuperGroteskWebPro-Bold";
+    letter-spacing: 0.3rem;
+}
+
+@media (max-width:991px) {
+    .home-promotions-title {
+        font-size: 2.3rem;
+    }
+}
+
+@media (max-width:639px) {
+    .home-promotions-title {
+        font-size: 1.8rem;
+    }
+}
+
+.home-promotions-title-box {
+    padding-bottom: 4.5rem;
+}
+
+.home-promotions-item-row {
+    margin-left: -0.35rem;
+    margin-right: -0.35rem;
+}
+
+.home-promotions-item-row:before,
+.home-promotions-item-row:after {
+    content: " ";
+    display: table;
+}
+
+.home-promotions-item-row:after {
+    clear: both;
+}
+
+.home-promotions-item {
+    float: left;
+    width: 50%;
+    min-height: 1px;
+    padding-left: 0.25rem;
+    padding-right: 0.25rem;
+    position: relative;
+    text-align: center;
+    margin-bottom: .25rem;
+}
+
+@media (min-width:640px) {
+    .home-promotions-item {
+        float: left;
+        width: 25%;
+    }
+}
+
+.home-promotions-sub-title {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    color: #ffffff;
+    font-size: 2rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2rem;
+    width: 100%;
+    text-align: center;
+}
+
+@media (max-width:991px) {
+    .home-promotions-sub-title {
+        font-size: 1.2rem;
+    }
+}
+
+.home-promotions-img {
+    filter: brightness(0.9);
+    -webkit-filter: brightness(0.9);
+}
+
+.home-promotions-item:hover .home-promotions-img {
+    filter: brightness(0.5);
+    -webkit-filter: brightness(0.5);
+}
+
+.bar {
+    position: absolute;
+    display: block;
+    width: 100%;
+    bottom: 0;
+    opacity: 0;
+}
+
+.bar:before,
+.bar:after {
+    content: '';
+    height: 2px;
+    width: 0;
+    bottom: 0;
+    position: absolute;
+    background: #d70d25;
+    transition: 1.5s ease all;
+    -moz-transition: 1.5s ease all;
+    -webkit-transition: 1.5s ease all;
+}
+
+.bar:before {
+    left: 50%;
+}
+
+.bar:after {
+    right: 50%;
+}
+
+.loading~.bar {
+    opacity: 1;
+}
+
+.loading~.bar:before,
+.loading~.bar:after {
+    width: 50%;
+}
+
+.slideUp_0,
+.slideUp_1,
+.slideUp_2 {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+    animation-name: slideUp;
+    -webkit-animation-name: slideUp;
+    animation-duration: .5s;
+    -webkit-animation-duration: .5s;
+    -webkit-animation-delay: 1.5s;
+    animation-timing-function: cubic-bezier(0, 0, 0.99, 0.99);
+    -webkit-animation-timing-function: cubic-bezier(0, 0, 0.99, 0.99);
+    animation-fill-mode: backwards;
+    -webkit-animation-fill-mode: backwards;
+    visibility: visible !important;
+}
+
+.slideUp_1 {
+    -webkit-animation-delay: 2s;
+}
+
+.slideUp_2 {
+    -webkit-animation-delay: 2.5s;
+}
+
+@keyframes slideUp {
+    0% {
+        -webkit-transform: translateY(160%);
+                transform: translateY(160%);
+    }
+    100% {
+        -webkit-transform: translateY(0%);
+                transform: translateY(0%);
+    }
+}
+
+@-webkit-keyframes slideUp {
+    0% {
+        -webkit-transform: translateY(160%);
+    }
+    100% {
+        -webkit-transform: translateY(0%);
+    }
+}
+
+@-webkit-keyframes pulse-down {
+    80% {
+        -webkit-transform: translate3d(0, 1px, 0);
+        transform: translate3d(0, 1px, 0);
+    }
+    85% {
+        -webkit-transform: translate3d(0, 5px, 0);
+        transform: translate3d(0, 5px, 0);
+    }
+    90% {
+        -webkit-transform: translate3d(0, 1px, 0);
+        transform: translate3d(0, 1px, 0);
+    }
+    95% {
+        -webkit-transform: translate3d(0, 5px, 0);
+        transform: translate3d(0, 5px, 0);
+    }
+    100% {
+        -webkit-transform: translate3d(0, 1px, 0);
+        transform: translate3d(0, 1px, 0);
+    }
+}
+
+@keyframes pulse-down {
+    80% {
+        -webkit-transform: translate3d(0, 1px, 0);
+        transform: translate3d(0, 1px, 0);
+    }
+    85% {
+        -webkit-transform: translate3d(0, 5px, 0);
+        transform: translate3d(0, 5px, 0);
+    }
+    90% {
+        -webkit-transform: translate3d(0, 1px, 0);
+        transform: translate3d(0, 1px, 0);
+    }
+    95% {
+        -webkit-transform: translate3d(0, 5px, 0);
+        transform: translate3d(0, 5px, 0);
+    }
+    100% {
+        -webkit-transform: translate3d(0, 1px, 0);
+        transform: translate3d(0, 1px, 0);
+    }
+}

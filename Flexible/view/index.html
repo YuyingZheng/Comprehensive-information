@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="initial-scale=0.4224,maximum-sacle=0.4224,">
+    <title>Document</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+        }
+        .width-1200px {
+            width: 1200px;
+            
+            height: 500px;
+            background: blue;
+            font-size: 16px;
+            color: #fff;
+        }
+        .border{
+            margin:20px;
+            box-sizing: border-box;
+            border: 1px solid red;
+            /* -webkit-transform:scale(0.5);
+            -webkit-transform-origin: 0 0;
+            transform:scale(0.5);
+            transform-origin: 0 0; */
+            
+        }
+    </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", function (event) {
+            console.log("DOM fully loaded and parsed")
+        });
+        for (var i = 0; i < 5; i++) {
+            console.log(i);
+        }
+        window.addEventListener("load", function (event) {
+            console.log("All resources finished loading!");
+        });
+        window.addEventListener("resize", function () {
+            console.log("resize！");
+        })
+        window.addEventListener('pageshow', function (event) {
+            console.log('pageshow:');
+            console.log(event);
+        })
+    </script>
+</head>
+
+<body>
+    <div class="width-1200px">
+        This is test para This is test para This is test para This is test para This is test para This is test para This is test
+        para This is test para This is test para This is test para This is test para This is test para This is test para
+        This is test para This is test para This is test para This is test para This is test para This is test para This
+        is test para This is test para This is test para This is test para This is test para This is test para This is test
+        para This is test para This is test para
+    </div>
+    <div class="border"></div>
+</body>
+
+</html>

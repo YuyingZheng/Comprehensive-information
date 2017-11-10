@@ -14,4 +14,31 @@ html{
     margin: 20px 0;
     -ms-flex-negative: 0;
         flex-shrink: 0;
+    font-size:1.25rem;
+}
+
+/* border-imgage */
+.red{
+    color:red;
+    font-weight: bold;
+    font-size: 20px;
+}
+.border-image{
+    border:20px solid transparent;
+    width: 300px;
+    padding: 20px;
+}
+.round{
+    border-image-source:url(../images/border.png);
+    border-image-slice:33.33333333%;
+    border-image-repeat: round;
+    -o-border-image:url(../images/border.png) 33.33333333% round;
+       border-image:url(../images/border.png) 33.33333333% round;
+}
+.stretch{
+    border-image-source:url(../images/border.png);
+    border-image-slice:33.33333333%;
+    border-image-repeat: round;
+    -o-border-image:url(../images/border.png) 33.33333333% stretch;
+       border-image:url(../images/border.png) 33.33333333% stretch;
 }

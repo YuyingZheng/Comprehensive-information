@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="Zh-cn">
+
+<head>
+    <meta charset="UTF-8">
+    <title>恭贺新春</title>
+</head>
+<style type="text/css" media="screen">
+    html {
+        font-size: 14px;
+    }
+
+    .em,
+    .em>.em-son,
+    .em>.em-son>.em-grandson {
+        font-size: 1.2em;
+    }
+
+    .rem,
+    .rem>.rem-son,
+    .rem>.rem-son>.rem-grandson {
+        font-size: 1.2rem;
+    }
+
+    .rem-box {
+        background: #d60b3b;
+        width: 10rem;
+        height: 10rem;
+        color: #fff;
+        text-align: center;
+        line-height: 5rem;
+    }
+
+    .vhvw-box {
+        background: #d60b3b;
+        width: 50vw;
+        height: 50vh;
+        color: #fff;
+        text-align: center;
+        line-height: 25vh;
+    }
+</style>
+
+<body>
+    <h1>em 继承父元素的字体大小，来变大或变小，多层嵌套字体变化</h1>
+    <div class="em">
+        <span>字体大小 1.2 * 14（父元素body） = 16px </span>
+        <div class="em-son">
+            <span>字体大小 1.2 * 16(父元素em) = 20px </span>
+            <div class="em-grandson">
+                <span>字体大小 1.2 * 20(父元素em-son) = 24px </span>
+            </div>
+        </div>
+    </div>
+    <br>
+    <h1>rem 继承根节点元素的字体大小，来变大或变小，多层嵌套字体不变化</h1>
+    <div class="rem">
+        <span>字体大小 1.2 * 14（根节点html） = 16px </span>
+        <div class="rem-son">
+            <span> 字体大小 1.2 * 14（根节点html） = 16px </span>
+            <div class="rem-grandson">
+                <span>字体大小 1.2 * 14（根节点html） = 16px </span>
+            </div>
+        </div>
+    </div>
+    <br>
+    <h1>rem 也可作为固定长度单位设置宽高等</h1>
+    <div class="rem-box">
+        宽：14 * 10 = 140px
+        <br> 高：14 * 10 = 140px
+    </div>
+    <br>
+    <h1>vh,vw 屏幕可见区域的高度，宽度的1%</h1>
+    <div class="vhvw-box">
+        宽：屏幕宽度的50%
+        <br> 高：屏幕高度的50%
+    </div>
+</body>
+
+</html>
