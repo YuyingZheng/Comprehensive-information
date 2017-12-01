@@ -3,19 +3,93 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <link rel="stylesheet" href="../stylesheets/style.css">
+    <title>Title</title>
 </head>
 
 <body>
-    <div class="border-image round">在这里，图片铺满整个边框。</div>
-    <br>
-    <div class="border-image stretch">在这里，图片被拉伸以填充该区域。</div>
-    <p>这是我们使用的图片：</p>
-    <img src="../images/border.png">
-    <p class="red">共存在两个九宫格，一个是边框图片，还有一个就是边框本身，九个方位关系一一对应。边框本身的特性让其变成了一个九宫格，四条边框交错，加上其围住的区域，正好形成一个九宫格。边框图片则是通过图片剪裁实现了九宫格。这是理解绘制原理的基础。</p>
-    <a href="http://www.zhangxinxu.com/wordpress/2010/01/css3-border-image/">参考</a>
+    <div style="margin-left: 30px; margin-top: 30px">
+        <form action="">
+            {% csrf_token %}
+            <h3>用户注册</h3>
+            <p>用户名：
+                <input type="text" name="userName">
+            </p>
+            <p>密码：
+                <input type="password" name="password">
+            </p>
+            <p>邮箱：
+                <input type="text" name="email">
+            </p>
+            <input id="avatar" type="text" value="/static/images/sample.png" name="avatar" style="width: 400px"> {# 实际应用中要将该input标签隐藏，display:none; #}
+            <p>
+                <input type="submit" value="注册">
+            </p>
+        </form>
+        <div style="position: absolute; top: 85px; left: 300px;">
+            <input id="avatarSlect" type="file" style="position: absolute;float: left; z-index: 10; opacity: 0;width: 100px; height: 100px;">
+            <img id="avatarPreview" src="/static/images/sample.png" title="点击更换图片" style="position: absolute; z-index: 9; float: left; width: 100px; height: 100px">
+        </div>
+    </div>
 </body>
+<script src="/static/jquery-3.2.1.js"></script>
+<script>
+$(function() {
+    bindAvatar();
+});
+
+function bindAvatar() {
+    if (window.URL.createObjectURL) {
+        bindAvatar3();
+    } else if (window.FileReader) {
+        bindAvatar2();
+    } else {
+        bindAvatar1();
+    }
+}
+/*Ajax上传至后台并返回图片的url*/
+function bindAvatar1() {
+    $("#avatarSlect").change(function() {
+        var csrf = $("input[name='csrfmiddlewaretoken']").val();
+        var formData = new FormData();
+        formData.append("csrfmiddlewaretoken", csrf);
+        formData.append('avatar', $("#avatarSlect")[0].files[0]); /*获取上传的图片对象*/
+        $.ajax({
+            url: '/upload_avatar/',
+            type: 'POST',
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function(args) {
+                console.log(args); /*服务器端的图片地址*/
+                $("#avatarPreview").attr('src', '/' + args); /*预览图片*/
+                $("#avatar").val('/' + args); /*将服务端的图片url赋值给form表单的隐藏input标签*/
+            }
+        })
+    })
+}
+/*window.FileReader本地预览*/
+function bindAvatar2() {
+    console.log(2);
+    $("#avatarSlect").change(function() {
+        var obj = $("#avatarSlect")[0].files[0];
+        var fr = new FileReader();
+        fr.onload = function() {
+            $("#avatarPreview").attr('src', this.result);
+            console.log(this.result);
+            $("#avatar").val(this.result);
+        };
+        fr.readAsDataURL(obj);
+    })
+}
+/*window.URL.createObjectURL本地预览*/
+function bindAvatar3() {
+    console.log(3);
+    $("#avatarSlect").change(function() {
+        var obj = $("#avatarSlect")[0].files[0];
+        var wuc = window.URL.createObjectURL(obj);
+        $("#avatarPreview").attr('src', wuc);
+        $("#avatar").val(wuc);
+    });
+</script>
+
 </html>
