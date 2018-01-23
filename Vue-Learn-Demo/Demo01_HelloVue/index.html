@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="https://unpkg.com/vue/dist/vue.js"></script>
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,max-sacle=1.0,user-saclable=no">
+</head>
+<body>
+	<div id="app-1" class="bind-content">
+		{{message}}
+	</div>
+	<div id="app-2" class="bind-DomeProperty">
+		<span v-bind:title="message">
+			{{message | capitalize }}
+		</span>
+	</div>
+	<script type="text/javascript">
+		var app=new Vue({
+			el:'#app-1',
+			data:{
+				message:'Hellow vue ~ bind-content!'
+			}
+		});
+		var app2=new Vue({
+			el:"#app-2",
+			data:{
+				message:'hellow vue ~ bind-DomeProperty!' + new Date()
+			},
+			filters:{
+				capitalize:function(value){			
+					if (!value) return '';
+					value=value.toString();
+					return value.charAt(0).toUpperCase()+value.slice(1);
+				}
+			}
+		});
+	</script>
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+    <style type="text/css">
+    .bind-class {
+        width: 100px;
+        height: 100px;
+        text-align: center;
+        display: table-cell;
+        vertical-align: middle;
+        border: 1px solid red;
+    }
+    
+    .active {
+        background: red;
+        color: #fff;
+    }
+    
+    .select {
+        font-size: 20px;
+    }
+    </style>
+</head>
+
+<body>
+    <div id="app-1" class="bind-class" v-bind:class="{active:isactive,select:isselect}">
+        bind-class
+    </div>
+    <div id="app-2" class="bind-class" v-bind:class="classObject">
+        bind-class
+    </div>
+    <div id="app-3" class="bind-class" v-bind:class="classObject">
+        bind-class
+    </div>
+    <div id="app-4" class="bind-class" v-bind:class="[activeClass,selectClass]">
+        bind-class
+    </div>
+    <div id="app-5" class="bind-class" v-bind:class="[isactive ? activeClass:'',selectClass]">
+        bind-class
+    </div>
+    <div id="app-6">
+        <active-component class="active select"></active-component>
+        <active-component v-bind:class="{active:isactive}"></active-component>
+    </div>
+    <div id="app-7" v-bind:style="[styleObject1,styleObject2]">bind-style-inline</div>
+    <script type="text/javascript">
+    var vm = new Vue({
+        el: "#app-1",
+        data: {
+            isactive: true,
+            isselect: false
+        }
+    });
+    var vm2 = new Vue({
+        el: "#app-2",
+        data: {
+            classObject: {
+                active: true,
+                select: false
+            }
+        }
+    });
+    var vm3 = new Vue({
+        el: "#app-3",
+        data: {
+            isactive: true,
+            isselect: true
+        },
+        computed: {
+            classObject: function() {
+                return {
+                    active: this.isactive && !this.isselect,
+                    select: this.isselect && this.isselect.type === 'fatal'
+                }
+            }
+        }
+    });
+    var vm4 = new Vue({
+        el: "#app-4",
+        data: {
+            activeClass: 'active',
+            selectClass: 'select'
+        }
+    });
+    var vm5 = new Vue({
+        el: "#app-5",
+        data: {
+            isactive: true,
+            activeClass: 'active',
+            selectClass: 'select'
+        }
+    });
+    Vue.component('active-component', {
+        template: "<div class='bind-class'>bind-class</div>"
+    });
+    var vm6 = new Vue({
+        el: "#app-6",
+        data: {
+            isactive: true
+        }
+    });
+    var vm7 = new Vue({
+        el: "#app-7",
+        data: {
+            styleObject1: {
+                color: 'red',
+                fontSize: '20px',
+                transform :"rotate(45deg)"
+
+            },
+            styleObject2: {
+                width: '200px',
+                heihgt: '200px',
+                border: '1px solid blue'
+            }
+
+        }
+    });
+    </script>
+</body>
+
+</html>
