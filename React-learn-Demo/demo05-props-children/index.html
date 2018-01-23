@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="../build/react.js"></script>
+    <script src="../build/react-dom.js"></script>
+    <script src="../build/browser.min.js"></script>
+    <style type="text/css">
+      .red-color{
+        color: red;
+        font-size: 20px;
+        font-family: "微软雅黑";
+      }
+    </style>
+  </head>
+  <body>
+    <div id="example"></div>
+    <script type="text/babel">
+      var NotesList = React.createClass({
+        render: function() {
+          return (
+            <ol className={this.props.className}>
+              {
+                React.Children.map(this.props.children, function (child) {
+                  return <li>{child}</li>;
+                })
+              }
+            </ol>
+          );
+        }
+      });
+
+      ReactDOM.render(
+        <NotesList className="red-color">
+          <span>this.props 对象的属性与组件的属性一一对应，但是有一个例外，就是 this.props.children 属性。它表示组件的所有子节点</span>
+          <span> this.props.children 的值有三种可能：如果当前组件没有子节点，它就是 undefined ;如果有一个子节点，数据类型是 object ；如果有多个子节点，数据类型就是 array 。</span>
+          <span>React 提供一个工具方法 React.Children 来处理 this.props.children</span>
+        </NotesList>,
+        document.getElementById('example')
+      );
+    </script>
+  </body>
+</html>
+

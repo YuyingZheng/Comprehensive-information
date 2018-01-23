@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="../build/react.js"></script>
+    <script src="../build/react-dom.js"></script>
+    <script src="../build/browser.min.js"></script>
+    <script src="../build/jquery.min.js"></script>
+  </head>
+  <body>
+    <div id="example"></div>
+    <script type="text/babel">
+var UserGist = React.createClass({
+  getInitialState: function() {
+    return {
+      username: '',
+      lastGistUrl: ''
+    };
+  },
+  componentDidMount: function() {  
+    $.ajax({          // $.get(this.props.source, function(result)
+      type:"GET",
+      url:this.props.source,
+      success:function(result){
+        var lastGist = result[0];
+        //if (this.isMounted()) {  //如果组件渲染到了 DOM 中，isMounted() 返回 true。组件渲染完成之后才设置组件的形态
+          this.setState({
+            username: lastGist.owner.login,
+            lastGistUrl: lastGist.html_url
+          });
+       // }
+      }.bind(this)
+    });
+  },  
+  /* componentDidMount: function() {
+    $.get(this.props.source, function(result) {
+      var lastGist = result[0];
+      if (this.isMounted()) {
+        this.setState({
+          username: lastGist.owner.login,
+          lastGistUrl: lastGist.html_url
+        });
+      }
+    }.bind(this));
+  },*/
+  render: function() {
+    return (
+      <div>
+        {this.state.username}'s last gist is <a href={this.state.lastGistUrl}>here：{this.state.lastGistUrl}</a>.
+      </div>
+    );
+  }
+});
+
+ReactDOM.render(
+  <UserGist source="https://api.github.com/users/octocat/gists" />,
+  document.getElementById('example')
+);
+    </script>
+  </body>
+</html>

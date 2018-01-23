@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="../build/react.js"></script>
+    <script src="../build/react-dom.js"></script>
+    <script src="../build/browser.min.js"></script>
+  </head>
+  <body>
+    <div id="example"></div>
+    <script type="text/babel">
+      var Hello = React.createClass({
+        getInitialState: function () {
+          return {
+            opacity: 1.0
+          };
+        },
+        componentWillMount:function(){  //在渲染前调用,在客户端也在服务端
+          console.log("componentWillMount:"+this.state.opacity);
+        },
+        componentDidMount: function () {//在第一次渲染后调用，只在客户端
+          console.log("componentDidMount:"+this.state.opacity);
+          this.timer = setInterval(function () {
+            var opacity = this.state.opacity;
+            opacity -= .05;
+            if (opacity < 0.1) {
+              opacity=1.0;
+              clearInterval(this.timer);
+            }
+            this.setState({
+              opacity: opacity
+            });
+          }.bind(this), 100);
+        },
+        componentWillUpdate(opacity){//在组件接收到新的props或者state但还没有render时被调用。在初始化时不会被调用。
+          opacity=this.state.opacity;
+          console.log("componentWillUpdate:" + opacity );
+        },
+        shouldComponentUpdate(opacity){
+          var opacity=this.state.opacity; 
+           if(opacity > 0.1){
+            console.log("true:"+opacity)
+            return true;
+           }else{
+           console.log("false:"+opacity)
+           return false;
+           }
+        },
+        componentDidUpdate(opacity){//在组件完成更新后立即调用。在初始化时不会被调用。
+          opacity=this.state.opacity;
+          console.log("componentDidUpdate:" + opacity );
+        },
+        componentWillUnmount:function(){//在组件从 DOM 中移除的时候立刻被调用。
+           console.log("(componentWillUnmount):" + opacity );
+        },
+        render: function () {
+          return (
+            <div style={{opacity: this.state.opacity}}>              
+              Hello {this.props.name}                                            
+            </div>
+          );
+        }
+      });
+
+      ReactDOM.render(
+        <div>
+        <Hello name="world"/>
+        <p style={{color:"red"}}>——这是因为 React 组件样式是一个对象，所以第一重大括号表示这是 JavaScript 语法，第二重大括号表示样式对象。
+        </p>
+        <ul style={{color:"red",fontSize:20+'px'}}>React 为每个状态都提供了两种处理函数，will 函数在进入状态之前调用，did 函数在进入状态之后调用，三种状态共计五种处理函数。
+          <li>componentWillMount()</li>
+          <li>componentDigMount()</li>
+          <li>componentWillUpdate(object nextProps, object nextState)</li>
+          <li>componentDidUpdate(object prevProps, object prevState)</li>
+          <li>componentWillUnmount()</li>
+          <li>React 还提供两种特殊状态的处理函数:<br/>
+componentWillReceiveProps(object nextProps)：已加载组件收到新的参数时调用<br/>
+shouldComponentUpdate(object nextProps, object nextState)：组件判断是否重新渲染时调用</li>
+        </ul>
+        </div>,
+        document.getElementById('example')
+      );
+    </script>
+  </body>
+</html>

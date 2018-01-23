@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="../build/react.js"></script>
+    <script src="../build/react-dom.js"></script>
+    <script src="../build/browser.min.js"></script>
+  </head>
+  <style type="text/css">
+    .summary{
+      border: 1px solid red;
+      padding: 20px;
+    }
+    .color{
+      color:red;
+    }
+  </style>
+  <body>
+    <div id="example"></div>
+    <div id="example1"></div>
+    <script type="text/babel">
+var LikeButton = React.createClass({
+  getInitialState: function() {
+    return {liked: false};
+  },
+  handleClick: function(event) {
+    this.setState({liked: !this.state.liked});
+  },
+  render: function() {
+    var text = this.state.liked ? 'like' : 'haven\'t liked';
+    return (
+      <p onClick={this.handleClick}>
+        You {text} this. Click to toggle.
+      </p>
+    );
+  }
+});
+
+ReactDOM.render(
+  <LikeButton />,
+  document.getElementById('example')
+);
+    </script>
+    <script type="text/babel">
+    var LinkState = React.createClass({
+      getInitialState:function(){  //初始化状态 对象 可用this.state读取
+        return {liked:false};
+      },
+      changeState:function(e){
+        this.setState({liked:!this.state.liked});
+      },
+      render:function(){
+        var text=this.state.liked ? 'liked':'don\'t liked';
+        return(
+          <p onClick={this.changeState}>
+            You {text} me? Click to toggle.
+          </p>
+        );
+      }
+    });
+    ReactDOM.render(
+      <div className="summary">
+      <LinkState />
+      <p className="color">由于 this.props 和 this.state 都用于描述组件的特性，可能会产生混淆。一个简单的区分方法是，this.props 表示那些一旦定义，就不再改变的特性，而 this.state 是会随着用户互动而产生变化的特性。</p>
+      </div>,
+      document.getElementById('example1')  
+    );
+    </script>
+  </body>
+</html>
+

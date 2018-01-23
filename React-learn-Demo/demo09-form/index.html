@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="../build/react.js"></script>
+    <script src="../build/react-dom.js"></script>
+    <script src="../build/browser.min.js"></script>
+  </head>
+  <body>
+    <div id="example"></div>
+    <script type="text/babel">
+      var Form = React.createClass({
+        getInitialState: function() {
+          return {value: 'Hello!'};
+        },
+        handleChange: function(event) {
+          this.setState({value: event.target.value});
+          var value=this.props.value;
+          console.log(value);
+        },
+        handleSubmit: function(event){
+          alert("The current value:"+this.state.value);
+        },
+        render: function () {
+          var value = this.state.value;
+          return (
+            <div>
+              <input type="text" value={value} onChange={this.handleChange} ref="myTextInput" name="test"/>
+              <p>{value}</p>
+              <input type="submit" value="submit" onClick={this.handleSubmit}/>
+            </div>
+          );
+        }
+      });
+
+      ReactDOM.render(
+        <Form/>, 
+        document.getElementById('example')
+      );
+    </script>
+  </body>
+</html>

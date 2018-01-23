@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="../build/react.js"></script>
+    <script src="../build/react-dom.js"></script>
+    <script src="../build/browser.min.js"></script>
+    <style type="text/css">
+      .test-color{
+        color: red;
+      }
+      .test-color2{
+        color:blue;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="example"></div>
+    <script type="text/babel">
+      var HelloMessage = React.createClass({
+        render: function() {
+          return <h1 className={this.props.className}>Hello {this.props.name}、{this.props.className},组件类只能包含一个顶部标签 </h1>;
+        }
+      });
+      var GoodBey =React.createClass({
+        render:function(){
+          return <h1 className={this.props.className}>GoodBey {this.props.name}、{this.props.className}</h1>
+        }
+      });
+      ReactDOM.render(
+      <div class="group">
+        <HelloMessage name="React" className="test-color"/>
+        <GoodBey name="Accidie!" className="test-color2"/>
+        <p className="test-color">可以添加任意的组件属性，组件的属性在组件类中用this.props对象上获取。<br/>
+          添加组件属性，有一个地方需要注意，就是 class 属性需要写成 className ，for 属性需要写成 htmlFor ，这是因为 class 和 for 是 JavaScript 的保留字。
+        </p>
+         <HelloMessage name="React1" className="test-color"/>
+         <p className="test-color" style={{fontSize:"20px"}}>
+         ReactDOM.render()——模板里面插入的都是组件类的一个实例.组件类的第一个字母必须大写!!
+        </p>
+      </div>,
+      document.getElementById('example')
+      );
+    </script>
+  </body>
+</html>

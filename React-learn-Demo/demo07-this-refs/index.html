@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="../build/react.js"></script>
+    <script src="../build/react-dom.js"></script>
+    <script src="../build/browser.min.js"></script>
+    <style type="text/css">
+       .test{
+        height: 30px;
+        font-size: 20px;
+        line-height:30px;
+        border: 1px solid red;
+       }
+    </style>
+  </head>
+  <body>
+  <div id="example"></div>
+  <script type="text/babel">
+    var MyComponent = React.createClass({
+      handleClick: function() {   
+        if(this.refs.myTextInput.value==""){
+          alert("please enter the value!")
+        }else{
+        this.refs.myTextInput.className="test";
+        alert(this.refs.myTextInput.value);
+        }
+      },
+    render: function() {
+      return (
+        <div>
+          <input type="text" ref="myTextInput"/>
+          <input type="button" value="Focus the text input" onClick={this.handleClick} />
+          <p style={{color:"red",fontSize:"20px"}}>this.refs.[refName] 可以获取真实的DOM节点</p>
+        </div>
+      );
+    }
+  });
+
+  ReactDOM.render(
+    <MyComponent />,
+    document.getElementById('example')
+  );
+  </script>
+  </body>
+</html>
