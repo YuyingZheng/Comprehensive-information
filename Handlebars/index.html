@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Handlebars</title>
+    <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="js/handlebars-v4.0.11.js"></script>
+</head>
+
+<body>
+    <a href="http://www.ghostchina.com/introducing-the-handlebars-js-templating-engine/">Handlebars</a>
+</body>
+<script id="tpl" type="text/x-handlebars-template">
+    <div class="demo">
+        <h1>{{name}}</h1>
+        <p>{{content}}</p>
+        <!-- block -->
+        <p>block</p>
+        <ul>
+            {{#programme}}
+            <li>{{language}}</li>
+            {{/programme}}
+        </ul>
+        <!-- each -->
+        <p>each</p>
+        <ul>
+            {{#each name}}
+            <li>{{this}}</li>
+            {{/each}}
+        </ul>
+        <!-- if-else -->
+        <p>if-else</p>
+        {{#if list}}
+        <ul>
+            {{#each list}}
+            <li>{{this}}</li>
+            {{/each}}
+        </ul>
+        {{else}}
+        <p>{{error}}</p>
+        {{/if}}
+        <!-- unless -->
+        <p>unless</p>
+        {{#unless list_unless}}
+        <ul>
+            {{#each list}}
+            <li>{{this}}</li>
+            {{/each}}
+        </ul>
+        {{else}}
+        <p>{{error_unless}}</p>
+        {{/unless}}
+        <!-- with block -->
+        <div class="entry">
+            <h1>{{title}}</h1>
+            {{#with author}}
+            <h2>By {{firstName}} {{lastName}}</h2>
+            {{/with}}
+        </div>
+        <p>{{author.firstName}}</p>
+        {{#debug}}{{/debug}}
+    </div>
+</script>
+<script id="tp2" type="text/x-handlebars-template">
+    <div class="demo">
+        <ul>
+            <li>{{data1}}</li>
+        </ul>
+    </div>
+</script>
+<script>
+    var data = {
+        name: 'Handlebars',
+        content: 'Handlebars is very usefuly',
+        programme: [{
+                language: "JavaScript"
+            },
+            {
+                language: "HTML"
+            },
+            {
+                language: "CSS"
+            }
+        ],
+        name: ["html", "css", "javascript"],
+        list: ["html-list", "css-list", "javascript-list"],
+        error: 'The list is no exist！',
+        list_unless: ['list_unless'],
+        error_unless: 'The list_unless is exist！',
+        title: 'with-block',
+        firstName: 'outter-firstName',
+        lastName: 'outter-lastName',
+        author: {
+            firstName: "Charles",
+            lastName: "Jolley"
+        }
+    }
+    var data1 = ["html", "css", "javascript"];
+    Handlebars.registerHelper('debug',function(){
+        console.log('this is a debug!')
+    });
+    //获取模板
+    var sourceTpl = document.getElementById('tp2').innerHTML;
+    //编译
+    var temlpate = Handlebars.compile(sourceTpl);
+    //加载数据
+    var dataContent = temlpate(data1);
+    $('#tpl').before(dataContent);
+</script>
+
+</html>

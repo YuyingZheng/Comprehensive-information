@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>事件冒泡和捕获的执行顺序</title>
+    <style>
+        #div1 {
+            width: 400px;
+            height: 400px;
+            background: #f00;
+        }
+
+        #div2 {
+            width: 300px;
+            height: 300px;
+            background: #0f0;
+        }
+
+        #div3 {
+            width: 200px;
+            height: 200px;
+            background: #00f;
+        }
+
+        #div4 {
+            width: 100px;
+            height: 100px;
+            background: #f0f;
+        }
+
+        code {
+            background: #000;
+            display: block;
+            color: #b58900;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>事件冒泡和捕获的执行顺序</h1>
+    <div id="div1">我是div1
+        <div id="div2">我是div2
+            <div id="div3">我是div3
+                <div id="div4">我是div4</div>
+            </div>
+        </div>
+    </div>
+    <pre>
+        <code class="code-1">
+                // 第一种情况（都是捕获）点击div4 ————> 4 - 3 - 2 - 1;
+                div1.addEventListener("click", function () {
+                    alert("我是div1");
+                })
+                div2.addEventListener("click", function () {
+                    alert("我是div2");
+                })
+                div3.addEventListener("click", function () {
+                    alert("我是div3");
+                })
+                div4.addEventListener("click", function () {
+                    alert("我是div4");
+                }) 
+        </code>
+        <code>
+                // 第二种情况（捕获冒泡穿插 目标元素只有一种事件）首先进入捕获时间，直到达到目标元素，再进入冒泡事件 点击div4 ————> 2 - 4 - 3 - 1;
+                div1.addEventListener('click',function(){
+                    alert('div1')
+                },false);
+                div2.addEventListener('click',function(){
+                    alert('div2')
+                },true);
+                div3.addEventListener('click',function(){
+                    alert('div3')
+                },false);
+                div4.addEventListener('click',function(){
+                    alert('div4')
+                },true); 
+        </code>
+        <code>
+                // 第三种情况（捕获冒泡穿插 目标元素有两种事件）执行顺序为：非目标元素捕获 -> 目标元素代码顺序 -> 非目标元素冒泡。
+                // 点击div4 ————> 2捕获- 4捕获 - 4冒泡- 3 - 2冒泡 -1;
+                /* div1.addEventListener('click', function () {
+                    alert('div1')
+                }, false);
+                div2.addEventListener('click', function () {
+                    alert('div2—捕获')
+                }, true);
+                div2.addEventListener('click', function () {
+                    alert('div2-冒泡')
+                }, false);
+                div3.addEventListener('click', function () {
+                    alert('div3')
+                }, false);
+                div4.addEventListener('click', function () {
+                    alert('div4-捕获')
+                }, true);
+                div4.addEventListener('click', function () {
+                    alert('div4-冒泡')
+                }, false); */
+                // 点击div4 ————> 2捕获- 4冒泡 - 4捕获- 3 - 2冒泡 -1;
+                div1.addEventListener('click', function () {
+                    alert('div1')
+                }, false);
+                div2.addEventListener('click', function () {
+                    alert('div2—捕获')
+                }, true);
+                div2.addEventListener('click', function () {
+                    alert('div2-冒泡')
+                }, false);
+                div3.addEventListener('click', function () {
+                    alert('div3')
+                }, false);
+                div4.addEventListener('click', function () {
+                    alert('div4-冒泡')
+                }, false);
+                div4.addEventListener('click', function () {
+                    alert('div4-捕获')
+                }, true);
+        </code> 
+    </pre>
+    <script>
+        var div1 = document.getElementById("div1");
+        var div2 = document.getElementById("div2");
+        var div3 = document.getElementById("div3");
+        var div4 = document.getElementById("div4");
+        // 第一种情况（都是捕获）点击div4 ————> 4 - 3 - 2 - 1;
+        /*  div1.addEventListener("click", function () {
+            alert("我是div1");
+        })
+        div2.addEventListener("click", function () {
+            alert("我是div2");
+        })
+        div3.addEventListener("click", function () {
+            alert("我是div3");
+        })
+        div4.addEventListener("click", function () {
+            alert("我是div4");
+        }) */
+        // 第二种情况（捕获冒泡穿插 目标元素只有一种事件）首先进入捕获时间，直到达到目标元素，再进入冒泡事件 点击div4 ————> 2 - 4 - 3 - 1;
+        /* div1.addEventListener('click',function(){
+            alert('div1')
+        },false);
+        div2.addEventListener('click',function(){
+            alert('div2')
+        },true);
+        div3.addEventListener('click',function(){
+            alert('div3')
+        },false);
+        div4.addEventListener('click',function(){
+            alert('div4')
+        },true);  */
+        // 第三种情况（捕获冒泡穿插 目标元素有两种事件）执行顺序为：非目标元素捕获 -> 目标元素代码顺序 -> 非目标元素冒泡。
+        // 点击div4 ————> 2捕获- 4捕获 - 4冒泡- 3 - 2冒泡 -1;
+        /* div1.addEventListener('click', function () {
+            alert('div1')
+        }, false);
+        div2.addEventListener('click', function () {
+            alert('div2—捕获')
+        }, true);
+        div2.addEventListener('click', function () {
+            alert('div2-冒泡')
+        }, false);
+        div3.addEventListener('click', function () {
+            alert('div3')
+        }, false);
+        div4.addEventListener('click', function () {
+            alert('div4-捕获')
+        }, true);
+        div4.addEventListener('click', function () {
+            alert('div4-冒泡')
+        }, false); */
+        // 点击div4 ————> 2捕获- 4冒泡 - 4捕获- 3 - 2冒泡 -1;
+        div1.addEventListener('click', function () {
+            alert('div1')
+        }, false);
+        div2.addEventListener('click', function () {
+            alert('div2—捕获')
+        }, true);
+        div2.addEventListener('click', function () {
+            alert('div2-冒泡')
+        }, false);
+        div3.addEventListener('click', function () {
+            alert('div3')
+        }, false);
+        div4.addEventListener('click', function () {
+            alert('div4-冒泡')
+        }, false);
+        div4.addEventListener('click', function () {
+            alert('div4-捕获')
+        }, true);
+    </script>
+
+</body>
+
+</html>
