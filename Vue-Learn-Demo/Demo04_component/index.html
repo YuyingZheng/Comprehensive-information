@@ -1,32 +1,35 @@
-  <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <title>Document</title>
-    <script src="../vue.js"></script>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script src="../vue.js"></script>
 </head>
 
 <body>
-    <div id="app-1">
-       <ol><todo-item class="item-todo" v-bind:todo="item" v-for="item in items"></todo-item></ol>
-    </div>
+  <div id="app-1">
+    <ol>
+      <todo-item class="item-todo" v-bind:todo="item" v-bind:key="item.id" v-for="item in groceryList"></todo-item>
+    </ol>
+  </div>
 
-    <script type="text/javascript">
-      Vue.component("todo-item",{
-      	props:['todo'],
-      	template:'<li class="item">{{todo.text | capitalize }}</li>'
-      });
-      var app1=new Vue({
-      	el:"#app-1",
-      	data:{
-      		items:[
-      			{text:"todotext-1"},
-      			{text:"todotext-2"},
-      			{text:"todotext-3"},
-      		]     		
-      	}
-      }); 
-    </script>
+  <script type="text/javascript">
+    Vue.component("todo-item", {
+      props: ['todo'],
+      template: '<li class="item">{{todo.text}}</li>'
+    });
+    var app1 = new Vue({
+      el: "#app-1",
+      data: {
+        groceryList: [
+          { id: 0, text: '蔬菜' },
+          { id: 1, text: '奶酪' },
+          { id: 2, text: '随便其它什么人吃的东西' }
+        ]
+      }
+    }); 
+  </script>
 </body>
 
 </html>

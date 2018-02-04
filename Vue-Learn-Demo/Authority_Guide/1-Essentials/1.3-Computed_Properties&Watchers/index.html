@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="../../../vue.js"></script>
+    <title>1.3-Computed_Properties&Watchers</title>
+</head>
+<body>
+    <div id="app">
+        <p>Original message: "{{ message }}"</p>
+        <p>Computed reversed message: "{{ reversedMessage }}"</p>
+        <p>Methods reversed message: "{{ reversedMessageMethod() }}"</p>
+        
+        <p>Original date : {{originalDate}}</p>
+        <p>Computed date : {{nowComputed}}</p>
+        <p>Methods date : {{nowMethods()}}</p>
+
+        <p>{{ fullName }}</p>
+    </div>
+    <script>
+        var data = {
+            message:'Hello Vue!',
+            originalDate:new Date().toLocaleTimeString(),
+            firstName:'jianbin',
+            lastName:'wang',
+            // fullName:'jianbin wang'
+        }
+        var vm = new Vue({
+            el:'#app',
+            data:data,
+            computed:{    // 计算属性是基于它们的依赖进行缓存的,只有在它的相关依赖发生改变时才会重新求值
+                // 计算属性的 getter
+                reversedMessage:function(){
+                     // `this` 指向 vm 实例
+                    return this.message.split(' ').reverse().join(' ');
+                },
+                //在console里面调用vm.nowComputed不会更新
+                nowComputed:function(){
+                    return new Date().toLocaleTimeString(); // 不是响应式依赖
+                },
+                fullName:{
+                    //getter
+                    get:function(){
+                        return this.firstName + ' ' + this.lastName;
+                    },
+                    //setter
+                    set:function(newName){
+                        var nameArray = newName.split(' ');
+                        this.firstName = nameArray[0];
+                        this.lastName = nameArray[nameArray.length - 1];
+                    }
+                }
+            },
+            methods:{
+                reversedMessageMethod:function(){
+                    return this.message.split(' ').reverse().join(' ');
+                },
+                 //在console里面调用vm.nowMethods,Date.now()会更新（没渲染？！每当触发重新渲染时，调用方法将总会再次执行）
+                nowMethods:function(){
+                    return new Date().toLocaleTimeString();
+                }
+            }
+            // watch:{
+            //     firstName:function(val){
+            //         this.fullName = val + ' ' + this.lastName;
+            //     },
+            //     lastName:function(val){
+            //         this.fullName = this.firstName + ' ' + val;
+            //     }
+            // }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="../../../vue.js"></script>
+    <title>1.4-ClassAndStyleBind</title>
+    <style type="text/css">
+        .bind-class {
+            width: 200px;
+            height: 100px;
+            text-align: center;
+            vertical-align: middle;
+            border: 1px solid red;
+            padding: 20px;
+            margin:20px;
+        }
+        
+        .active {
+            background: red;
+            color: #fff;
+        }
+        
+        .select {
+            font-size: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app-1" class="bind-class" v-bind:class="{active:isactive,select:isselect}">
+        bind-class-object
+    </div>
+    <div id="app-2" class="bind-class" v-bind:class="classObject">
+        bind-class-object
+    </div>
+    <div id="app-3" class="bind-class" v-bind:class="classObject">
+        bind-class-object-computed property
+    </div>
+    <div id="app-4" class="bind-class" v-bind:class="[activeClass,selectClass]">
+        bind-class-Array
+    </div>
+    <div id="app-5" class="bind-class" v-bind:class="[isactive ? activeClass : selectClass]">
+        bind-class- ternary expression
+    </div>
+    <div id="app-6">
+        <active-component class="active select"></active-component>
+        <active-component v-bind:class="{active:isactive}"></active-component>
+    </div>
+
+    <div id="app-7" v-bind:style="[styleObject1,styleObject2]">bind-style-inline</div>
+
+    <div id="app-8" class="bind-class" :style="{ display: ['-webkit-box', '-ms-flexbox', 'flex'] }" :class="classObject"></div>
+    <script type="text/javascript">
+        var vm = new Vue({
+            el: "#app-1",
+            data: {
+                isactive: true,
+                isselect: false
+            }
+        });
+        var vm2 = new Vue({
+            el: "#app-2",
+            data: {
+                classObject: {
+                    active: true,
+                    select: false
+                }
+            }
+        });
+        var vm3 = new Vue({
+            el: "#app-3",
+            data: {
+                isactive: true,
+                error: {
+                    type: 'fatal'
+                },
+                isselect: {
+                    type: 'fatal'
+                }
+            },
+            computed: {
+                classObject: function () {
+                    return {
+                        active: this.isactive && !this.error,
+                        select: this.isselect && this.isselect.type === 'fatal'
+                    }
+                }
+            }
+        });
+        var vm4 = new Vue({
+            el: "#app-4",
+            data: {
+                activeClass: 'active',
+                selectClass: 'select'
+            }
+        });
+        var vm5 = new Vue({
+            el: "#app-5",
+            data: {
+                isactive: true,
+                activeClass: 'active',
+                selectClass: 'select'
+            }
+        });
+        Vue.component('active-component', {
+            template: "<div class='bind-class'>bind-class</div>"
+        });
+        var vm6 = new Vue({
+            el: "#app-6",
+            data: {
+                isactive: true
+            }
+        });
+        var vm7 = new Vue({
+            el: "#app-7",
+            data: {
+                styleObject1: {
+                    color: 'red',
+                    fontSize: '20px',
+                    transform: "rotate(45deg)",
+                    transition: 'all .3s'
+
+                },
+                styleObject2: {
+                    width: '200px',
+                    heihgt: '200px',
+                    border: '1px solid blue'
+                }
+
+            }
+        });
+
+        var vm8 = new Vue({
+            el: '#app-8',
+            data: {
+                classObject: {
+                    active: true,
+                    select: false
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

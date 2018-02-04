@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="../../../vue.js"></script>
+    <title>1.6-List_Rendering</title>
+</head>
+
+<body>
+    <div id="app">
+        <ul id="list">
+            <li v-for="item of messageArrayList">
+                {{item.message}}
+            </li>
+        </ul>
+
+        <ul id="list">
+            <li v-for="(item,index) in messageArrayList">
+                {{childItem}} - {{index}} : {{item}} -> {{item.message}}
+            </li>
+        </ul>
+
+        <ul id="list">
+            <li v-for="value in nameObject">
+                {{value}}
+            </li>
+        </ul>
+
+        <ul id="list">
+            <li v-for="(value,key) in nameObject">
+                {{key}} : {{value}}
+            </li>
+        </ul>
+        <ul id="list">
+            <li v-for="(value,key,index) in nameObject">
+                {{index}}-{{key}} : {{value}}
+            </li>
+        </ul>
+
+        <ul id="list">
+            <li v-for="n in evenNumbers">
+                cpmputed:{{n}}
+            </li>
+        </ul>
+
+        <ul id="list">
+            <li v-for="n in even()">
+                methods:{{n}}
+            </li>
+        </ul>
+
+        <ul id="list">
+            <li v-for="n in evenNumbers(numbers)">
+                methods:{{n}}
+            </li>
+        </ul>
+
+        <ul>
+            <li v-for="n in 5">{{n}}</li>
+        </ul>
+
+        <ul>
+            <template v-for="item in messageArrayList">
+                <li>{{item.message}}</li>
+                <li>————————————</li>
+            </template>
+        </ul>
+
+        <ul>
+            <li v-for="num in numbers" v-if="num % 2 !==0 ">
+                {{num}}
+            </li>
+        </ul>
+
+        <ul v-if='messageArrayList.length > 2'>
+            <li v-for='item in messageArrayList'>
+                {{item.message}}
+            </li>
+        </ul>
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                childItem: 'item',
+                messageArrayList: [
+                    { message: 'firstMessage' },
+                    { message: 'secondMessage' }
+                ],
+                nameObject: {
+                    name: 'jianbin',
+                    age: 30,
+                    job: 'web-font'
+                },
+                numbers: [1, 2, 3, 4, 5, 6]
+            },
+            computed: {
+                evenNumbers: function () {
+                    return this.numbers.filter(function (num) {
+                        return num % 2 === 0;
+                    });
+                }
+            },
+            methods: {
+                even: function () {
+                    return this.numbers.filter(function (num) {
+                        return num % 2 === 0;
+                    });
+                },
+                evenNumbers: function (numbers) {
+                    return numbers.filter(function (num) {
+                        return num % 2 === 0;
+                    });
+                }
+            }
+        });
+    </script>
+    <div id="todo-list-demo">
+        <input type="text" v-bind:placeholder="placeholderText" v-model="newTodeText" v-on:keyup.enter="addNewTodo">
+        <ul>
+            <li is="todo-item" v-for="(todo,index) in todos" v-bind:text="todo.text" v-bind:key="todo.id" v-on:remove="todos.splice(index,1)"></li>
+        </ul>
+    </div>
+    <script>
+        Vue.component('todo-item', {
+            template: '\
+                <li>\
+                    {{text}}\
+                    <button v-on:click="$emit(\'remove\')">X</button>\
+                </li>',
+            props: ['text']
+        });
+        var vmTodo = new Vue({
+            el: '#todo-list-demo',
+            data: {
+                placeholderText: 'Please input the new todo text',
+                todos: [
+                    {
+                        id: 1,
+                        text: 'first'
+                    },
+                    {
+                        id: 2,
+                        text: 'second'
+                    },
+                    {
+                        id: 3,
+                        text: 'third'
+                    }
+                ],
+                todoNextId: 4,
+                newTodeText: ''
+            },
+            methods: {
+                addNewTodo: function () {
+                    this.todos.push({
+                        id: this.todoNextId++,
+                        text: this.newTodeText
+                    });
+                    this.newTodeText = '';
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

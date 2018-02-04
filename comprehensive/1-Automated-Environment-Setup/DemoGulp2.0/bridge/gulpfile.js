@@ -90,18 +90,19 @@ gulp.task('html', function(cb) {
 //========================================================================================================//
 //                                            Css Task
 //========================================================================================================//
-// *Note*
-// The css-comb plugin will make @font-face{src: ulr...; src: url...,url...,url...,..;} the 2 kind of "src"
-// in reverse order resulting in "@font-face" will be not working.
-// So you had better write them in reverse order in the '_02_fonts.scss' file before, then the css-comb plugin 
-// will make them in reverse order again. At last, we get the correct order.
+/* 
+    *Note*
+    The css-comb plugin will make @font-face{src: url...; src: url...,url...,url...,..;} the 2 kind of "src"
+    in reverse order resulting in "@font-face" will be not working.
+    So you had better write them in reverse order in the '_02_fonts.scss' file before, then the css-comb plugin 
+    will make them in reverse order again. At last, we get the correct order.
 
-//gulp-sass-bulk-import:gulp task to allow importing directories in your SCSS
-//@import "some/path/*";
-// becomes 
-// @import "some/path/file1.scss"; 
-// @import "some/path/file2.scss"; 
-
+    gulp-sass-bulk-import:gulp task to allow importing directories in your SCSS
+    @import "some/path/*";
+    becomes 
+    @import "some/path/file1.scss"; 
+    @import "some/path/file2.scss"; 
+*/
 
 var cssSrc='../src/sass/app.scss',
     cssDest='../dist/assets/css',
@@ -221,23 +222,16 @@ gulp.task('imgmin', function () {
 //fetches external SVGs referenced in "<use>" elements.
 //Add the code to the bottom of <body> , <script defer src="js/vendors/svgxuse.min.js"></script>
 
-var iconSrc = '../src/assets/tese-icons/*.svg',
-    iconDest = '../dist/assets/tese/';
+var iconSrc = '../src/assets/icons/*.svg',
+    iconDest = '../dist/assets/icons/';
 
 gulp.task('svgicon', function() {
     return gulp.src(iconSrc)
-        .pipe(svgmin(function(file) {
-            var prefix = path.basename(file.relative, path.extname(file.relative)); //Get the filrName ex extname
-            return {
-                plugins: [{
-                    cleanupIDs: {
-                        prefix: prefix + '-',
-                        minify: true
-                    }
-                }]
-            }
+        .pipe(svgmin())
+        .pipe(rename({
+            prefix:'icon-'
         }))
-        //.pipe(gulp.dest(iconDest)) //minify and copy each icon to dist
+        .pipe(gulp.dest(iconDest)) //minify and copy each icon to dist
         .pipe(svgstore())
         .pipe(gulp.dest(iconDest));
 });

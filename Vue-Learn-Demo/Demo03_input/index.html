@@ -14,7 +14,7 @@
     </div>
     <div id="app-2">
         <p>{{message}}</p>
-        <input v-model="message">
+        <input v-bind:name="message" v-model="message">
     </div>
     <script type="text/javascript">
         var app1=new Vue({

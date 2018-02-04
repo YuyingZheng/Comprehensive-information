@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="../../../vue.js"></script>
+    <title>1.2-Template_Syntax</title>
+</head>
+<body>
+    <div id="app">
+        <input v-model="message">
+        <span>This document is : {{ message }}</span>
+        <span v-once>This document is (can't-change): {{ message }}</span>
+        <p>Using mustaches: {{ rawHtml }}</p>
+        <p>Using v-html directive: <span v-html="rawHtml"></span></p>
+
+        <button v-bind:id="dynamicId" v-bind:disabled="isButtonDisabled" v-on:click="addNumber">{{dynamicId}}</button>
+
+        <p>number:{{ number + 1}} : {{message.split('').reverse().join('')}} {{ number > 19 ? 'YES' : 'NO' }}</p>
+
+        <p v-if='seen'>you cen see me </p>
+
+        <p><a v-bind:href="href" v-on:click.prevent="alertHrefInfo">Alert {{href}} and not switch</a></p>
+
+        <p><a :href="href" @click.prevent="alertHrefInfo">Alert {{href}} and not switch</a></p>
+    </div>
+    <script>
+        var data = {
+            message:'Template_Syntax',
+            rawHtml:'<span style="color: red">This should be red.</span>',
+            dynamicId:'addnumber',
+            isButtonDisabled:false,
+            number:20,
+            seen:true,
+            href:'http://www.qq.com'
+        };
+        var app = new Vue({
+            el:'#app',
+            data:data,
+            methods:{
+                addNumber:function(){
+                    this.number++;
+                },
+                alertHrefInfo:function(){
+                    alert(this.href);
+                }
+            }
+        });
+    </script>
+</body>
+</html>

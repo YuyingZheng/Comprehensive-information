@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="../../../vue.js"></script>
+    <title>1.5-Conditional_Rendering</title>
+</head>
+
+<body>
+    <div id="app">
+        <template v-if='ok'>
+            <input v-model="type" placeholder="Enter the type(A,B,C)">
+            <p v-if="type ==='A'">A paragraph</p>
+            <p v-else-if="type ==='B'">B paragraph</p>
+            <p v-else-if="type ==='C'">C paragraph</p>
+            <p v-else>Please Enter the type(A,B,C)</p>
+        </template>
+
+        <template v-if="loginType === 'username'">
+            <label>Username</label>
+            <input placeholder="Enter your username">
+        </template>
+        <template v-else>
+            <label>Email</label>
+            <input placeholder="Enter your email address">
+        </template>
+        <button @click="switchLoginMethod()"> switchLoginMethod </button>
+        <br/> <br/>
+        <template v-if="loginType === 'username'">
+            <label>Username</label>
+            <input placeholder="Enter your username" key="username-input">
+        </template>
+        <template v-else>
+            <label>Email</label>
+            <input placeholder="Enter your email address" key= "eamil-input">
+        </template>
+        <button @click="switchLoginMethod()"> switchLoginMethod </button>
+
+        <p v-show="vshow">v-show 的元素始终会被渲染并保留在 DOM 中。v-show 只是简单地切换元素的 CSS 属性 display。注意，v-show 不支持 template 元素，也不支持 v-else。</p>
+    </div>
+    <script>
+        var vm = new Vue({
+            el:'#app',
+            data: {
+                ok: true,
+                type: 'A',
+                loginType: 'username',
+                vshow:true
+            },
+            methods: {
+                switchLoginMethod: function () {
+                    return this.loginType = this.loginType === 'username' ? 'eamil' : 'username';
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

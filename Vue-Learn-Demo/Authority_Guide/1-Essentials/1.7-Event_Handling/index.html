@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="../../../vue.js"></script>
+    <title>1.7-Event_Handling</title>
+</head>
+    <div id="app">
+        <button v-on:click="counter+=1">Add</button>
+        <p>click butoon {{counter}} times</p>
+
+        <button @click="alertHello">Hello</button>
+
+        <button @click="alertGoodBye('GoodBye',$event)">GoodBye</button>
+
+        <a v-bind:href="url" v-on:click.once.prevnt="alertHref">Google</a>
+
+        <div v-on:scroll="onScroll" style="100px;overflow-y:auto;border: 1px solid red;line-height: 150px;height: 100px;padding:20px">
+            test
+            <!-- <div v-on:touchstart="onTouchStart" style="height: 100px;border: 1px solid red;position: relative;z-index: 2;">
+                    onTouchStart
+            </div> -->
+        </div>
+
+        <input v-on:keyup.enter='clickEnterKey' v-model="enterMEssage">
+    </div>
+<body>
+    <script>
+        var vm = new Vue({
+            el:'#app',
+            data:{
+                counter:0,
+                message:'vue.js!',
+                url:'http://www.google.com',
+                enterMEssage:""
+            },
+            methods:{
+                alertHello:function(event){
+
+                    alert('Hello,'+this.message);
+                    
+                    if(event){
+                        alert(event.target.tagName);
+                    }
+                },
+                alertGoodBye:function(value,event){
+                    if(event) event.preventDefault;
+                    alert(value+','+this.message);
+                },
+                alertHref:function(){
+                    alert(this.url);
+                },
+                onScroll:function(event){
+                    // var i = 0;
+                    // while(!i){
+                    //     console.log(i);
+                    //     i=0;
+                    // }
+                    event.preventDefault();
+                    console.log("scroll");
+                },
+                // onTouchStart:function(event){
+                //     console.log('test');
+                //     event.preventDefault();
+                // }
+                clickEnterKey:function(){
+                    alert(this.enterMEssage);
+                    this.enterMEssage="";
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

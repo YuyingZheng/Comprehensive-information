@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="../../../vue.js"></script>
+    <title>1.1-The_Vue_Instance</title>
+</head>
+<body>
+    <div id="app-1" class="bind-content">
+		{{message}} {{originalValue}}
+		<input v-model="message">
+	</div>
+	
+	<script type="text/javascript">
+		var data = {
+			message:'Hellow vue ~ bind-content!',
+			originalValue:''
+		}
+		// Object.freeze(data);
+		var app=new Vue({
+			el:'#app-1',
+			data:data,
+			//Lifecycle Hooks
+			beforeCreate:function(){
+				console.log('beforeCreate -> message is：' +this.message);
+			},
+			created:function(){
+				console.log('created -> message is：' +this.message);
+			}
+		}); 
+
+		console.log(app.$data);
+		console.log(app.$el);
+		app.$watch('message',function(newValue,oldValue){
+			console.log('the "'+ oldValue +'" -> "' + newValue+'"!');
+		});
+        
+	</script>
+</body>
+</html>

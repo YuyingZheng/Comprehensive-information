@@ -3,12 +3,13 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Document</title>
-	<script src="https://unpkg.com/vue/dist/vue.js"></script>
+	<script src="../vue.js"></script>
 	<meta name="viewport" content="width=device-width,initial-scale=1.0,max-sacle=1.0,user-saclable=no">
 </head>
 <body>
 	<div id="app-1" class="bind-content">
-		{{message}}
+		{{message}} {{originalValue}}
+		<input v-model="message">
 	</div>
 	<div id="app-2" class="bind-DomeProperty">
 		<span v-bind:title="message">
@@ -16,16 +17,24 @@
 		</span>
 	</div>
 	<script type="text/javascript">
+		var data = {
+			message:'Hellow vue ~ bind-content!',
+			originalValue:''
+		}
+		// Object.freeze(data);
 		var app=new Vue({
 			el:'#app-1',
-			data:{
-				message:'Hellow vue ~ bind-content!'
-			}
+			data:data,
 		});
+
+		app.$watch('message',function(newValue,oldValue){
+			console.log('the "'+ oldValue +'" -> "' + newValue+'"!');
+		});
+
 		var app2=new Vue({
 			el:"#app-2",
 			data:{
-				message:'hellow vue ~ bind-DomeProperty!' + new Date()
+				message:'hellow vue ~ bind-DomeProperty!' + new Date().toLocaleString()
 			},
 			filters:{
 				capitalize:function(value){			
@@ -35,6 +44,7 @@
 				}
 			}
 		});
+
 	</script>
 </body>
 </html>
