@@ -1,12 +1,113 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <script src="../../../vue.js"></script>
+    <title>1.8-Form_Input_Bindings</title>
 </head>
+
 <body>
-    
+    <div id="app">
+        <input type="text" v-model.lazy="message" placeholder="enter the message">
+        <p>Message is : {{message}}</p>
+
+        <input type="number" v-model.number="age" placeholder="enter the age">
+        <p>age is : {{age}}</p>
+
+        <input type="text" v-model.trim="message2" placeholder="enter the message">
+        <p>Message2 is : {{message2}}</p>
+
+        <textarea name="" id="" cols="30" rows="10" v-model="multiMeesage" placeholder="enter the multiple line message"></textarea>
+        <p>mul-Message is : {{multiMeesage}}</p>
+
+        <p>{{checkbox.name}}</p>
+        <input type="checkbox" id="checkbox" v-model="checkbox.checked">
+        <label for="checkbox">{{ checkbox.checked }}</label>
+        <br/>
+
+        <input type="checkbox" id="jack" value="Jack" v-model="checkbox.checkedNames">
+        <label for="jack">Jack</label>
+        <input type="checkbox" id="john" value="John" v-model="checkbox.checkedNames">
+        <label for="john">John</label>
+        <input type="checkbox" id="mike" value="Mike" v-model="checkbox.checkedNames">
+        <label for="mike">Mike</label>
+        <p>Checked names:{{ checkbox.checkedNames }}</p>
+
+        <p>{{radio.name}}</p>
+        <input type="radio" id="one" v-bind:value="radio.a" v-model="radio.picked">
+        <label for="one">one</label>
+        <input type="radio" id="two" v-bind:value="radio.b" v-model="radio.picked">
+        <label for="two">two</label>
+
+        <p>{{ select.name }}</p>
+        <select v-model="select.selected">
+            <option disabled value="">choice</option>
+            <option>A</option>
+            <option>B</option>
+            <option>C</option>
+        </select>
+        <p>selected: {{select.selected}}</p>
+
+        <select v-model="select.mulSelected" multiple>
+            <option>A</option>
+            <option>B</option>
+            <option>C</option>
+        </select>
+        <p>selected: {{select.mulSelected}}</p>
+
+        <select name="" id="" v-model="select.selected2">
+            <option disabled value="">choice</option>
+            <option v-for="option in options" v-bind:value="option.value">
+                {{option.text}}
+            </option>
+        </select>
+        <p>selected2: {{select.selected2}}</p>
+
+        <input type="checkbox" v-model="checkbox.toggle" true-value="yes" false-value="no">
+        <br/>
+        <select v-model="select.selected3">
+            <!-- 内联对象字面量 -->
+            <option v-bind:value="{ number: 123 }">123</option>
+        </select>
+    </div>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                message: '',
+                age:'',
+                message2: '    message2     ',
+                multiMeesage: '',
+                checkbox: {
+                    name: 'Checkbox',
+                    checked: true,
+                    checkedNames: [],
+                    toggle: ''
+                },
+                radio: {
+                    a: 'one',
+                    b: 'two',
+                    name: 'Radio',
+                    picked: ''
+                },
+                select: {
+                    name: 'Select:',
+                    selected: '',
+                    mulSelected: [],
+                    selected2: '',
+                    selected3:''
+                },
+                options: [
+                    { text: "One", value: "A" },
+                    { text: "Two", value: "B" },
+                    { text: "Three", value: "C" }
+                ]
+            }
+        });
+    </script>
 </body>
+
 </html>

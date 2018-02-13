@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="../../../../vue.js"></script>
+    <title>custom-events</title>
+</head>
+
+<body>
+    <div id="counter-event-example">
+        <p>{{total}}</p>
+        <button-counter-add v-on:increment="incrementTotal"></button-counter-add>
+        <button-counter-add v-on:increment="incrementTotal"></button-counter-add>
+        <native-events v-on:click.native="popTip"></native-events>
+    </div>
+    <script>
+        var vm = new Vue({
+            el: '#counter-event-example',
+            data: {
+                total: 0
+            },
+            components: {
+                'buttonCounterAdd': {
+                    template: '<button v-on:click="incrementCounter">{{counter}}</button>',
+                    data: function () {
+                        return {
+                            counter: 0
+                        }
+                    },
+                    methods: {
+                        incrementCounter: function () {
+                            this.counter++;
+                            this.$emit('increment');
+                        }
+                    }
+                },
+                'nativeEvents': {
+                    data: function () {
+                        return {
+                            message: "Binding Native Events to Components!"
+                        }
+                    },
+                    template: '<div><p style="color:red">{{this.message}}</p><button>nativeBtn</button></div>'
+                }
+            },
+            methods: {
+                incrementTotal: function () {
+                    this.total++;
+                },
+                popTip: function () {
+                    alert("this is a nvtive event");
+                }
+            }
+        });
+    </script>
+    <div id="custom-input">
+        <p v-bind:style="styleObject">{{something}}</p>
+        <input type="text" v-model="something">
+        <input type="text" 
+            v-bind:value="something"
+            v-on:input="something = $event.target.value">
+    </div>
+    <script>
+        var vm = new Vue({
+            el:'#custom-input',
+            data:{
+                something:'Form Input Components using Custom Events',
+                styleObject:{
+                    color:'red'
+                }
+            },
+            
+        });
+    </script>
+</body>
+
+</html>

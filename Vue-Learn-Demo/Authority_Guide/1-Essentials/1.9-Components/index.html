@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="../../../vue.js"></script>
+    <title>1.9-Components</title>
+</head>
+<body>
+    <div id="app">
+        <p>{{name}}</p>
+        <my-component></my-component>
+        <table>
+            <tr>
+                <td>
+                    <local-component></local-component>
+                </td>
+            </tr> 
+        </table>
+        <ul>
+            <li is="local-component"></li>
+        </ul>
+    </div>
+    <div id="app2">
+        <p>{{name}}</p>
+        <my-component></my-component>
+        <p></p>
+        <div>
+            <simple-counter></simple-counter>
+            <simple-counter></simple-counter>
+            <simple-counter></simple-counter>
+        </div> 
+    </div>
+    <script>
+        Vue.component('my-component',{
+            template:'<div>This is a custom component! {{message}}</div>',
+            data:function(){
+                return{
+                    message:'Hello component-data'   
+                }
+            } 
+        });
+
+        var childComponent = {
+            template:'<div>This is a custom childComponent!</div>'
+        }
+ 
+        // var data = {counter:0}
+        Vue.component('simple-counter',{
+            template:'<button v-on:click="counter++">{{counter}}</button>',
+            data:function(){
+               /*  return data */ //每个组件实例返回了同一个对象的引用
+                return {
+                    counter:0,
+                }
+            }
+        });
+        var vm = new Vue({
+            el:'#app',
+            data:{
+                name:'Gloabal-Local'
+            },
+            components:{
+                'local-component':childComponent
+            }
+        });
+
+        var vm2 = new Vue({
+            el:'#app2',
+            data:{
+                name:'Gloabal'
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="../../../vue.js"></script>
+    <title>dynamic-components</title>
+</head>
+
+<body>
+    <div id="app">
+        <keep-alive>
+            <component :is="currentView"></component>
+        </keep-alive>
+    </div>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                currentView: 'home'
+            },
+            components: {
+                home: {
+                    template: '<p>This is home component</p>'
+                },
+                posts: {
+                    template: '<p>This is posts component</p>'
+                },
+                archive: {
+                    template: '<p>This is archive component</p>'
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

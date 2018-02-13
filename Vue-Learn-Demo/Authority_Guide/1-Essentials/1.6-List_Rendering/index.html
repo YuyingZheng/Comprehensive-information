@@ -122,7 +122,7 @@
     <div id="todo-list-demo">
         <input type="text" v-bind:placeholder="placeholderText" v-model="newTodeText" v-on:keyup.enter="addNewTodo">
         <ul>
-            <li is="todo-item" v-for="(todo,index) in todos" v-bind:text="todo.text" v-bind:key="todo.id" v-on:remove="todos.splice(index,1)"></li>
+            <li is="todo-item" v-for="(todo,index) in todos" v-bind:text="todo.text" v-bind:key="todo.id" v-on:remove="removeTodo(index)"></li>
         </ul>
     </div>
     <script>
@@ -156,6 +156,9 @@
                 newTodeText: ''
             },
             methods: {
+                removeTodo:function(index){
+                    this.todos.splice(index,1)
+                },
                 addNewTodo: function () {
                     this.todos.push({
                         id: this.todoNextId++,

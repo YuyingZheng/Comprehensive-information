@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="../../../vue.js"></script>
+    <title>content-distribution-with-slots</title>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 无效 父组件模板的内容在父组件作用域内编译；子组件模板的内容在子组件作用域内编译。 -->
+        <!-- <child-component1 v-if="childProperty"></child-component1> -->
+        <child-component1></child-component1>
+    </div>
+    <script>   
+        Vue.component('child-component1', {
+            template: '<div v-show="childProperty">Child component 1</div>',
+            data: function () {
+                return {
+                    childProperty: true
+                }
+            }
+        });
+        var vm = new Vue({
+            el: '#app'
+        });
+    </script>
+    <hr>
+    <div id="single-slot">
+        <h1 style="color:red">{{message}}</p>
+            <h2>I'm the parent title</h2>
+            <child-component>
+                <p>This is some original content</p>
+                <p>This is some more original content</p>
+            </child-component>
+            <child-component></child-component>
+    </div>
+    <script>
+        var singleSlot = new Vue({
+            el: '#single-slot',
+            data: {
+                message: 'single-slot'
+            },
+            components: {
+                'childComponent': {
+                    template: '\
+                        <div>\
+                            <h3>I\'m the child title</h3>\
+                            <slot>\
+                                This will only be displayed if there is no content to be distributed.\
+                            </slot>\
+                        </div>'
+                }
+            }
+        })
+    </script>
+    <hr>
+    <div id="named-slots">
+        <h1 style="color:red">{{message}}</h1>
+        <child-component>
+            <h1 slot="header">Here might be a page title</h1>
+
+            <p>A paragraph for the main content.</p>
+            <p>And another one.</p>
+
+            <p slot="footer">Here's some contact info</p>
+        </child-component>
+    </div>
+    <script>
+        var singleSlot = new Vue({
+            el: '#named-slots',
+            data: {
+                message: 'named-slots'
+            },
+            components: {
+                'childComponent': {
+                    template: '\
+                        <div class="container">\
+                            <header><slot name="header"></slot></header>\
+                            <main><slot></slot></main>\
+                            <footer><slot name="footer"></slot></footer>\
+                        </div>'
+                }
+            }
+        });
+    </script>
+    <hr>
+    <div id="scoped-slots">
+        <h1 style="color:red">{{message}}</h1>
+        <child-component>
+            <!--接收从子组件中传递的prop对象(这个就是作用域插槽)-->
+            <template slot-scope="props">
+                <p>hello from parent</p>
+                <!--使用这个prop对象-->
+                <p>{{ props.text }}</p>
+                <p>{{ props.text1 }}</p>
+            </template>
+        </child-component>
+    </div>
+    <script>
+        var singleSlot = new Vue({
+            el: '#scoped-slots',
+            data: {
+                message: 'scoped-slots'
+            },
+            components: {
+                'childComponent': {
+                    props: ['props'], //这个写不写都可以,作用域插槽固定会接收prop对象,而且这个prop对象是肯定存在的
+                    template: '\
+                        <div class="child"> \
+                            <slot text="hello from child" text1="hello2 form child"></slot> \
+                            <p>other messages of child component</p>\
+                        </div>'
+                }
+            }
+        });
+    </script>
+    <hr>
+    <div id="list-demo">
+        <h1 style="color:red">{{message}}</h1>
+        <ul>
+            <li class="my-fancy-item" v-for="item in items">
+                {{item.text}}
+            </li>
+        </ul>
+        <my-awesome-list :items="items">
+            <template slot="item" slot-scope="props">
+                <li class="my-fancy-item">{{props.text}}</li>
+            </template>
+        </my-awesome-list>
+
+        <my-awesome-list :items="items">
+            <li slot="item" slot-scope="props" class="my-fancy-item">{{props.text}}</li>
+        </my-awesome-list>
+    </div>
+    <script>
+        var listDemo = new Vue({
+            el: '#list-demo',
+            data: {
+                message: 'list-comments',
+                items: [
+                    { text: 'first' },
+                    { text: 'second' }
+                ]
+            },
+            components: {
+                'MyAwesomeList': {
+                    props: ['items'],
+                    template: '\
+                        <ul>\
+                            <slot name="item" v-for="item in items" :text="item.text">\
+                            </slot>\
+                        </ul>\
+                    '
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

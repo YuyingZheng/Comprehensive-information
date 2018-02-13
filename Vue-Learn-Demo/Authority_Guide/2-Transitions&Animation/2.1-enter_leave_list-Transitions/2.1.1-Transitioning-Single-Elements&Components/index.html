@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>2.1-Enter-Leave-List-Transitions</title>
+    <link href="../animate.css" rel="stylesheet" type="text/css">
+    <script src="../../../../vue.js"></script>
+   
+    <style>
+        .fade-enter-active,
+        .fade-leave-active {
+            transition: opacity .5s;
+        }
+
+        /* .fade-leave-active below version 2.1.8 */
+
+        /* 0 -> 1 -> 0 */
+
+        .fade-enter,
+        .fade-leave-to {
+            opacity: 0;
+        }
+
+        /* 可以设置不同的进入和离开动画 */
+
+        /* 设置持续时间和动画函数 */
+
+        .slide-fade-enter-active {
+            transition: all .3s ease;
+        }
+
+        .slide-fade-leave-active {
+            transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+        }
+
+        /* .slide-fade-leave-active for below version 2.1.8 */
+
+        .slide-fade-enter,
+        .slide-fade-leave-to {
+            transform: translateX(10px);
+            opacity: 0;
+        }
+
+        bounce-enter-active {
+            animation: bounce-in .5s;
+        }
+
+        .bounce-leave-active {
+            animation: bounce-in .5s reverse;
+        }
+
+        @keyframes bounce-in {
+            0% {
+                transform: scale(0);
+            }
+            50% {
+                transform: scale(1.5);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="demo">
+        <button @click="demo1.show = !demo1.show">Toggle</button>
+        <transition name="fade">
+            <p v-if="demo1.show">{{demo1.message}}</p>
+        </transition>
+        <hr>
+        <button @click="demo2.show = !demo2.show">Toggle</button>
+        <transition name="slide-fade">
+            <p v-if="demo2.show">{{demo2.message}}</p>
+        </transition>
+        <hr>
+        <button @click="demo3.show = !demo3.show">Toggle</button>
+        <transition name="bounce">
+            <p v-if="demo3.show">{{demo3.message}}</p>
+        </transition>
+        <hr>
+        <button @click="demo4.show = !demo4.show">Toggle</button>
+        <transition name="custom-classes-transition" 
+            enter-active-class="animated tada" 
+            leave-active-class="animated bounceOutRight"
+            :duration="{ enter: 5000, leave: 3000 }">
+            <p v-if="demo4.show">{{demo4.message}}</p>
+        </transition>
+        <hr>
+    </div>
+    <script>
+        var demo = new Vue({
+            el: '#demo',
+            data: {
+                demo1: {
+                    message: 'Transition Classes',
+                    show: true
+                },
+                demo2: {
+                    message: 'CSS Transitions',
+                    show: true
+                },
+                demo3: {
+                    message: 'CSS Animations',
+                    show: true
+                },
+                demo4: {
+                    message: 'Custom Transition Classes',
+                    show: true
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

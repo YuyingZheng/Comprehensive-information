@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="../../../vue.js"></script>
+    <title>1.9-Components(prop.html)</title>
+</head>
+<body>
+    <div id="app">
+        <child message="Hello props"></child>
+        <!-- 输入字符串1+1 -->
+        <child  message="1+1"></child>
+        <!-- 输入2 -->
+        <child  v-bind:message="1+1"></child>
+        <div>
+            <input type="text" v-model="dynamicProps">
+            <br>
+            <child2 v-bind:dynamic-props-message="dynamicProps"></child2>
+        </div>
+        <div>
+            <todo-item v-bind="todo"></todo-item>
+        </div>
+        <div>
+            <one-way-data-local v-bind:initial-counter="initialCounter"></one-way-data-local>
+            <one-way-data-computed v-bind:computed-message="oneWayDataComputedMessage"></one-way-data-computed>
+        </div>
+        <div>
+            <prop-validation :number-porp="propValidationArray.num1" :mul-prop="propValidationArray.mulMessage" :string-prop="propValidationArray.msg" :default-number-prop="propValidationArray.num2"
+                :object-prop="propValidationArray.obj" :custom-prop="propValidationArray.num3"></prop-validation>
+        </div>
+    </div>
+    
+    <script>
+        Vue.component('child',{
+            props:['message'],
+            template:'<p>{{message}}</p>'
+        });
+        Vue.component('propValidation',{
+            props:{
+                numberPorp:Number,
+                stringProp:{
+                    type:String,
+                    required:true
+                },
+                mulProp:[Number,String],
+                defaultNumProp:{
+                    type:Number,
+                    default:100
+                },
+                objectProp:{
+                    type:Object,
+                    default:function(){
+                        return { message:'hello Vue!'}
+                    }
+                },
+                customProp:{
+                    validator:function(value){
+                        return value > 10 
+                    }
+                }
+            },
+            template:'<div><h5>test-prop-validation</h5>numberPorp:{{numberPorp}}<br>\
+                stringProp:{{stringProp}}<br>\
+                mulProp:{{mulProp}}<br>\
+                defaultNumProp:{{defaultNumProp}}<br>\
+                objectProp:{{objectProp}}<br>\
+                customProp:{{customProp}}</div>'
+        });
+        var vm = new Vue({
+            el:'#app',
+            data:{
+                dynamicProps:"Message form parent",
+                initialCounter:1,
+                oneWayDataComputedMessage:['item1','item2'],
+                todo:{
+                    text:'Learn vue prop',
+                    isComplete:false
+                },
+                propValidationArray:{
+                    num1:50,
+                    mulMessage:'this is a mulmessage,[Number,String]',
+                    msg:'parent data',
+                    num2:150,
+                    obj:{
+                        str:'hello child!'
+                    },
+                    num3:25
+                }
+            },
+            components:{
+                'child2':{
+                    props:['dynamicPropsMessage'],
+                    template:'<p>{{dynamicPropsMessage}}</p>'
+                },
+                'todoItem':{
+                    props:['text','isComplete'],
+                    template:'<p>{{text}},{{isComplete}}</p>'
+                },
+                'oneWayDataLocal':{
+                    props:['initialCounter'],
+                    data:function(){
+                        return {
+                            message:'The prop is used to pass in an initial value;\
+                                    the child component wants to use it as a local data property afterwards.',
+                            counter:this.initialCounter
+                        }
+                    },
+                    template:'<div><p style="color:red;">{{message}}</p><button @click="initialCounter++">{{initialCounter}}</button><button @click="counter++">{{counter}}</button></div>'
+                },
+                'oneWayDataComputed':{
+                    props:['computedMessage'],
+                    data:function(){
+                        return{
+                            message:'The prop is passed in as a raw value that needs to be transformed.'
+                        }
+                    },
+                    computed:{
+                        normalizedMessage:function(){
+                            return this.computedMessage.join(' ');
+                        }
+                    },
+                    methods:{
+                        add(){
+                            this.computedMessage.push('item3');
+                        },
+                        edit(index){
+                            //this.computedMessage[index]='newItem';//Vue 检测不到数组变动没有刷新视图
+                            this.computedMessage.splice(index,1,'newItem');
+                        },
+                        reset(){
+                            this.computedMessage.splice(0,this.computedMessage.length,'item1','item2');
+                        }
+                    },
+                    template:'<div><p style="color:red;">{{message}}</p>\
+                    <p>{{computedMessage}}->{{normalizedMessage}}</p>\
+                    <button @click="add">add</button>\
+                    <p v-for="(item,index) in computedMessage" @click="edit(index)">{{item}}</p>\
+                    <button @click="reset">reset</button>\
+                    </div>'
+                }
+            },
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="../../../vue.js"></script>
+    <title>2.2-state-transitions</title>
+    <script src="https://cdn.jsdelivr.net/npm/tween.js@16.3.4"></script>
+</head>
+
+<body>
+    <div id="animated-number-demo">
+        <input type="number" step="20" v-model.number="number">
+        <p>{{animateNumber}}</p>
+    </div>
+    <script>
+        var vm = new Vue({
+            el: '#animated-number-demo',
+            data: {
+                number: 0,
+                animateNumber: 0
+            },
+            watch: {
+                number: function (newValue, oldValue) {
+                    var vm = this;
+                    function animate() {
+                        // requestAnimationFrame(animate);
+                        // TWEEN.update(time);
+                        if (TWEEN.update()) {
+                            requestAnimationFrame(animate);
+                        }
+                    }
+
+                    new TWEEN.Tween({ tweeningNumber: oldValue })
+                        .easing(TWEEN.Easing.Quadratic.Out)
+                        .to({ tweeningNumber: newValue }, 500)
+                        .onUpdate(function () {
+                            vm.animateNumber = this.tweeningNumber.toFixed(0)
+                        })
+                        .start();
+                    animate();
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

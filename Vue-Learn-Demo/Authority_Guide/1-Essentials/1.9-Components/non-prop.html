@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="../../../vue.js"></script>
+    <title>non-prop</title>
+</head>
+<body>
+    <div id="app">
+        <bs-date-input data-3d-date-picked="true" class="date-picker-theme-dark" type="outdate"></bs-date-input>
+    </div>
+    <script>
+        var vm = new Vue({
+            el:'#app',
+            components:{
+                'BsDateInput':{
+                    template:'<input type="date" class="form-control"></input>'
+                }
+            }
+        });
+    </script>
+</body>
+</html>

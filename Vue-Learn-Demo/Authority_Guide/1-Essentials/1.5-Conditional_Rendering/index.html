@@ -19,7 +19,7 @@
             <p v-else>Please Enter the type(A,B,C)</p>
         </template>
 
-        <template v-if="loginType === 'username'">
+        <template v-if="loginType1 === 'username'">
             <label>Username</label>
             <input placeholder="Enter your username">
         </template>
@@ -27,9 +27,10 @@
             <label>Email</label>
             <input placeholder="Enter your email address">
         </template>
-        <button @click="switchLoginMethod()"> switchLoginMethod </button>
-        <br/> <br/>
-        <template v-if="loginType === 'username'">
+        <button @click="switchLoginMethod1()"> switchLoginMethod </button>
+        <br/> 
+        <hr>
+        <template v-if="loginType2 === 'username'">
             <label>Username</label>
             <input placeholder="Enter your username" key="username-input">
         </template>
@@ -37,7 +38,7 @@
             <label>Email</label>
             <input placeholder="Enter your email address" key= "eamil-input">
         </template>
-        <button @click="switchLoginMethod()"> switchLoginMethod </button>
+        <button @click="switchLoginMethod2()"> switchLoginMethod </button>
 
         <p v-show="vshow">v-show 的元素始终会被渲染并保留在 DOM 中。v-show 只是简单地切换元素的 CSS 属性 display。注意，v-show 不支持 template 元素，也不支持 v-else。</p>
     </div>
@@ -47,12 +48,16 @@
             data: {
                 ok: true,
                 type: 'A',
-                loginType: 'username',
+                loginType1: 'username',
+                loginType2: 'username',
                 vshow:true
             },
             methods: {
-                switchLoginMethod: function () {
-                    return this.loginType = this.loginType === 'username' ? 'eamil' : 'username';
+                switchLoginMethod1: function () {
+                    return this.loginType1 = this.loginType1 === 'username' ? 'eamil' : 'username';
+                },
+                switchLoginMethod2: function () {
+                    return this.loginType2 = this.loginType2 === 'username' ? 'eamil' : 'username';
                 }
             }
         });

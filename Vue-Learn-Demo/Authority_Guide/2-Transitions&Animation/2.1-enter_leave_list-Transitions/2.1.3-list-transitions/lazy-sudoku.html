@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>lazy-sudoku</title>
+    <link href="../animate.css" rel="stylesheet" type="text/css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.14.1/lodash.min.js"></script>
+    <script src="../../../../vue.js"></script>
+    <style>
+        .sudoku-container {
+            display: flex;
+            flex-wrap: wrap;
+            width: 238px;
+            margin-top: 10px;
+        }
+
+        .cell {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            width: 25px;
+            height: 25px;
+            border: 1px solid #aaa;
+            margin-right: -1px;
+            margin-bottom: -1px;
+        }
+
+        .cell:nth-child(3n) {
+            margin-right: 0;
+        }
+
+        .cell:nth-child(27n) {
+            margin-bottom: 0;
+        }
+
+        .cell-move {
+            transition: transform 1s;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="sudoku">
+        <h2>Lazy SudoKU</h2>
+        <p>Keep hitting the shuffle button until you win.</p>
+        <button @click="shuffle">Shuffle</button>
+        <transition-group name="cell" class="sudoku-container" tag="div">
+            <!-- cell 为一个object{id,number,bg} -->
+            <span v-for="cell in cells" :key="cell.id" :style="cell.bg" class="cell">
+                {{cell.number}}
+            </span>
+        </transition-group>
+        
+    </div>
+    <script>
+        var vm = new Vue({
+            el:'#sudoku',
+            data:{
+                cells:Array.apply(null,{length:81})  //apply() 的第一个参数是this对象，第二个参数是数组(类数组对象)，作为参数列表。
+                    .map(function(_, index){
+                        return {
+                            id:index,
+                            number:index % 9 + 1,
+                            bg:{
+                                backgroundColor:'hsl(' + Math.floor(Math.random() * 360) + ',70% ,80%)'
+                            }
+                        }
+                    })
+            },
+            methods:{
+                shuffle:function(){
+                    this.cells=_.shuffle(this.cells);
+                    console.log(this.cells);
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
