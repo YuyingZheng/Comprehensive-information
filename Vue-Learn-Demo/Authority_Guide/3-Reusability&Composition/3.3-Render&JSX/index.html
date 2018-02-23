@@ -67,10 +67,14 @@
         });
         Vue.component('anchored-heading-render', {
             render:function(createElement){
-                return createElement(
-                    'h'+this.level, // tag name 标签名称
-                    this.$slots.default // 子组件中的阵列
-                )
+                var title = this.$slots.default; 
+                return createElement('div',[
+                    createElement(
+                        'h'+this.level, [
+                            createElement('a',title)
+                        ]
+                    )
+                ]);
             },
             props: {
                 level: {
