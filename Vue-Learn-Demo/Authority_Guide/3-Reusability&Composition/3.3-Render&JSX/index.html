@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>3.3-Render&JSX</title>
+    <script src="../../../vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <h1 style="color:red;text-transform:capitalize">
+            template option
+        </h1>
+        <anchored-heading-template :level="level">Hello world!</anchored-heading-template>
+
+        <anchored-heading-render :level="level">Hello world!</anchored-heading-render>
+    </div>
+
+
+    <script type="text/x-template" id="anchored-heading-template">
+        <h1 v-if="level === 1">
+            <a name="hello-world" href="#hello-world">
+                <slot></slot>
+            </a>
+        </h1>
+        <h2 v-else-if="level === 2">
+            <a name="hello-world" href="#hello-world">
+                <slot></slot>
+            </a>
+        </h2>
+        <h3 v-else-if="level === 3">
+            <a name="hello-world" href="#hello-world">
+                <slot></slot>
+            </a>
+        </h3>
+        <h4 v-else-if="level === 4">
+            <a name="hello-world" href="#hello-world">
+                <slot></slot>
+            </a>
+        </h4>
+        <h5 v-else-if="level === 5">
+            <a name="hello-world" href="#hello-world">
+                <slot></slot>
+            </a>
+        </h5>
+        <h6 v-else-if="level === 6">
+            <a name="hello-world" href="#hello-world">
+                <slot></slot>
+            </a>
+        </h6>
+        <p v-else>
+            H6 is smallest title!
+        </p>
+    </script>
+    <script>
+        Vue.component('anchored-heading-template', {
+            template: '#anchored-heading-template',
+            props: {
+                level: {
+                    type: Number,
+                    required: true
+                }
+            }
+        });
+        Vue.component('anchored-heading-render', {
+            render:function(createElement){
+                return createElement(
+                    'h'+this.level, // tag name 标签名称
+                    this.$slots.default // 子组件中的阵列
+                )
+            },
+            props: {
+                level: {
+                    type: Number,
+                    required: true
+                }
+            }
+        });
+        var vm = new Vue({
+            el: '#app',
+            data:{
+                level:1
+            }
+        });
+    </script>
+</body>
+
+</html>

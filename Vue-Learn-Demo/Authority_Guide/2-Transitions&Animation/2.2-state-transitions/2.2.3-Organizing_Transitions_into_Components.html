@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>2.2.3-Organizing_Transitions_into_Components</title>
+    <script src="../../../vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tween.js@16.3.4"></script>
+</head>
+<body>
+    <div id="number-component">
+        <input type="number" step="20" v-model.number="firstNumber">+
+        <input type="number" step="20" v-model.number="secondNumber">=
+        {{result}}
+        <br>
+        <animated-integer v-bind:value="firstNumber"></animated-integer> +
+        <animated-integer v-bind:value="secondNumber"></animated-integer> =
+        <animated-integer v-bind:value="result"></animated-integer>
+    </div>
+    <script>
+        Vue.component('animated-integer',{
+            template:'<span>{{tweeningValue}}</span>',
+            props:{
+                value:{
+                    type:Number,
+                    required:true
+                }
+            },
+            data:function(){
+                return {
+                    tweeningValue:0
+                }
+            },
+            mounted:function(){
+                this.tweenNumber(this.tweeningValue,this.value);
+            },
+            watch:{
+                value:function(newValue,oldValue){
+                    this.tweenNumber(oldValue,newValue)
+                }
+            },
+            methods:{
+                tweenNumber:function(startValue,endValue){
+                    var self = this ;
+
+                    function animate(){ 
+                        if(TWEEN.update()){
+                            requestAnimationFrame(animate);
+                        }
+                    }
+                    new TWEEN.Tween({tweeningValue:startValue})
+                    .to({tweeningValue:endValue},500)
+                    .onUpdate(function(){
+                        self.tweeningValue = this.tweeningValue.toFixed(0);
+                    })  
+                    .start();
+
+                    animate();
+                }
+            }
+        });
+        var vm = new Vue({
+            el:'#number-component',
+            data:{
+                firstNumber:20,
+                secondNumber:40
+            },
+            computed:{
+                result:function(){
+                    return this.firstNumber + this.secondNumber;
+                }
+            }
+        });
+    </script>
+</body>
+</html>
