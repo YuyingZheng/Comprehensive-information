@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>complete</title>
+    <script src="../../../vue.js"></script>
+</head>
+<body>
+    <div id="head-component">
+        <input type="number" v-model="titleLevel" max="6">
+        <anchored-heading :level="titleLevel">Hello world!</anchored-heading>
+        <repeat-p></repeat-p>
+    </div>
+    <script>
+    var getChildTextContent = function (childern) {
+        return childern.map(function(node){
+            return node.childern ?  getChildTextContent(node.childern) : node.text
+        }).join(' ');
+    }
+    Vue.component('anchored-heading',{
+        props:{
+            level:{
+                required:true,
+            }
+        },
+        // data:function(){
+        //     return{
+        //         levelNum:parseInt(this.level)
+        //     }
+        // },
+        render:function(createElement){
+            //create kabebCase id based on the $slots.default content
+            var titleText = this.$slots.default;
+            console.log(titleText);
+            var headeringId = getChildTextContent(titleText)
+                .toLowerCase()
+                .replace(/\W+/g,'-')
+                .replace(/(^\-|\-$)/g,'');
+            return createElement('h'+ this.level,[
+                createElement('a',
+                    {
+                        attrs:{
+                            name:headeringId,
+                            href:'#' + headeringId
+                        }
+                    },titleText
+                )
+            ])
+        }
+    });
+    /* 
+        约束：VNodes 必须唯一组件树中的所有 VNodes 必须是唯一的
+
+        render: function (createElement) {
+            var myParagraphVNode = createElement('p', 'hi')
+            return createElement('div', [
+            // 错误-重复的 VNodes
+                myParagraphVNode, myParagraphVNode
+            ])
+        }
+        Repeat 
+     */
+    Vue.component('repeatP',{
+        render:function(createElement){
+            return createElement('div',
+                Array.apply(null,{length:30}).map(function(){
+                    return createElement('p','Hello,the same paragraph');
+                })
+            )
+        }
+    });
+    var headComponent = new Vue({
+        el:'#head-component',
+        data:{
+            titleLevel:1
+        }
+    });
+    </script>
+</body>
+</html>

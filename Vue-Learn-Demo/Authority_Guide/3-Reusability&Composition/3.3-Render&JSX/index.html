@@ -68,6 +68,7 @@
         Vue.component('anchored-heading-render', {
             render:function(createElement){
                 var title = this.$slots.default; 
+                console.log(title);
                 return createElement('div',[
                     createElement(
                         'h'+this.level, [
