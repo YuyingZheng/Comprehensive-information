@@ -11,6 +11,7 @@
 
 <body>
     <div id="app">
+        <input type="text" v-model="currentView">
         <keep-alive>
             <component :is="currentView"></component>
         </keep-alive>
