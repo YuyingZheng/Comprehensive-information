@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>flex-grow&flex-shrink</title>
+    <style>
+        #container{
+            display: flex;
+            flex-flow: row nowrap;
+        }
+        .item{
+            height: 200px;
+            font-size: 20px;
+            color:#fff;
+        }
+        .item:first-of-type{
+            background: red;
+            width: 200px;
+        }
+        .item:nth-of-type(2){
+            background: blue;
+            flex-grow: 1;
+        }
+        .item:nth-of-type(3){
+            background: green;
+            width: 200px;
+        }
+    </style>
+</head>
+<body>
+    <a href="https://zhuanlan.zhihu.com/p/24372279">详解</a>
+    <a href="https://xieranmaya.github.io/blog/flex-grow-shrink.html">Demo</a>
+    <div id="container">
+        <div class="item left-side">left</div>
+        <div class="item main-content">content</div>
+        <div class="item right-side">right</div>
+    </div>
+</body>
+</html>
