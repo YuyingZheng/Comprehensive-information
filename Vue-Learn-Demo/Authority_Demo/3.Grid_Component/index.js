@@ -20,16 +20,20 @@ Vue.component('table-grid',{
             var sortKey = this.sortKey;
             var filterKey = this.filterKey && this.filterKey.toLowerCase();
             var order = this.sortOrders[sortKey] || 1;
-            var data = data;
+            var data = this.data;
             if(sortKey){
-                data =  data.sort(function (a,b) {  
+                    data =  data.sort(function (a,b) {  
                     nameA = a[sortKey];
                     nameB = b[sortKey];
-                    return ( a===b ? 0 : a > b ? 1 : -1) * order;
+                    return ( nameA === nameB ? 0 : nameA < nameB ? 1 : -1) * order;
                 });
             }
-            if(filteredData){
-
+            if(filterKey){
+                data = data.filter(function(row){
+                    return Object.keys(row).some(function(key){
+                        return String(row[key]).toLowerCase().indexOf(filterKey) > -1 ;
+                    });
+                });
             }
             return data;
         }

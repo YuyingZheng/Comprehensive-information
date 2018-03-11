@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>4.Tree_View</title>
+    <script src='../../vue.js'></script>
+    <style>
+        body {
+            font-family: Menlo, Consolas, monospace;
+            color: #444;
+        }
+
+        .item {
+            cursor: pointer;
+        }
+
+        .bold {
+            font-weight: bold;
+        }
+
+        ul {
+            padding-left: 1em;
+            line-height: 1.5em;
+            list-style-type: dot;
+        }
+    </style>
+</head>
+
+<body>
+    <p>(You can double click on an item to turn it into a folder.)</p>
+
+    <!-- the demo root element -->
+    <ul id="demo">
+        <item class="item" :model="treeData">
+        </item>
+    </ul>
+    <!-- item template -->
+    <script type="text/x-template" id="item-template">
+    <li>
+      <div
+        :class="{bold: isFolder}"
+        @click="toggle"
+        @dblclick="changeType">
+        {{ model.name }}
+        <span v-if="isFolder">[{{ open ? '-' : '+' }}]</span>
+      </div>
+      <ul v-show="open" v-if="isFolder">
+        <item
+          class="item"
+          v-for="(model, index) in model.children"
+          :key="index"
+          :model="model">
+        </item>
+        <li class="add" @click="addChild">+</li>
+      </ul>
+    </li>
+  </script>
+  <script src="index.js"></script>
+</body>
+
+</html>
