@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style type="text/css">
+    P{
+    	width: 1000px;
+    	margin: 20px auto;
+    	text-align:center;
+    }
+ 
+    div {
+        width: 200px;
+        height: 200px;
+        background: red;
+        border: 1px solid black;
+        line-height: 200px;
+        color: black;
+        font-size: 20px;
+        text-align: center;
+        word-wrap: break-word;
+    }
+    
+    .box1 {
+    	margin: 50px auto;
+        position: relative;
+    }
+    
+    .box2 {
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+    
+    .box2:hover {
+        transform: rotate(30deg);	
+    }
+    </style>
+</head>
+
+<body>
+    <div class="box1">
+        <div class="box2">——————————</div>
+    </div>
+    <p>transform: rotate(30deg);以自己的中心旋转，顺时针为正</p>
+    <p>我们没有使用transform-origin改变元素原点位置的情况下，CSS变形进行的旋转、移位、缩放等操作都是以元素自己中心（变形原点）位置进行变形的。但很多时候需要在不同的位置对元素进行变形操作，我们就可以使用transform-origin来对元素进行原点位置改变，使元素原点不在元素的中心位置，以达到需要的原点位置。</p>
+</body>
+
+</html>

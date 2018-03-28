@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="http://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
+    <style type="text/css">
+    
+    
+    .div-wrap {
+        display: block;
+        height: 500px;
+        width: 500px;
+        position: absolute;
+        top: 50%;
+        margin-top: -50px;
+        border: 1px solid black;
+        left: 50%;
+        margin-left: -50px;
+        text-align: center;
+        overflow: hidden;
+    }
+    
+    .div-wrap img {
+        display: inline-block;
+        max-width: 100%;   
+    }
+    
+    .method-2 {
+        display: table-cell;
+        vertical-align: middle;
+        height: 350px;
+        width: 350px;
+        text-align: center;
+        /* 针对IE的Hack */
+        *display: block;
+        *font-size: 175px;
+        /*约为高度的0.873，200*0.873 约为175*/
+        *font-family: Arial;
+        /*防止非utf-8引起的hack失效问题，如gbk编码*/
+        border: 1px solid red;
+    }
+    
+    .method-2 img {}
+    
+    .zxx_align_box_6 li {
+        height: 128px;
+        width: 150px;
+        padding: 13px 0;
+        float: left;
+        margin-right: 10px;
+        border: 1px solid #beceeb;
+        text-align: center;
+        font-size: 0;
+    }
+    
+    .zxx_align_box_6 li .alpha_img {
+        height: 100%;
+        width: 1px;
+        vertical-align: middle;
+    }
+    
+    .zxx_align_box_6 li .show_img {
+        vertical-align: middle;
+    }
+    .clearfix{
+        *zoom:1;
+    }
+    .clearfix:after{
+        content: "";
+        display: table;
+        clear:both;
+    }
+    </style>
+</head>
+
+<body>
+    <p>1、用JS控制</p>
+    <div class="div-box">
+        <div class="div-wrap method-1">
+            <img src="./images/5.jpg">
+        </div>
+    </div>
+    <p>2、设置DIV为 display:table-cell 以表格的形式</p>
+    <div class="method-2">
+        <img src="images/5.jpg">
+    </div>
+    <p>3、使用空白图片实现垂直对齐</p>
+    <ul class="zxx_align_box_6 fix clearfix">
+        <li>
+            <img class="show_img" src="http://image.zhangxinxu.com/image/study/s/s128/mm1.jpg" />
+            <img class="alpha_img" src="../image/pixel.gif" />
+        </li>
+        <li>
+            <img class="show_img" src="http://image.zhangxinxu.com/image/study/s/s128/mm2.jpg" />
+            <img class="alpha_img" src="../image/pixel.gif" />
+        </li>
+    </ul>
+     
+     <p>4、translateY(-50%)</p>
+     <div class="method-4" style="width:500px;height: 500px;position:relative;border:1px solid red">
+         <img src="images/5.jpg" style="position:absolute;top:50%;left:0;right:0;margin: 0 auto;transform:translateY(-50%);">
+     </div>
+      <p>5、translate(-50%,-50%)</p>
+     <div class="method-4" style="width:500px;height: 500px;position:relative;border:1px solid red">
+         <img src="images/5.jpg" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);">
+     </div>
+</body>
+<script type="text/javascript">
+$(".div-wrap img").each(function(){
+    var img_height = ($(this).parent().height() - $(this).height()) / 2;
+$(this).css("margin-top", img_height);
+})
+</script>
+
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style type="text/css">
+    .wrapper {
+        width: 500px;
+        height: 400px;
+        margin: 30px auto;
+        position: relative;
+        background: url(http://www.w3cplus.com/sites/default/files/blogs/2013/1311/bg.jpg) repeat center center;
+    }
+    
+    .wrapper > div {
+        position: absolute;
+        background-color: hsla(220, 20%, 20%, .3);
+        top: 50%;
+        left: 50%;
+        margin-left: -100px;
+        margin-top: -100px;
+        width: 198px;
+        height: 198px;
+        border: 1px dotted orange;
+        text-align: center;
+        line-height: 198px;
+        color: #fff;
+        font-size: 20px;
+        transition: all 3s ease;
+        
+    }
+    .scale-1:hover{
+    	transform: scale(-1.5);
+    }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="scale-1">Scale(-1.5)</div>
+    </div>
+</body>
+
+</html>

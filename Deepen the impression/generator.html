@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+</body>
+<script type="text/javascript">
+function fib(max) {
+    var t, a = 0,
+        b = 1;
+    arr = [0, 1];
+    while (arr.length < max) {
+        t = a + b;
+        a = b;
+        b = t;
+        arr.push(t);
+    }
+    return arr;
+}
+console.log(fib(10));
+console.log(fib(5));
+</script>
+
+</html>

@@ -1,0 +1,28 @@
+.box-shadow-6 {
+    box-shadow: -10px 0 10px red, /*左边阴影*/
+    10px 0 10px yellow, /*右边阴影*/
+    0 -10px 10px blue, /*顶部阴影*/
+    0 10px 10px green;
+    /*底边阴影*/
+}
+
+.box-shadow-7 {
+    box-shadow: 0 0 10px 5px black, 0 0 10px 20px red;
+}
+
+.box-shadow-8 {
+    box-shadow: 0 0 10px 20px red, 0 0 10px 5px black;
+}
+
+@mixin box-shadow($shadow...) {
+    -webkit-box-shadow: $shadow;
+    box-shadow: $shadow;
+}
+
+.box {
+    border: 1px solid #ccc;
+    @include box-shadow(0 2px 2px rgba(0, 0, 0, .3), 0 3px 3px rgba(0, 0, 0, .3), 0 4px 4px rgba(0, 0, 0, .3));
+}
+
+
+/* c */

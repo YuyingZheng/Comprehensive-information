@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+</head>
+<style type="text/css">
+    .tsesheight{
+        height: 200px;
+        padding: 20px;
+        margin: 20px;
+        box-shadow: 0 0 2px 2px #e3e3e3;
+        cursor: pointer;
+    }
+    .container{
+        height: 200px;
+        padding: 20px;
+        margin: 20px;
+        box-shadow: 0 0 2px 2px #e3e3e3;
+    }
+    .content{
+        display: none;
+        padding: 20px;
+        width:100px;
+        height: 100px;
+        box-shadow:  0 0 2px 2px red;
+        float: left;
+        margin: 10px;
+    }
+    .active{
+        color:red;
+        text-decoration: underline;
+    }
+</style>
+<body>
+<div class="tsesheight">
+  <ul>
+      <li class="active">apple</li>
+      <li class="list-2">banana</li>
+      <li class="list-3">orange</li>
+  </ul>
+</div>
+<div class="container">
+    <div class="content">apple~~~~~~</div>
+    <div class="content">apple~~~~~~1</div>
+    <div class="content">apple~~~~~~2</div>
+</div>
+
+    <script type="text/javascript">
+   $("ul li").on("click",function(){
+    $(this).addClass('active').siblings().removeClass("active");
+     $(".content").eq($(this).index()).show().siblings().hide();
+     if($(this).index()==0){
+        
+     }
+     if($(this).index()==1){
+        alert("i ma banana!")
+     }
+     if($(this).index()==2){
+        alert("i ma orange")
+     } 
+   }).eq(0).click();
+    </script>
+</body>
+
+</html>

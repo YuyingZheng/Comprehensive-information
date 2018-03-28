@@ -1,0 +1,118 @@
+    .error {
+        border: 1px solid #f00;
+        background-color: #fdd;
+    }
+    
+    .seriousError {
+        @extend .error;
+        border-width: 3px;
+    }
+    
+    .error {
+        border: 1px solid #f00;
+        background-color: #fdd;
+    }
+    
+    .error.intrusion {
+        background-image: url("/image/hacked.png");
+    }
+    
+    .seriousError {
+        @extend .error;
+        border-width: 3px;
+    }
+    /* Extending(延伸) Complex Selectors */
+    
+
+    a:hover {
+        text-decoration: underline;
+    }
+    .hoverlink {
+        @extend a:hover;
+    }
+    
+    
+    .comment a.user:hover {
+        font-weight: bold;
+    }
+    /* Multiple Extends */
+    
+    .error {
+        border: 1px #f00;
+        background-color: #fdd;
+    }
+    
+    .attention {
+        font-size: 3em;
+        background-color: #ff0;
+    }
+    
+    .seriousError {
+        @extend .error;
+        @extend .attention;
+        border-width: 3px;
+    }
+    /* Chaining Extends */
+    
+    .error {
+        border: 1px #f00;
+        background-color: #fdd;
+    }
+    
+    .seriousError {
+        @extend .error;
+        border-width: 3px;
+    }
+    
+    .criticalError {
+        @extend .seriousError;
+        position: fixed;
+        top: 10%;
+        bottom: 10%;
+        left: 10%;
+        right: 10%;
+    }
+    /* #admin .tabbar a {
+  font-weight: bold;
+}
+#demo .overview .fakelink {
+  @extend a;
+} */
+    /* @extend-Only Selectors  */
+    
+    // This ruleset won't be rendered on its own.
+    /*% */
+    
+    #context a%extreme {
+        color: blue;
+        font-weight: bold;
+        font-size: 2em;
+    }
+    
+    .notice {
+        @extend %extreme;
+    }
+    /* media */
+    
+    @media print {
+        .error1 {
+            border: 1px #f00;
+            background-color: #fdd;
+        }
+        .seriousError1 {
+            @extend .error1;
+            border-width: 3px;
+        }
+    }
+    
+    /* .error1 {
+        border: 1px #f00;
+        background-color: #fdd;
+    }
+    
+    @media print {
+        .seriousError1 {
+            @extend .error1;
+            border-width: 3px;
+        }
+    } 错误*/

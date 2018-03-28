@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>jq 滑动幻灯片</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <style type="text/css">
+        @charset "UTF-8";
+        /**
+         * @authors Dony feng  Date: 2016-7
+         */
+        * {
+            padding: 0;
+            margin: 0;
+            list-style-type: none;
+        }
+        a,a:hover,a:link,a:visited{text-decoration: none;} 
+    	ul li{ list-style: none; }
+		/*幻灯片*/
+		.m-slide{ width: 700px; height: 438px; position: relative; margin:50px auto; border:1px solid #000; overflow: hidden; }
+		.m-slide .banner{ width: 700px; height:100%;}
+	    .m-slide .banner li{ width: 700px; height:100%; text-align: center; line-height: 270px; font-weight: bold; font-size: 30px; color:#fff; position: absolute; left: 100%;}
+	    .m-slide .banner li.act{left: 0;}
+	    .m-slide .banner li img{width: 100%;}
+
+		.m-slide .carousel { width: 100%; height: 30px; position: absolute; right:-32%; bottom: 10px; overflow: hidden;}
+        .m-slide .carousel li a{float: left;display: block; width: 30px; height: 30px; line-height: 30px;margin-right: 10px; border-radius: 50%;text-align: center;color:#FFF; background: #ff00b1;transition: all 0.5s;}
+        .m-slide .carousel li.act a{background: #f90;}	
+        .m-slide .carousel li a:hover{background: #f90;}
+
+		.m-slide .prev,.m-slide .next{width: 50px;height: 70px;position: absolute;top: 45%;line-height: 70px;font-size: 24px; color: #fff;background: rgba(0,0,0,0.5);text-align: center;cursor: pointer;}
+		.m-slide .prev{left: 0;}
+		.m-slide .next{ right: 0;}
+    </style>
+</head>
+<body>
+<div class='wamp'>
+    <div id="js-slider" class="m-slide">
+        <ul class='banner'>
+            <li class="act"><a href=""><img src="http://www.zxhuan.com/wp-content/uploads/2016/02/img1.jpg"></a></li>
+            <li><a href=""><img src="http://www.zxhuan.com/wp-content/uploads/2016/02/img2.jpg"></a></li>
+            <li><a href=""><img src="http://www.zxhuan.com/wp-content/uploads/2016/02/img3.jpg"></a></li>
+            <li><a href=""><img src="http://www.zxhuan.com/wp-content/uploads/2016/02/img4.jpg"></a></li>
+            <li><a href=""><img src="http://www.zxhuan.com/wp-content/uploads/2016/02/img5.jpg"></a></li>
+        </ul>
+        <ol class="carousel"></ol>
+        <a class="prev" href="javascript:void(0)">&lt;</a>
+        <a class="next" href="javascript:void(0)">&gt;</a>        
+    </div>
+</div>
+<script src="http://libs.baidu.com/jquery/1.10.2/jquery.min.js"></script>
+<!-- <script src="js/index.js"></script> -->
+<script type="text/javascript">
+	$(function(){
+		UISlider({
+			slide :"#js-slider",
+			banner :".banner",
+			carousel :".carousel"
+		});
+		/********
+		 * UISlider 幻灯片滑动函数 options 为配置对象
+		 **********/
+	    function UISlider(options){
+		    var index = 0, timer = null; //定义关键字和定时器
+			var slide = $(options.slide); //获取幻灯片模块id
+			var banner = slide.find(options.banner);//获取幻灯片banner图
+			var carousel = slide.find(options.carousel); 
+			var slide_w = banner.children().width(); //获取滑动模块宽度
+			carousel.html(carouselHtml()); //打印幻灯片图片序号
+			play(); //初始播放
+		    // 鼠标移入暂停移出开始
+		    slide.on('mouseover',function(){
+		    	clearInterval(timer);
+		    }).on('mouseout',function(){
+		    	 play();
+		    });
+		    //点击上一个
+		    slide.on('click','.prev',function(){ Animation(-slide_w,index); });
+		    //点击下一个
+		    slide.on('click','.next',function(){ Animation(slide_w,index); });
+		    // 点击切换幻灯片
+		    carousel.children().on('click',function(){
+		        var temp = carousel.find('.act').index();
+		        if (index < $(this).index() && $(this).index() != index) {
+		        	index = ($(this).index()-1);
+		        	Animation(slide_w,temp);	  		        	
+		        };
+	        	if (index > $(this).index() && $(this).index() != index) {
+					index = ($(this).index()+1);
+					Animation(-slide_w,temp);	
+	        	};		        
+		    });
+		    // 加载滑动序号
+		    function carouselHtml(){
+		    	var carouselHtml = '';
+				banner.children().each(function(i,k){
+					var act = '';
+					if (i == 0) { act = 'act';};
+					carouselHtml += '<li class="'+act+'"><a href="javascript:void(0)">'+(i+1)+'</a></li>'; 
+				});
+				return carouselHtml;
+		    };
+			// 开始播放幻灯片
+			function play(){
+		        clearInterval(timer);
+		        timer=setInterval(function(){Animation(slide_w,index);},3000);
+		    };		    
+		    // 播放幻灯片函数 wh滑动宽度，temp切换的上一个
+		    function Animation(wh,temp){
+		    	var offset = Number(wh);
+		    	var time = 600;//切换动画时间
+		    	if (offset > 0) {
+		            index++;
+		            if(index == banner.children().length){ index = 0;}
+		            // 向右切换动画
+		            banner.children().eq(index).stop().css("left",offset).animate({left:0},time).addClass('act').siblings().removeClass('act');
+		            banner.children().eq(temp).stop().animate({left:-offset},time);
+		    	};
+		    	if (offset < 0) {
+		            index--;
+		            if(index == -1){index = (banner.children().length-1);}
+		            // 向左切换动画
+		            banner.children().eq(index).stop().css("left",offset)
+		            .animate({left:0},time).addClass('act').siblings().removeClass('act');
+		            banner.children().eq(temp).stop().animate({left:-offset},time);
+		    	};
+		    	// 获取当前轮播图位置
+		        carousel.children().eq(index).addClass('act')
+		        .siblings().removeClass('act');
+		    };
+	    };
+	});
+</script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style type="text/css">
+    P{
+    	width: 1000px;
+    	margin: 20px auto;
+    	text-align:center;
+    }
+ 
+    div {
+        width: 200px;
+        height: 200px;
+        background: red;
+        border: 1px solid black;
+        line-height: 200px;
+        color: black;
+        font-size: 20px;
+        text-align: center;
+        word-wrap: break-word;
+    }
+    
+    .box1 {
+        z-index: 2000;
+    	margin: 50px auto;
+        position: relative;
+    }
+    
+    .box2 {
+        z-index: 1;
+        position: absolute;
+        top: 0;
+        left: 0;
+        transition: transform 3s linear;
+    }
+    
+    .box1:nth-child(1) .box2:hover {
+        transform:  rotate(45deg) scale(0.5) skew(30deg, 30deg) translate(100px, 100px);
+    }
+     .box1:nth-child(2) .box2:hover{
+         transform: skew(0deg,20deg);    
+    }
+    .box1:nth-child(3) .box2:hover{
+        transform:  skew(45deg,-45deg);
+    }
+    </style>
+</head>
+
+<body>
+    <div class="box1">
+        <div class="box2">——————————</div>
+    </div>
+    <div class="box1">
+        <div class="box2">——————————</div>
+    </div>
+    <div class="box1">
+        <div class="box2">——————————</div>
+    </div>
+    <p>transform: skew(30deg);skew(<angle> [, <angle>]) ：X轴Y轴上的skew transformation（斜切变换）。第一个参数对应X轴，第二个参数对应Y轴。如果第二个参数未提供，则值为0，也就是Y轴方向上无斜切。skew是用来对元素进行扭曲变行，第一个参数是水平方向扭曲角度，第二个参数是垂直方向扭曲角度。其中第二个参数是可选参数，如果没有设置第二个参数，那么Y轴为0deg。同样是以元素中心为基点，我们也可以通过transform-origin来改变元素的基点位置。如：transform:skew(30deg,10deg):</p>
+    <p>简洁：第一个值为正Y轴逆时针旋转，第二个值为正X轴顺时针旋转</p>
+    <p style="color:red">总结：在水平方向（X轴）进行扭曲变行，在垂直方向（Y轴）扭曲变形，即是Y轴旋转后所在的线段两点在原图行X方向的边上（上下），X轴旋转后所在的线段两点为Y方向的边上（左右）。根据两条新的线即可得出扭曲后图形。如skew(45deg-,45deg)将会形成一个四边过原图四顶点的平行四边形;</p>
+</html>

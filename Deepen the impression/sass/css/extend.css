@@ -1,0 +1,120 @@
+@charset "UTF-8";
+.error,
+.seriousError,
+.criticalError{
+	background-color:#fdd; 
+	border:1px solid #f00;
+}
+
+.seriousError,
+.criticalError{
+	border-width:3px;
+}
+
+.error,
+.seriousError,
+.criticalError{
+	background-color:#fdd; 
+	border:1px solid #f00;
+}
+
+.error.intrusion,
+.intrusion.seriousError,
+.intrusion.criticalError{
+	background-image:url("/image/hacked.png");
+}
+
+.seriousError,
+.criticalError{
+	border-width:3px;
+}
+
+/* Extending(延伸) Complex Selectors */
+a:hover,
+.hoverlink{
+	text-decoration:underline;
+}
+
+.comment a.user:hover,
+.comment .user.hoverlink{
+	font-weight:bold;
+}
+
+/* Multiple Extends */
+.error,
+.seriousError,
+.criticalError{
+	background-color:#fdd; 
+	border:1px #f00;
+}
+
+.attention,
+.seriousError,
+.criticalError{
+	font-size:3em;
+	background-color:#ff0;
+}
+
+.seriousError,
+.criticalError{
+	border-width:3px;
+}
+
+/* Chaining Extends */
+.error,
+.seriousError,
+.criticalError{
+	background-color:#fdd; 
+	border:1px #f00;
+}
+
+.seriousError,
+.criticalError{
+	border-width:3px;
+}
+
+.criticalError{
+	position:fixed;
+	top:10%;
+	right:10%; 
+	bottom:10%;
+	left:10%;
+}
+
+/* #admin .tabbar a {
+  font-weight: bold;
+}
+#demo .overview .fakelink {
+  @extend a;
+} */
+/* @extend-Only Selectors  */
+/*% */
+#context a.notice{
+	font-size:2em; 
+	font-weight:bold;
+	color:blue;
+}
+
+/* media */
+@media print{
+	.error1,
+	.seriousError1{
+		background-color:#fdd; 
+		border:1px #f00;
+	}
+	.seriousError1{
+		border-width:3px;
+	}
+}
+
+/* .error1 {
+        border: 1px #f00;
+        background-color: #fdd;
+    }
+    
+    @media print {
+        .seriousError1 {
+            @extend .error1;
+            border-width: 3px;
+        }
+    } 错误*/

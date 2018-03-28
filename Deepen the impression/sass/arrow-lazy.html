@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="css/be-useful-mixin.css">
+    <style type="text/css">
+    #phone {
+        width: 50px;
+        height: 50px;
+        border-left: 6px solid #EEB422;
+        border-radius: 20%;
+        transform: rotate(-30deg);
+        -webkit-transform: rotate(-30deg);
+        margin: 20px;
+        margin-right: 0px;
+        position: relative;
+        display: inline-block;
+        top: -5px;
+    }
+    
+    #phone:before {
+        width: 15px;
+        height: 15px;
+        background: #EEB422;
+        border-radius: 20%;
+        content: "";
+        position: absolute;
+        left: -2px;
+        top: 1px;
+    }
+    
+    #phone:after {
+        width: 15px;
+        height: 15px;
+        background: #EEB422;
+        border-radius: 20%;
+        content: "";
+        position: absolute;
+        left: -3px;
+        top: 34px;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="masthead">
+        <h1>These arrows are pretty rad!</h1></div>
+    <div class="demo a"></div>
+    <div class="demo b"></div>
+    <div class="demo c"></div>
+    <div class="demo d"></div>
+</body>
+
+<body>
+    <div class="masthead">
+        <h1>These arrows are pretty rad!</h1></div>
+    <div class="demo">
+        <div class="div-arrow-top"></div>
+        <div class="div-arrow-right"></div>
+        <div class="div-arrow-bottom"></div>
+        <div class="div-arrow-left"></div>
+    </div>
+</body>
+<div id="wraper">
+    <div id="phone"></div>
+</div>
+
+</html>

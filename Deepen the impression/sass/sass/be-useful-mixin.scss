@@ -1,0 +1,453 @@
+/* 1、pxtoRem  */
+
+$browser-default-font-size: 16;
+@function strip-units($number) {
+    @return $number / ($number * 0 + 1);
+}
+
+@function pxToRem($target-size, $context:$browser-default-font-size) {
+    @if not unitless($target-size) {
+        $target-size: strip-units($target-size);    
+    }
+    @if not unitless($context) {
+        $context: strip-units($context);
+    }
+    @return ($target-size / $context) *1rem;
+}
+
+.html {
+    font-size: $browser-default-font-size;
+    width: pxToRem(64px);
+}
+
+/* 2、custom fontface mixin */
+
+@mixin fontface($fontfamily, $filename, $fontweight: normal, $fontstyle: normal) {
+    font-family: $fontfamily;
+    src: url('../fonts/#{$filename}.eot');
+    src: url('../fonts/#{$filename}.eot?#iefix') format('embedded-opentype'), url('../fonts/#{$filename}.woff') format('woff'), url('../fonts/#{$filename}.ttf') format('truetype'), url('../fonts/#{$filename}.svg#{$filename}') format('svg');
+    font-weight: $fontweight;
+    font-style: $fontstyle;
+}
+
+@font-face {
+    @include fontface('opificio', opificio_neue-regular-webfont);
+}
+
+
+/* 3、clearfix */
+
+%clearfix {
+    *zoom: 1;
+    &:before, &:after {
+        content: " ";
+        display: table;
+    }
+    &:after {
+        clear: both;
+    }
+}
+
+.cleardiv {
+    @extend %clearfix;
+}
+
+
+/*  4、Alert the color of placeholder */
+
+@mixin placeholder($color) {
+    &:-moz-placeholder {
+        // Firefox 4-18
+        color: $color;
+        opacity: 1;
+    }
+    &::-moz-placeholder {
+        // Firefox 19+
+        color: $color;
+        opacity: 1;
+    }
+    &:-ms-input-placeholder {
+        // Internet Explorer 10+
+        color: $color;
+    }
+    &::-webkit-input-placeholder {
+        // Safari and Chrome
+        color: $color;
+    }
+}
+
+.input-placeholder {
+    @include placeholder(red);
+}
+
+
+/* 5、opacity */
+
+@mixin opacity($opacity) {
+    opacity: $opacity;
+    $opacity-ie: $opacity*100;
+    filter: alpha(opacity=$opacity-ie);
+}
+
+.div-opacity {
+    @include opacity($opacity: 0.8);
+}
+
+/* 6、box-sizing */
+
+@mixin box-sizing($boxmodel:border-box) {
+    box-sizing: $boxmodel;
+}
+
+.div-box-sizing {
+    @include box-sizing(content-box);
+}
+
+
+/*7、partial border-radius*/
+
+@mixin border-top-radius($radius) {
+    border-top-right-radius: $radius;
+    border-top-left-radius: $radius;
+}
+
+@mixin border-right-radius($radius) {
+    border-bottom-right-radius: $radius;
+    border-top-right-radius: $radius;
+}
+
+@mixin border-bottom-radius($radius) {
+    border-bottom-right-radius: $radius;
+    border-bottom-left-radius: $radius;
+}
+
+@mixin border-left-radius($radius) {
+    border-bottom-left-radius: $radius;
+    border-top-left-radius: $radius;
+}
+
+.div-border-top-radius {
+    @include border-top-radius(5px);
+}
+
+
+/* 8、box-shadow*/
+
+@mixin box-shadow($shadow...) {
+    -webkit-box-shadow:$shadow;  
+    -moz-box-shadow:$shadow;  
+    box-shadow:$shadow;
+}
+
+.div-box-shadow {
+    border: 1px solid #ccc;
+    @include box-shadow(0 0 3px 3px #ccc);
+    @include box-shadow(0 2px 2px rgba(0, 0, 0, .3), 0 3px 3px rgba(0, 0, 0, .3), 0 4px 4px rgba(0, 0, 0, .3));
+}
+
+
+/*9、transition */
+
+@mixin transition($type:all, $time:.4s, $ease:ease) {
+    -webkit-transition: $type $time $ease;
+    transition: $type $time $ease;
+}
+
+.div-transition {
+    @include transition($time: .8s);
+}
+
+
+/* 10、transform */
+
+
+/* transform2D */
+
+@mixin translate($x, $y) {
+    -webkit-transform: translate($x, $y);
+    -ms-transform: translate($x, $y);
+    transform: translate($x, $y);
+}
+
+.div-translate {
+    @include translate(20px, 20px);
+}
+
+@mixin rotate($deg) {
+    -webkit-transform: rotate($deg);
+    -ms-transform: rotate($deg);
+    transform: rotate($deg);
+}
+
+.div-rotate {
+    @include rotate(30deg);
+}
+
+@mixin scale($ratio) {
+    -webkit-transform: scale($ratio);
+    -ms-transform: scale($ratio);
+    transform: scale($ratio);
+}
+
+.div-scale {
+    @include scale(2);
+}
+
+@mixin skew($deg, $deg2) {
+    -webkit-transform: skew($deg, $deg2);
+    -ms-transform: skew($deg, $deg2);
+    transform: skew($deg, $deg2);
+}
+
+.div-skew {
+    @include skew(30deg, 20deg);
+}
+
+
+/*transform3d*/
+
+@mixin rotateX($deg) {
+    -webkit-transform: rotate($deg);
+    -ms-transform: rotate($deg);
+    transform: rotate($deg);
+}
+
+.div-rotateX {
+    @include rotateX(30deg);
+}
+
+@mixin rotateY($deg) {
+    -webkit-transform: rotate($deg);
+    -ms-transform: rotate($deg);
+    transform: rotate($deg);
+}
+
+.div-rotateY {
+    @include rotateX(30deg);
+}
+
+@mixin translateZ($t) {
+    -webkit-transform: translateZ($t);
+    -ms-transform: translateZ($t);
+    transform: translateZ($t);
+}
+
+.div-translateZ {
+    @include translateZ(30px);
+}
+
+@mixin translate3d($tx, $ty, $tz) {
+    -webkit-transform: translate3d($tx, $ty, $tz);
+    -ms-transform: translate3d($tx, $ty, $tz);
+    transform: translate3d($tx, $ty, $tz);
+}
+
+.div-translate3d {
+    @include translate3d(30px, 30px, 200px);
+}
+@mixin scaleZ($ratio){         
+         -webkit-transform: rotate($ratio);         
+             -ms-transform: rotate($ratio);         
+                 transform: rotate($ratio);
+}
+.div-scaleZ{
+    @include scaleZ(3);
+    -webkit-transform:translate3d(20px 20px 30px);
+            transform:translate3d(20px 20px 30px);       
+    -webkit-perspective: 400px;
+            perspective: 400px; 
+    -webkit-perspective-origin: center;
+            perspective-origin: center;
+    -webkit-transform-style:preserve-3d;
+            transform-style:preserve-3d;
+}
+/* 11.gradient */
+@mixin gradient-vertical($start-color: #555,
+$end-color: #333,
+$start-percent: 0%,
+$end-percent: 100%) {
+    background-image: -webkit-gradient(linear, left $start-percent, left $end-percent, from($start-color), to($end-color)); // Safari 4+, Chrome 2+
+    background-image: -webkit-linear-gradient(top, $start-color, $start-percent, $end-color, $end-percent); // Safari 5.1+, Chrome 10+
+    background-image: -moz-linear-gradient(top, $start-color $start-percent, $end-color $end-percent); // FF 3.6+
+    background-image: linear-gradient(to bottom, $start-color $start-percent, $end-color $end-percent); // Standard, IE10
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#{ie-hex-str($start-color)}',
+    endColorstr='#{ie-hex-str($end-color)}',
+    GradientType=0); // IE9 and down
+}
+
+@mixin gradient-horizontal($start-color: #555,
+$end-color: #333,
+$start-percent: 0%,
+$end-percent: 100%) {
+    background-image: -webkit-linear-gradient(left, $start-color $start-percent, $end-color $end-percent); // Safari 5.1-6, Chrome 10+
+    background-image: -o-linear-gradient(left, $start-color $start-percent, $end-color $end-percent); // Opera 12
+    background-image: -moz-linear-gradient(left,$start-color $start-percent, $end-color $end-percent); //FF 3.6+
+    background-image: linear-gradient(to right, $start-color $start-percent, $end-color $end-percent); // Standard, IE10, Firefox 16+, Opera 12.10+, Safari 7+, Chrome 26+
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#{ie-hex-str($start-color)}',
+    endColorstr='#{ie-hex-str($end-color)}',
+    GradientType=1); // IE9 and down
+}
+.div-gradient-vertical{
+    @include gradient-vertical;
+}
+.div-gradient-horizontal{
+    @include gradient-horizontal;
+}
+@mixin gradient-linear-v($start-color,$end-color){
+    background:-moz-linear-gradient(top,$start-color,$end-color);
+    background:-webkit-linear-gradient(top,$start-color,$end-color);
+    background:-o-linear-gradient(top,$start-color,$end-color);
+    background:linear-gradient(to bottom,$start-color,$end-color);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#{ie-hex-str($start-color)}',
+    endColorstr='#{ie-hex-str($end-color)}',
+    GradientType=0); // IE9 and down 0为缺省值，表示垂直渐变，1表示水平渐变。如图所示：
+}
+.div-gradient-linear-v{
+    @include gradient-linear-v(red,blue);
+}
+@mixin gradient-linear-h($start-color,$end-color){
+    background:-moz-linear-gradient(left,$start-color,$end-color);
+    background:-webkit-linear-gradient(left,$start-color,$end-color);
+    background:-o-linear-gradient(left,$start-color,$end-color);
+    background:linear-gradient(to right,$start-color,$end-color);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#{ie-hex-str($start-color)}',
+    endColorstr='#{ie-hex-str($end-color)}',
+    GradientType=1); // IE9 and down 0为缺省值，表示垂直渐变，1表示水平渐变。如图所示：
+}
+.div-gradient-linear-h{
+    @include gradient-linear-h(red,blue);
+}
+/* 12、arrow-lazy http://codepen.io/MichaelArestad/pen/IxFGj */
+@mixin arrow-lazy($direction: top, $size: 10px, $color: #ccc, $center: 50%, $margin: -1px, $pseudo: before){
+    position: relative;
+    border-color: $color;
+
+    &:#{$pseudo} {
+        position: absolute;
+        content: "";
+        width: 0;
+        height: 0;
+        border-color: $color;
+
+        @if $direction == "right" {
+            top: $center;
+            left: 100%;
+            margin-left: $margin;
+            margin-top: $size * -1;
+            border-top: $size solid transparent;
+            border-bottom: $size solid transparent;
+            border-left: $size solid $color;
+            border-left-color: inherit;
+        } @else if $direction == "down" {
+            top: 100%;
+            left: $center;
+            margin-top: $margin;
+            margin-left: $size * -1;
+            border-left: $size solid transparent;
+            border-right: $size solid transparent;
+            border-top: $size solid $color;
+            border-top-color: inherit;
+        } @else if $direction == "left" {
+            top: $center;
+            right: 100%;
+            margin-right: $margin;
+            margin-top: $size * -1;
+            border-top: $size solid transparent;
+            border-bottom: $size solid transparent; 
+            border-right:$size solid $color;
+            border-right-color: inherit;
+        } @else {
+            bottom: 100%;
+            left: $center;
+            margin-bottom: $margin;
+            margin-left: $size * -1;
+            border-left: $size solid transparent;
+            border-right: $size solid transparent;
+            border-bottom: $size solid $color;
+            border-bottom-color: inherit;
+        }
+    }
+}
+.demo {
+  margin: 20px auto;
+  width: 200px;
+  height: 50px;
+}
+
+.a {
+  background: #277ca3;
+  transition: all .2s ease-in-out;
+  @include arrow-lazy($color: #277ca3);
+  
+  &:hover {
+      background: #3089b0;
+      border-color: #3089b0;
+    }
+}
+.b {
+  background: #666;
+  @include arrow-lazy(down, $color: #666, $margin: 5px);
+}
+.c {
+  background: #39322f;
+  @include arrow-lazy(left, 6px, #39322f, 70%);
+}
+.d {
+  background: #b35d3c;
+  @include arrow-lazy(right, 25px, #b35d3c, $margin: 0);
+}
+
+
+
+html {
+  background: #faf9ea;
+  text-align: center;
+}
+.masthead {
+  background: #b35d3c;
+  border-bottom: 1px solid #673521;
+}
+h1 {
+  display: inline-block;
+  padding: 15px 20px;
+  margin: 30px 0;
+  background: #f5f7f7;
+  @include arrow-lazy(down, 15px, #f5f7f7);
+  font-family: Helvetica, Arial, sans-serif;
+  font-weight: normal;
+  border-radius: 5px;
+}
+/* 13、text-overflow() */
+@mixin text-overflow($display:block){
+    display: $display;
+    word-wrap:normal;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.div-text-overflow{
+    @include text-overflow(inline-block);
+}
+/* 14、Arrrow */
+@mixin arrow($width:5px,$border-width:2px,$color:#f00,$deg:45deg){
+    display: inline-block;
+    width:$width;
+    height:$width;
+    border:solid $color;
+    border-width: $border-width $border-width 0 0;
+    transform: rotate($deg);
+}
+.div-arrow-top{
+    @include arrow($width:10px,$deg:-45deg);
+}
+.div-arrow-right{
+    @include arrow($width:10px,$color:purple,$deg:45deg);
+}
+.div-arrow-bottom{
+    @include arrow($width:10px,$color:#0f0,$deg:135deg);
+}
+.div-arrow-left{
+    @include arrow($width:10px,$color:#00f,$deg:225deg);
+}

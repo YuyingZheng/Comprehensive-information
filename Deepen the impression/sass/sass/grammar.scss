@@ -1,0 +1,766 @@
+/*!　
+标准的CSS注释 /* comment  ，会保留到编译后的文件。
+
+单行注释 // comment，只保留在SASS源文件中，编译后被省略。
+
+在/*后面加一个感叹号，表示这是"重要注释"。即使是压缩模式编译，也会保留这行注释，通常可以用于声明版权信息。
+重要注释！*/
+
+
+/******1、
+嵌套
+*******/
+
+#main p {
+    color: #00ff00;
+    width: 97%;
+    .redbox {
+        background-color: #ff0000;
+        color: #000000;
+        height: 20px;
+        position: relative;
+        box-shadow: 1px 2px #cccccc;
+        transform: translate(50px, 100px);
+    }
+}
+
+/*******
+ &表示父元素选择器
+*******/
+
+#mian {
+    color: red;
+    a {
+        font-weight: bold;
+        text-decoration: none;
+        &:hover {
+            text-decoration: underline;
+        }
+        body.firefox & {
+            font-weight: normal;
+        }
+    }
+}
+
+/* 嵌套属性 （没啥用）*/
+
+.fakeshadow {
+    border: {
+        style: solid;
+        left: {
+            width: 4px;
+            color: #888;
+        }
+        right: {
+            width: 2px;
+            color: #ccc;
+        }
+    }
+}
+.funky {
+  font: {
+    family: fantasy;
+    size: 30em;
+    weight: bold;
+  }
+}
+.funky {
+  font: 2px/3px {
+    family: fantasy;
+    size: 30em;
+    weight: bold;
+  }
+}
+/* Variables-变量 { !default 默认变量 }
+设置默认值，默认变量的价值在进行组件化开发的时候会非常有用。
+*/
+
+$default-width:200px !default;
+div.default {
+    width: $default-width;
+}
+$default-width:300px;
+div.no-default {
+    width: $default-width;
+}
+/* 变量的值如果是 null 的话，会被 !default 当做没有值： */
+
+$content: null;
+$content: "Non-null content" !default;
+#main {
+    content: $content;
+}
+
+/* 特殊变量 作为属性或者值一部分使用 /#/{/$variables/}形式使用*/
+
+$borderDirection: top !default;
+$baseFontSize: 12px !default;
+$baseLineHeight: 1.5 !default;
+
+/* 应用于class和属性 */
+
+.border-#{$borderDirection} {
+    border-#{$borderDirection}: 1px solid #ccc;
+}
+
+/* 应用于复杂的属性值 */
+
+.body {
+    font:#{$baseFontSize}/#{$baseLineHeight};
+}
+
+/* 多值变量 多值变量分为list类型和map类型，简单来说list类型有点像js中的数组，而map类型有点像js中的对象。*/
+
+
+/*list类型 
+list数据可通过空格，逗号或小括号分隔多个值，可用nth($var,$index)取值
+*/
+
+//一维数据
+$px: 10px 9px 8px 7px;
+//二维数据
+$px1: 5px 10px,0 auto;
+$px2: (5px 10px) (0 auto);
+div {
+    padding: $px;
+    padding: nth($px, 3);
+    margin: $px1;
+    margin: nth($px1, 2);
+    margin: $px2;
+    margin: nth($px2, 1);
+}
+
+/* map类型 
+map数据以key和value成对出现，其中value又可以是list。
+格式为：$map: (key1: value1, key2: value2, key3: value3);。可通过map-get($map,$key)取值。
+*/
+
+$map:( dribble: #ea4c89, facebook: #3b5998, Github: #171515, google: #db4437, twitter: #55acee);
+.twitter {
+    background-color: map-get($map,twitter);
+}
+.facebook {
+    background-color: map-get($map, facebook);
+}
+$headings: (h1: 2em, h2: 1.5em, h3: 1.2em);
+@each $header,
+$size in $headings {
+    #{$header} {
+        font-size: $size;
+    }
+}
+@each $name,
+$color in $map {
+    .#{$name} {
+        color: $color;
+    }
+}
+
+/* 全局变量 !global
+1、目前变量机制
+在选择器中声明的变量会覆盖外面全局声明的变量。(测试结果不会覆盖 只有加了关键字!global)
+*/
+
+$fontSize: 12px;
+$color: #333;
+.body {
+    $fontSize: 14px;
+    $color: #fff !global;
+    font-size: $fontSize;
+    color: $color;
+}
+p {
+    font-size: $fontSize;
+    color: $color;
+}
+$fontSize: 12px;
+.body {
+    $fontSize: 14px;
+    font-size: $fontSize;
+}
+p {
+    font-size: $fontSize;
+}
+
+/* @at-root
+sass3.3.0中新增的功能，用来跳出选择器嵌套的。默认所有的嵌套，继承所有上级选择器，
+但有了这个就可以跳出所有上级选择器。
+ */
+
+.at-root {
+    background-color: #666;
+    @at-root .item {
+        color: red;
+    }
+}
+.content {
+    @at-root #{&}-header {
+        color: red;
+    }
+    @at-root #{&}-content {
+        color: blue;
+    }
+}
+
+/* @at-root (without: ...)
+all（表示所有），rule（表示常规css），media（表示media  跳出meadia 父级），support */
+
+@media screen {
+    .parent1 {
+        color: #f00;
+        @at-root .child1 {
+            width: 200px;
+        }
+    }
+}
+@media screen {
+    .parent1 {
+        color: #f00;
+        @at-root(without: media) .child1 {
+            width: 200px;
+        }
+    }
+}
+@media screen {
+    .parent3 {
+        color: #f00;
+        @at-root(without: all) .child3 {
+            width: 200px;
+        }
+    }
+}
+
+/* 运算*/
+/* 在纯 CSS 中使用变量和 /， 你可以包住变量 */
+
+p {
+    $font-size: 12px;
+    $line-height: 30px;
+    font: #{$font-size}/#{$line-height};
+}
+p {
+    color: #010203 + #040506;
+    color: #010203 * 2;
+}
+$translucent-red: rgba(255, 0, 0, 0.5);
+p {
+    color: opacify($translucent-red, 0.3); //+
+    background-color: transparentize($translucent-red, 0.3); //-
+}
+p:before {
+    content: "Foo " + Bar;
+    font-family: sans- + "serif";
+}
+p:before {
+    content: "I ate #{5 + 10} pies!";
+}
+
+/*混合(mixin) */
+
+@mixin opacity($opacity:50) {
+    opacity: $opacity / 100;
+    filter: alpha(opacity=$opacity);
+}
+.opacity {
+    @include opacity;
+    @include opacity(80);
+}
+@mixin transition ($type:all, $time:0.4s, $ease:ease) {
+    -moz-transition: $type $time $ease;
+    -webkit-transition: $type $time $ease;
+    -o-transition: $type $time $ease;
+    transition: $type $time $ease;
+}
+.transition {
+    @include transition;
+}
+@mixin horizontal-line($border:1px dashed #ccc, $padding:20px) {
+    border-bottom: $border;
+    padding-top: $padding;
+    padding-bottom: $padding;
+}
+.imgtext-h li {
+    @include horizontal-line(1px solid #ccc, 200px);
+}
+.imgtext-h-default {
+    @include horizontal-line();
+}
+@mixin box-shadow($shadow...) {
+    -webkit-box-shadow: $shadow;
+    box-shadow: $shadow;
+}
+.box {
+    border: 1px solid #ccc;
+    @include box-shadow(0 2px 2px rgba(0, 0, 0, .3), 0 3px 3px rgba(0, 0, 0, .3), 0 4px 4px rgba(0, 0, 0, .3));
+}
+
+/* content 它可以使@mixin接受一整块样式，接受的样式从@content开始。*/
+
+@mixin max-screen($res) {
+    @media only screen and ( max-width: $res) {
+        @content;
+    }
+}
+@include max-screen(480px) {
+    .body {
+        color: red;
+        font-size: 15px;
+    }
+    h1 {
+        fontSize: 20px
+    }
+}
+.show-mobile { 
+    .body{
+        color:blue;
+    } 
+    @include max-screen(480px) {
+    .body {
+        color: red;
+        font-size: 15px;
+    }
+   
+        font-size: 20px
+    
+}
+}
+@include max-screen(780px) {
+    .body {
+        color: red;
+        font-size: 15px;
+    }
+    h1 {
+        fontSize: 20px
+    }
+}
+@mixin apply-to-ie6-only {
+  * html {
+    color:red;
+    @content;
+  }
+}
+@include apply-to-ie6-only {
+  #logo {
+    background-image: url(/logo.gif);
+  }
+}
+$color: white;
+@mixin colors($color: blue) {
+  background-color: $color;
+  @content;
+  border-color: $color;
+}
+.colors {
+  @include colors(red) { color: $color; }
+}
+/* 继承 与mixin差别：继承是给继承元素额外添加一完整的样式如xxx{},mixin是讲样式加在里面*/
+@mixin border-style{
+     border: 1px solid #ccc;
+}
+.border-style {
+    border: 1px solid #ccc;
+    margin-top:10px;
+}
+div.border {
+    @include border-style;
+    @extend .border-style;
+    margin-top: 9px;
+}
+
+.error {
+  border: 1px #f00;
+  background-color: #fdd;
+}
+.error.intrusion {
+  background-image: url("/image/hacked.png");
+}
+.seriousError {
+  @extend .error;
+  border-width: 3px;
+}
+
+/* 多重扩展 (Multiple Extends) */
+.error {
+  border: 1px #f00;
+  background-color: #fdd;
+}
+.attention {
+  font-size: 3em;
+  background-color: #ff0;
+}
+.seriousError {
+  @extend .error;
+  @extend .attention;
+  border-width: 3px;
+}
+.seriousError {
+  @extend .error,.attention;
+  border-width: 3px;
+}
+/* 链式扩展（Chaining Extends） */
+.error {
+  border: 1px #f00;
+  background-color: #fdd;
+}
+.seriousError {
+  @extend .error;
+  border-width: 3px;
+}
+.criticalError {
+  @extend .seriousError;
+  position: fixed;
+  top: 10%;
+  bottom: 10%;
+  left: 10%;
+  right: 10%;
+}
+/* 指令中的@extend (@extend in Directives) */
+@media print {
+  .error1 {
+    border: 1px #f00;
+    background-color: #fdd;
+  }
+  .seriousError1 {
+    @extend .error1;
+    border-width: 3px;
+  }
+}
+/*  .error2 {
+    border: 1px #f00;
+    background-color: #fdd;
+  }
+@media print {
+  .seriousError2 {
+    @extend .error2;
+    border-width: 3px;
+  }
+}   error*/
+
+/* 
+**占位符 % */
+
+%not-extent {
+    box-shadow: 0 0 2px #ccc;
+}
+%clearfix {
+    *zoom: 1;
+    &:after,
+    &:before {
+        display: table;
+        content: "";
+        font-size: 0;
+    }
+    &:after {
+        clear: both;
+    }
+}
+
+.clearfix {
+    @extend %clearfix;
+}
+.global-width-01,
+.global-width-02,
+.global-width-03{
+    margin: 0 auto;
+    @extend .clearfix;
+}
+
+/* if语句 */
+
+$lte7: true;
+$type: monster;
+.ib {
+    display: inline-block;
+    @if $lte7 {
+        *display: inline;
+        *zoom: 1;
+    }
+}
+p {
+    @if $type==ocean {
+        color: blue;
+    }
+    @else if $type==matador {
+        color: red;
+    }
+    @else if $type==monster {
+        color: green;
+    }
+    @else {
+        color: black;
+    }
+}
+
+/* 三目 if($condition, $if_true, $if_false)*/
+/* $width=@if(true,1px,2px);
+.ifDiv{width:$width};
+ */
+/*@for through include end*/
+
+@for $i from 1 through 3 {
+    .itme-#{$i} {
+        width: 2em*$i;
+    }
+}
+
+/* to no include end */
+
+@for $i from 1 to 3 {
+    .itme-#{$i} {
+        width: 2em*$i;
+    }
+}
+
+/* @each @each $var in <list or map>*/
+
+
+/* 一维 */
+
+$animal-list:cat,
+dog,
+pig,
+chicken;
+@each $animal-item in $animal-list {
+    .#{$animal-item}-icon {
+        background:url("/images/#{$animal-item}.jpg")
+    }
+}
+
+/* 二维 */
+
+$animal-data: (cat,
+black,
+default),
+(dog,
+blue,
+pointer),
+(pig,
+white,
+move);
+@each $animal,
+$color,
+$cursor in $animal-data {
+    .#{$animal}-icon {
+        background-image: url('/images/#{$animal}.png');
+        border: 2px solid $color;
+        cursor: $cursor;
+    }
+}
+
+/*map*/
+
+$animal-map:(cat:20em,
+dog:30em,
+chicken:25em);
+@each $name,
+$length in $animal-map {
+    .#{$name} {
+        width: $length;
+    }
+}
+
+/*Function*/
+
+body {
+    font-size: 62.5%;
+}
+$baseColor: #ccc !default;
+$baseFontSize: 10;
+@function pxToRem($px) {
+    @return $px / $baseFontSize * 1rem;
+}
+div {
+    font-size: $baseFontSize;
+    color: lighten($baseColor, 10%);
+}
+.test {
+    font-size: pxToRem(10);
+    color: darken($baseColor, 10%);
+    color: lighten($baseColor, 10%);
+}
+
+/* 字符串函数 */
+
+
+/*  unquote($string)：删除字符串中的引号；
+    quote($string)：给字符串添加引号。*/
+
+
+/*    数字函数
+    percentage($value)：将一个不带单位的数转换成百分比值；
+    round($value)：将数值四舍五入，转换成一个最接近的整数；
+    ceil($value)：将大于自己的小数转换成下一位整数；
+    floor($value)：将一个数去除他的小数部分；
+    abs($value)：返回一个数的绝对值；
+    min($numbers…)：找出几个数值之间的最小值；
+    max($numbers…)：找出几个数值之间的最大值。
+ */
+
+
+/*  List函数
+
+列表函数主要包括一些对列表参数的函数使用，主要包括以下几种：
+
+    length($list)：返回一个列表的长度值；
+    nth($list, $n)：返回一个列表中指定的某个标签值
+    join($list1, $list2, [$separator])：将两个列给连接在一起，变成一个列表；
+    append($list1, $val, [$separator])：将某个值放在列表的最后；
+    zip($lists…)：将几个列表结合成一个多维的列表；
+    index($list, $value)：返回一个值在列表中的位置值。
+ */
+ /* pxToRem function */
+ $browser-default-font-size:16px;
+
+ @function strip-units($number){
+    @return $number / ($number * 0 + 1);
+}
+ @function pxToRem_($target-size,$context:$browser-default-font-size){ 
+    @if not unitless($target-size){     
+        $target-size: strip-units($target-size);    
+    }
+    @if not unitless($context){
+        $context: strip-units($context);
+    }
+  @return ($target-size / $context) *1rem;
+ }
+ .html{
+    font-size: $browser-default-font-size;
+    width: pxToRem_(48);
+    height:pxToRem_(32em);
+ }
+
+ /* pxToRem mixin */
+
+ @mixin pxtorem($target){
+    font-size: $target;
+    font-size: $target / $browser-default-font-size * 1rem;
+ }
+ .html2{
+    @include pxtorem(16px);
+ }
+ /* pxtoem  mixin*/
+ $base-font-size: 16 !default;
+
+@mixin emCalc($props,$sizes,$base:$base-font-size){
+    $values: ();
+    $sublists: false;
+
+    @each $s in $sizes {
+        //循环列表中多个属性值，例如text-shadow属性
+        @if type-of($s) == list {
+            $sublists: true;
+            $vv: ();
+            @each $ss in $s {
+                $vv: append($vv,if(type-of($ss) == number, #{$ss / $base}em, $ss));
+            }
+            $values: append($values,join((), $vv));
+        }
+        @else {
+            $values: append($values,if(type-of($s) == number, #{$s / $base}em, $s));
+        }
+    }
+    $value: join((), $values, if($sublists,comma,space));
+    @each $prop in $props {#{$prop}: $value}
+}
+
+@function strip-units($number){
+    @return $number / ($number * 0 + 1);
+}
+
+$base-font-size: 16px !default;
+
+@function pxToem($target-size,$context:$base-font-size){
+    @if not unitless($target-size){     
+        $target-size: strip-units($target-size);    }
+    @if not unitless($context){
+        $context: strip-units($context);
+    }
+    @return ($target-size / $context) * 1em;
+}
+.emdiv{
+    @include emCalc(padding,8 16 48 32,16);
+    @include emCalc(box-shadow, (inset 0 0 0 1 #2a9022) (inset 0 0 3 #459966), 16);
+    padding:pxToem(15) pxToem(15);
+}
+
+/* @warn */
+
+
+/* while */
+$i: 6;
+@while $i > 0 {
+  .item-#{$i} { width: 2em * $i; }
+  $i:            $i - 2;
+}
+@mixin large-text {
+  font: {
+    family: Arial;
+    size: 20px;
+    weight: bold;
+  }
+  color: #ff0000;
+}
+.page-title {
+  @include large-text;
+  padding: 4px;
+  margin-top: 10px;
+}
+
+@mixin colors($text, $background, $border) {
+  color: $text;
+  background-color: $background;
+  border-color: $border;
+}
+
+$values: #ff0000, #00ff00, #0000ff;
+.primary {
+  @include colors($values...);
+}
+/* @content */
+@mixin apply-to-ie6-only {
+  * html {
+    @content;
+  }
+}
+@include apply-to-ie6-only {
+  #logo {
+    background-image: url(/logo.gif);
+  }
+  .content-test{
+    height: 20px;
+    width: 20px;
+  }
+}
+/* -- */
+$color: white;
+@mixin colors($color: blue) {
+  background-color: $color;
+  @content;
+  border-color: $color;
+}
+.color{
+  @include colors { color: $color; }
+}
+
+@mixin background-opacity($color, $opacity: 0.3) {
+    background: $color;
+    /* The Fallback */
+    background: rgba($color, $opacity);
+}
+.pop_bg{
+    @include background-opacity($color:#000)
+}
+@mixin element($element, $top, $right, $bottom, $left) {
+    position: relative;
+    &:#{$element} {
+        position: absolute;
+        content: "";
+        top: $top;
+        bottom: $bottom;
+        left: $left;
+        right: $right;
+    }
+}
+.pop_up{
+    @include element(before,20px,20px,20px,20px);
+}

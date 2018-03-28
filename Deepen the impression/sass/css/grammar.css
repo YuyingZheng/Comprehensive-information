@@ -1,0 +1,663 @@
+@charset "UTF-8";
+/*!　
+标准的CSS注释 /* comment  ，会保留到编译后的文件。
+
+单行注释 // comment，只保留在SASS源文件中，编译后被省略。
+
+在/*后面加一个感叹号，表示这是"重要注释"。即使是压缩模式编译，也会保留这行注释，通常可以用于声明版权信息。
+重要注释！*/
+/******1、
+嵌套
+*******/
+#main p{
+	width:97%; 
+	color:#0f0;
+}
+#main p .redbox{
+	position:relative;
+	height:20px;
+	color:#000;
+	background-color:#f00;
+	box-shadow:1px 2px #ccc;
+	-webkit-transform:translate(50px, 100px);
+	    -ms-transform:translate(50px, 100px);
+	        transform:translate(50px, 100px);
+}
+
+/*******
+ &表示父元素选择器
+*******/
+#mian{
+	color:red;
+}
+#mian a{
+	font-weight:bold;
+	text-decoration:none;
+}
+#mian a:hover{
+	text-decoration:underline;
+}
+body.firefox #mian a{
+	font-weight:normal;
+}
+
+/* 嵌套属性 （没啥用）*/
+.fakeshadow{
+	border-style:solid;
+	border-right-color:#ccc; 
+	border-right-width:2px;
+	border-left-color:#888;
+	border-left-width:4px;
+}
+
+.funky{
+	font-family:fantasy;
+	font-size:30em;
+	font-weight:bold;
+}
+
+.funky{
+	font:2px/3px;
+	font-family:fantasy;
+	font-size:30em;
+	font-weight:bold;
+}
+
+/* Variables-变量 { !default 默认变量 }
+设置默认值，默认变量的价值在进行组件化开发的时候会非常有用。
+*/
+div.default{
+	width:200px;
+}
+
+div.no-default{
+	width:300px;
+}
+
+/* 变量的值如果是 null 的话，会被 !default 当做没有值： */
+#main{
+	content:"Non-null content";
+}
+
+/* 特殊变量 作为属性或者值一部分使用 /#/{/$variables/}形式使用*/
+/* 应用于class和属性 */
+.border-top{
+	border-top:1px solid #ccc;
+}
+
+/* 应用于复杂的属性值 */
+.body{
+	font:12px/1.5;
+}
+
+/* 多值变量 多值变量分为list类型和map类型，简单来说list类型有点像js中的数组，而map类型有点像js中的对象。*/
+/*list类型 
+list数据可通过空格，逗号或小括号分隔多个值，可用nth($var,$index)取值
+*/
+div{
+	padding:10px 9px 8px 7px;
+	padding:8px;
+	margin:5px 10px, 0 auto;
+	margin:0 auto;
+	margin:5px 10px 0 auto;
+	margin:5px 10px;
+}
+
+/* map类型 
+map数据以key和value成对出现，其中value又可以是list。
+格式为：$map: (key1: value1, key2: value2, key3: value3);。可通过map-get($map,$key)取值。
+*/
+.twitter{
+	background-color:#55acee;
+}
+
+.facebook{
+	background-color:#3b5998;
+}
+
+h1{
+	font-size:2em;
+}
+
+h2{
+	font-size:1.5em;
+}
+
+h3{
+	font-size:1.2em;
+}
+
+.dribble{
+	color:#ea4c89;
+}
+
+.facebook{
+	color:#3b5998;
+}
+
+.Github{
+	color:#171515;
+}
+
+.google{
+	color:#db4437;
+}
+
+.twitter{
+	color:#55acee;
+}
+
+/* 全局变量 !global
+1、目前变量机制
+在选择器中声明的变量会覆盖外面全局声明的变量。(测试结果不会覆盖 只有加了关键字!global)
+*/
+.body{
+	font-size:14px;
+	color:#fff;
+}
+
+p{
+	font-size:12px;
+	color:#fff;
+}
+
+.body{
+	font-size:14px;
+}
+
+p{
+	font-size:12px;
+}
+
+/* @at-root
+sass3.3.0中新增的功能，用来跳出选择器嵌套的。默认所有的嵌套，继承所有上级选择器，
+但有了这个就可以跳出所有上级选择器。
+ */
+.at-root{
+	background-color:#666;
+}
+.item{
+	color:red;
+}
+
+.content-header{
+	color:red;
+}
+
+.content-content{
+	color:blue;
+}
+
+/* @at-root (without: ...)
+all（表示所有），rule（表示常规css），media（表示media  跳出meadia 父级），support */
+@media screen{
+	.parent1{
+		color:#f00;
+	}
+	.child1{
+		width:200px;
+	}
+}
+
+@media screen{
+	.parent1{
+		color:#f00;
+	}
+}
+.child1{
+	width:200px;
+}
+
+@media screen{
+	.parent3{
+		color:#f00;
+	}
+}
+.child3{
+	width:200px;
+}
+
+/* 运算*/
+/* 在纯 CSS 中使用变量和 /， 你可以包住变量 */
+p{
+	font:12px/30px;
+}
+
+p{
+	color:#050709;
+	color:#020406;
+}
+
+p{
+	color:rgba(255, 0, 0, .8);
+	background-color:rgba(255, 0, 0, .2);
+}
+
+p:before{
+	font-family:sans-serif; 
+	content:"Foo Bar";
+}
+
+p:before{
+	content:"I ate 15 pies!";
+}
+
+/*混合(mixin) */
+.opacity{
+	filter:alpha(opacity=50);
+	filter:alpha(opacity=80); 
+	opacity:.5;
+	opacity:.8;
+}
+
+.transition{
+	-webkit-transition:all .4s ease;
+	        transition:all .4s ease;
+}
+
+.imgtext-h li{
+	padding-top:200px;
+	padding-bottom:200px; 
+	border-bottom:1px solid #ccc;
+}
+
+.imgtext-h-default{
+	padding-top:20px;
+	padding-bottom:20px; 
+	border-bottom:1px dashed #ccc;
+}
+
+.box{
+	border:1px solid #ccc;
+	box-shadow:0 2px 2px rgba(0, 0, 0, .3), 0 3px 3px rgba(0, 0, 0, .3), 0 4px 4px rgba(0, 0, 0, .3);
+}
+
+/* content 它可以使@mixin接受一整块样式，接受的样式从@content开始。*/
+@media only screen and (max-width: 480px){
+	.body{
+		font-size:15px; 
+		color:red;
+	}
+	h1{
+		fontSize:20px;
+	}
+}
+
+.show-mobile .body{
+	color:blue;
+}
+
+@media only screen and (max-width: 480px){
+	.show-mobile{
+		font-size:20px;
+	}
+	.show-mobile .body{
+		font-size:15px; 
+		color:red;
+	}
+}
+
+@media only screen and (max-width: 780px){
+	.body{
+		font-size:15px; 
+		color:red;
+	}
+	h1{
+		fontSize:20px;
+	}
+}
+
+* html{
+	color:red;
+}
+* html #logo{
+	background-image:url(/logo.gif);
+}
+
+.colors{
+	color:white;
+	background-color:red;
+	border-color:red;
+}
+
+/* 继承 与mixin差别：继承是给继承元素额外添加一完整的样式如xxx{},mixin是讲样式加在里面*/
+.border-style,
+div.border{
+	margin-top:10px; 
+	border:1px solid #ccc;
+}
+
+div.border{
+	margin-top:9px; 
+	border:1px solid #ccc;
+}
+
+.error,
+.seriousError,
+.criticalError{
+	background-color:#fdd; 
+	border:1px #f00;
+}
+
+.error.intrusion,
+.intrusion.seriousError,
+.intrusion.criticalError{
+	background-image:url("/image/hacked.png");
+}
+
+.seriousError,
+.criticalError{
+	border-width:3px;
+}
+
+/* 多重扩展 (Multiple Extends) */
+.error,
+.seriousError,
+.criticalError{
+	background-color:#fdd; 
+	border:1px #f00;
+}
+
+.attention,
+.seriousError,
+.criticalError{
+	font-size:3em;
+	background-color:#ff0;
+}
+
+.seriousError,
+.criticalError{
+	border-width:3px;
+}
+
+.seriousError,
+.criticalError{
+	border-width:3px;
+}
+
+/* 链式扩展（Chaining Extends） */
+.error,
+.seriousError,
+.criticalError{
+	background-color:#fdd; 
+	border:1px #f00;
+}
+
+.seriousError,
+.criticalError{
+	border-width:3px;
+}
+
+.criticalError{
+	position:fixed;
+	top:10%;
+	right:10%; 
+	bottom:10%;
+	left:10%;
+}
+
+/* 指令中的@extend (@extend in Directives) */
+@media print{
+	.error1,
+	.seriousError1{
+		background-color:#fdd; 
+		border:1px #f00;
+	}
+	.seriousError1{
+		border-width:3px;
+	}
+}
+
+/*  .error2 {
+    border: 1px #f00;
+    background-color: #fdd;
+  }
+@media print {
+  .seriousError2 {
+    @extend .error2;
+    border-width: 3px;
+  }
+}   error*/
+/* 
+**占位符 % */
+.clearfix,
+.global-width-01,
+.global-width-02,
+.global-width-03{
+	*zoom:1;
+}
+.clearfix:after,
+.global-width-01:after,
+.global-width-02:after,
+.global-width-03:after,
+.clearfix:before,
+.global-width-01:before,
+.global-width-02:before,
+.global-width-03:before{
+	display:table;
+	font-size:0; 
+	content:"";
+}
+.clearfix:after,
+.global-width-01:after,
+.global-width-02:after,
+.global-width-03:after{
+	clear:both;
+}
+
+.global-width-01,
+.global-width-02,
+.global-width-03{
+	margin:0 auto;
+}
+
+/* if语句 */
+.ib{
+	display:inline-block;
+
+	*display:inline;
+	*zoom:1;
+}
+
+p{
+	color:green;
+}
+
+/* 三目 if($condition, $if_true, $if_false)*/
+/* $width=@if(true,1px,2px);
+.ifDiv{width:$width};
+ */
+/*@for through include end*/
+.itme-1{
+	width:2em;
+}
+
+.itme-2{
+	width:4em;
+}
+
+.itme-3{
+	width:6em;
+}
+
+/* to no include end */
+.itme-1{
+	width:2em;
+}
+
+.itme-2{
+	width:4em;
+}
+
+/* @each @each $var in <list or map>*/
+/* 一维 */
+.cat-icon{
+	background:url("/images/cat.jpg");
+}
+
+.dog-icon{
+	background:url("/images/dog.jpg");
+}
+
+.pig-icon{
+	background:url("/images/pig.jpg");
+}
+
+.chicken-icon{
+	background:url("/images/chicken.jpg");
+}
+
+/* 二维 */
+.cat-icon{
+	cursor:default; 
+	background-image:url("/images/cat.png");
+	border:2px solid black;
+}
+
+.dog-icon{
+	cursor:pointer; 
+	background-image:url("/images/dog.png");
+	border:2px solid blue;
+}
+
+.pig-icon{
+	cursor:move; 
+	background-image:url("/images/pig.png");
+	border:2px solid white;
+}
+
+/*map*/
+.cat{
+	width:20em;
+}
+
+.dog{
+	width:30em;
+}
+
+.chicken{
+	width:25em;
+}
+
+/*Function*/
+body{
+	font-size:62.5%;
+}
+
+div{
+	font-size:10;
+	color:#e6e6e6;
+}
+
+.test{
+	font-size:1rem;
+	color:#b3b3b3;
+	color:#e6e6e6;
+}
+
+/* 字符串函数 */
+/*  unquote($string)：删除字符串中的引号；
+    quote($string)：给字符串添加引号。*/
+/*    数字函数
+    percentage($value)：将一个不带单位的数转换成百分比值；
+    round($value)：将数值四舍五入，转换成一个最接近的整数；
+    ceil($value)：将大于自己的小数转换成下一位整数；
+    floor($value)：将一个数去除他的小数部分；
+    abs($value)：返回一个数的绝对值；
+    min($numbers…)：找出几个数值之间的最小值；
+    max($numbers…)：找出几个数值之间的最大值。
+ */
+/*  List函数
+
+列表函数主要包括一些对列表参数的函数使用，主要包括以下几种：
+
+    length($list)：返回一个列表的长度值；
+    nth($list, $n)：返回一个列表中指定的某个标签值
+    join($list1, $list2, [$separator])：将两个列给连接在一起，变成一个列表；
+    append($list1, $val, [$separator])：将某个值放在列表的最后；
+    zip($lists…)：将几个列表结合成一个多维的列表；
+    index($list, $value)：返回一个值在列表中的位置值。
+ */
+/* pxToRem function */
+.html{
+	width:3rem;
+	height:2rem; 
+	font-size:16px;
+}
+
+/* pxToRem mixin */
+.html2{
+	font-size:16px;
+	font-size:1rem;
+}
+
+/* pxtoem  mixin*/
+.emdiv{
+	padding:.5em 1em 3em 2em;
+	padding:.9375em .9375em; 
+	box-shadow:inset 0 0 0 .0625em #2a9022, inset 0 0 .1875em #459966;
+}
+
+/* @warn */
+/* while */
+.item-6{
+	width:12em;
+}
+
+.item-4{
+	width:8em;
+}
+
+.item-2{
+	width:4em;
+}
+
+.page-title{
+	padding:4px;
+	margin-top:10px; 
+	font-family:Arial;
+	font-size:20px;
+	font-weight:bold;
+	color:#f00;
+}
+
+.primary{
+	color:#f00;
+	background-color:#0f0;
+	border-color:#00f;
+}
+
+/* @content */
+* html #logo{
+	background-image:url(/logo.gif);
+}
+
+* html .content-test{
+	width:20px; 
+	height:20px;
+}
+
+/* -- */
+.color{
+	color:white;
+	background-color:blue;
+	border-color:blue;
+}
+
+.pop_bg{
+	background:#000;
+	/* The Fallback */
+	background:rgba(0, 0, 0, .3);
+}
+
+.pop_up{
+	position:relative;
+}
+.pop_up:before{
+	position:absolute;
+	top:20px;
+	right:20px; 
+	bottom:20px;
+	left:20px;
+	content:"";
+}

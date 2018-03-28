@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style type="text/css">
+    html {
+        font-size: 62.5%;
+        line-height: 1;
+    }
+    
+    body {
+        width: 500px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-left: -250px;
+        text-align: center;
+    }
+    
+    div {
+        font-size: 1.5rem;
+        width:20em;
+        height: 3em;
+        border:1em solid red;
+        margin-bottom:20px;
+    }
+    
+    p.test-em {
+        font-size: 1em;
+    }
+    
+    p.test-rem {
+        font-size: 1rem;
+    }
+    </style>
+</head>
+
+<body>
+    <div>
+        <p class="test-rem">I'm a test for rem .My font-size is 1rem=16*62.5%=10px</p>
+    </div>
+    <div class="box1">
+        <p class="test-em">I'm a test for em .My font-size is 1em=16*62.5%*1.5=15px</p>
+    </div>
+</body>
+
+</html>

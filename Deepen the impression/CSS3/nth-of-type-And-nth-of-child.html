@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style type="text/css">
+    body {
+        text-align: center;
+    }
+    
+    p:nth-of-type(3) {
+        color: red;
+    }
+    
+    p:nth-child(3) {
+        color: red;
+    }
+    
+    .sub-box p:nth-of-type(4) {
+        color: blue;
+    }
+    
+    .sub-box p:nth-child(4) {
+        color: blue;
+    }
+    
+    p:nth-last-of-type(1) {
+        color: green;
+    }
+    /*无效 因为没有父模块的最后一个元素为P */
+    
+    p:nth-last-child(2) {
+        color: #CCC;
+    }
+    div.explain{
+    	width: 1000px;
+    	margin:20px auto;
+    	text-align: left;
+    	font-size: 18px;
+    	font-family: 微软雅黑;
+    	color:red;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="test">
+        <span>普通的SPAN1</span>
+        <div>普通的DIV1</div>
+        <p title="test-p">"I am test p"</p>
+        <p title="test-p">"I am test p"</p>
+        <p title="test-p">"I am test p"</p>
+        <p title="test-p">"I am test p"</p>
+        <p title="test-p">"I am test p"</p>
+        <hr/>
+        <div class="sub-box">
+            <span>普通的SPAN1</span>
+            <div>普通的DIV1</div>
+            <p title="sub-test-p">"I am sub test p"</p>
+            <p title="sub-test-p">"I am sub test p"</p>
+            <p title="sub-test-p">"I am sub test p"</p>
+            <p title="sub-test-p">"I am sub test p"</p>
+            <p title="sub-test-p">"I am sub test p"</p>
+            <span>普通的SPAN</span>
+            <span>普通的SPAN22</span>
+        </div>
+    </div>
+    <p class="last-child-p">I'm last child and p</p>
+    <span class="">foot-span</span>
+    <div class="explain">
+        <pre>
+        <h4>解释和拓展</h4>
+        :nth-of-type(n) 选择器匹配属于父元素的特定类型的第N个子元素的每个元素. 
+        :nth-child(n) 选择器匹配属于其父元素的第 N 个子元素，不论元素的类型。
+        n从1开始 可以是数字和表达式如{(3n+1) 这里n>=0} 
+        差异： 从字面上来看： 
+            对于p:nth-of-type(2)和:nth-child(2)的理解为： 
+            :nth-child： 
+            1. 这是个段落元素 
+            2. 这是父标签的第二个子元素 
+            :nth-of-type： 
+            这是父元素的第二个段落子元素  （其计算的方式为其父元素内具有"相同标签名"兄弟元素。比如<div>等同于<div class="xx">）
+            同理还有：
+            nth-last-child(n)和nth-last-of-type(n)两者同上。只是变为设定为倒数。
+            first-child 和 last-child 等同于。nth-child(1) 和 nth-last-child(1);
+            同理。first-of-type ....
+            only-child和only-of-type 父元素唯一的元素。区别如上。
+        </pre>
+    </div>
+    <div class="last-test-box">
+        <p>段落1</p>
+        <h1>标题1</h1>
+        <p class="other-p">其他段落</p>
+        <p class="other-p">其他段落</p>
+        <p class="other-p">其他段落</p>
+        <p class="other-p">其他段落</p>
+    </div>
+    <style>
+        .last-test-box .other-p:nth-of-type(2n){
+            color:red;
+            font-size: 20px;
+        }
+        .last-test-box .other-p:nth-child(3n){
+            color:blue;
+            font-size: 20px;
+        }
+    </style>
+</body>
+
+</html>

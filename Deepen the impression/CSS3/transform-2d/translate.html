@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style type="text/css">
+    .box1,
+    .box2 {
+        width: 200px;
+        height: 200px;
+        transition: all 2s ease;
+        background: red;
+        line-height: 200px;
+        text-align: center;
+        color: black;
+    }
+    
+    .box1 {
+        -webkit-transform-origin: 50% 50%;
+        -moz-transform-origin: 50% 50%;
+        -o-transform-origin: 50% 50%;
+        -ms-transform-origin: 50% 50%;
+        transform-origin: 50% 50%;
+    }
+    
+    .box1:hover {
+        -webkit-transform: translate(40px, 40px) translate(-50px, 35px) translateY(30px);
+        -moz-transform: translate(40px, 40px) translate(-50px, 35px) translateY(30px);
+        -o-transform: translate(40px, 40px) translate(-50px, 35px) translateY(30px);
+        -ms-transform: translate(40px, 40px) translate(-50px, 35px) translateY(30px);
+        transform: translate(40px, 40px) translate(-50px, 35px) translateY(30px);
+    }
+    
+    .box2 {
+        background: blue;
+        -webkit-transform-origin: 100% 100%;
+        -moz-transform-origin: 100% 100%;
+        -o-transform-origin: 100% 100%;
+        -ms-transform-origin: 100% 100%;
+        transform-origin: 100% 100%;
+    }
+    
+    .box2:hover {
+        transform: translateY(100%);
+        transform: translateY(calc(-100% + 64px));
+    }
+    
+    * {
+        margin: 0;
+        padding: 0;
+    }
+    
+    .center {
+        width: 960px;
+        height: 500px;
+        margin: 0 auto;
+        background: #1879D9;
+    }
+    
+    .center p {
+        background: #fff;
+        position: relative;
+        top: 50%;
+        transform: translateY(-50%);
+        left: 0;
+        right: 0;
+        margin: 0 auto;
+        width: 100px;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="box1">*</div>
+    <div class="box2">*translate:50%</div>
+    <p class="conclusion" style="color: red;font-weight: bold">CSS3变形中旋转、缩放、倾斜都可以通过transform-origin属性重置元素的原点，但其中的位移translate()始终以元素中心点进行位移。 translate(百分比)：相对自身元素的宽高</p>
+    <div class="center">
+        <p>垂直居中内容</p>
+    </div>
+</body>
+
+</html>
