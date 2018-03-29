@@ -16,8 +16,7 @@ gulp.task('clean',function(){
     .pipe(clean({force:true}));
 });
 /* -- */
-var iconSrc = '../icon/*.svg',
-    iconSrc2 = '../icon2/*.svg',
+var iconSrc = ['../icon/*.svg','../icon2/*.svg'],
     iconDest = '../dist/';
 
 gulp.task('svg-sprites',function(){
@@ -62,9 +61,9 @@ gulp.task('svg-sprites-2',function(){
             prefix:'icon-'
         }))
         .pipe(svgSymbols())
-        
+
         .pipe(gulp.dest(iconDest));
 });
 gulp.task('default',function(cb){
-    sequence('clean',['svg-sprites','svg-sprites-2'])(cb);
-}); 
+    sequence('clean',['svg-sprites'])(cb);
+});

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="video-js.min.css">
+    <style>
+        .video-box{
+            width: 50%;
+            height:auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="video-box">
+        <video src="https://sew.blob.core.windows.net/starteenwinkel/Media/videos/Start-een-winkel.mp4"></video>
+    </div>
+
+    <script src="jquery-1.11.0.min.js"></script>
+    <script src="video.min.js"></script>
+    <script>
+        $('video').each(function () {
+            $(this).addClass("video-js vjs-default-skin vjs-big-play-centered");
+            videojs($(this)[0], {
+                preload: true,
+                controls: true,
+                fluid: true
+            });
+        });
+    </script>
+</body>
+
+</html>

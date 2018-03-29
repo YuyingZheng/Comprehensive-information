@@ -7,6 +7,10 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>SVG Test Demo</title>
     <style>
+        html {
+            font-size: 62.5%;
+        }
+
         ul {
             list-style: none;
         }
@@ -20,10 +24,12 @@
         }
 
         .icon {
-            width: 30px;
-            height: 30px;
-            fill: currentColor;
+            display: inline-block;
+            width: 3.2rem;
+            height: 3.2rem;
+            stroke-width: 0;
             stroke: currentColor;
+            fill: currentColor;
         }
     </style>
 </head>
@@ -50,45 +56,43 @@
                 <use xlink:href="dist/icons.svg#icon-scroll-top"></use>
             </svg>
         </li>
+        <hr>
+        <li>
+            <svg class="icon icon-arrow-right">
+                <use xlink:href="dist/icons.svg#icon-ic_account"></use>
+            </svg>
+        </li>
+        <li>
+            <svg class="icon icon-email">
+                <use xlink:href="dist/icons.svg#icon-ic_call"></use>
+            </svg>
+        </li>
+        <li>
+            <svg class="icon icon-slider-next">
+                <use xlink:href="dist/icons.svg#icon-ic_facebook"></use>
+            </svg>
+        </li>
+        <li>
+            <svg class="icon icon-scroll-top">
+                <use xlink:href="dist/icons.svg#icon-ic_mail"></use>
+            </svg>
+        </li>
     </ul>
-    <ul id="icon-list-2">
-        <li>
-            <svg class="icon icon-ic_account">
-                <use xlink:href="dist/icons2.svg#icon-ic_account"></use>
-            </svg>
-        </li>
-        <li>
-            <svg class="icon icon-ic_call">
-                <use xlink:href="dist/icons2.svg#icon-ic_call"></use>
-            </svg>
-        </li>
-        <li>
-            <img src="icon2/ic_account.svg" alt="ic_account">
-        </li>
-        <li>
-            <img src="icon2/ic_call.svg" alt="ic_account">
-        </li>
-    </ul>
-    <ul id="icon-list-3">
-        <li>
-            <svg class="icon icon-ic_account">
-                <use xlink:href="dist/svg-symbols.svg#icon-arrow-right"></use>
-            </svg>
-        </li>
-        <li>
-            <svg class="icon icon-ic_call">
-                <use xlink:href="dist/svg-symbols.svg#icon-arrow-right"></use>
-            </svg>
-        </li>
-        <li>
-            <img src="icon2/ic_account.svg" alt="ic_account">
-        </li>
-        <li>
-            <img src="icon2/ic_call.svg" alt="ic_account">
-        </li>
     </ul>
     <strong>修改对应li元素的颜色</strong>
     <ul id="color">
+        <li>
+            <input type="color" value="#336699">
+        </li>
+        <li>
+            <input type="color" value="#336699">
+        </li>
+        <li>
+            <input type="color" value="#336699">
+        </li>
+        <li>
+            <input type="color" value="#336699">
+        </li>
         <li>
             <input type="color" value="#336699">
         </li>

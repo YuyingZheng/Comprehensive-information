@@ -132,7 +132,7 @@ div {
 
 /* map类型 
 map数据以key和value成对出现，其中value又可以是list。
-格式为：$map: (key1: value1, key2: value2, key3: value3);。可通过map-get($map,$key)取值。
+格式为：$map: (key1: value1, key2: value2, key3: value3);。可通过map-get($map,$key)取值。map-merge函数用于map和新加的键值融合
 */
 
 $map:( dribble: #ea4c89, facebook: #3b5998, Github: #171515, google: #db4437, twitter: #55acee);
@@ -143,14 +143,12 @@ $map:( dribble: #ea4c89, facebook: #3b5998, Github: #171515, google: #db4437, tw
     background-color: map-get($map, facebook);
 }
 $headings: (h1: 2em, h2: 1.5em, h3: 1.2em);
-@each $header,
-$size in $headings {
+@each $header,$size in $headings {
     #{$header} {
         font-size: $size;
     }
 }
-@each $name,
-$color in $map {
+@each $name,$color in $map {
     .#{$name} {
         color: $color;
     }
@@ -193,12 +191,18 @@ sass3.3.0中新增的功能，用来跳出选择器嵌套的。默认所有的�
         color: red;
     }
 }
+/* 无意义 */
 .content {
     @at-root #{&}-header {
         color: red;
     }
     @at-root #{&}-content {
         color: blue;
+    }
+}
+.content{
+    &-header{
+        color:red;
     }
 }
 
@@ -283,7 +287,7 @@ p:before {
     @include horizontal-line(1px solid #ccc, 200px);
 }
 .imgtext-h-default {
-    @include horizontal-line();
+    @include horizontal-line;
 }
 @mixin box-shadow($shadow...) {
     -webkit-box-shadow: $shadow;
@@ -310,19 +314,17 @@ p:before {
         fontSize: 20px
     }
 }
-.show-mobile { 
-    .body{
-        color:blue;
-    } 
-    @include max-screen(480px) {
+.show-mobile {
     .body {
-        color: red;
-        font-size: 15px;
+        color: blue;
     }
-   
+    @include max-screen(480px) {
+        .body {
+            color: red;
+            font-size: 15px;
+        }
         font-size: 20px
-    
-}
+    }
 }
 @include max-screen(780px) {
     .body {
@@ -448,7 +450,6 @@ div.border {
     &:before {
         display: table;
         content: "";
-        font-size: 0;
     }
     &:after {
         clear: both;
