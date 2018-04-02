@@ -1,0 +1,60 @@
+// Html
+//
+// font-size:625% => 1rem = 100px
+$px-to-rem: (100px / 16px) * 100%;
+$base-font-size: .16rem;
+
+// Body
+//
+// Settings for the `<body>` element.
+
+$body-bg : $white !default;
+$body-color : $gray-900 !default;
+
+
+// Color system
+//
+$white:#fff !default;
+$blue:#017DC3 !default;
+$light-blue:#DAECF6 !default;
+$pink:#E01F76 !default;
+$dark-pink:#B41960 !default;
+$orange:#EF7E2C !default;
+$gray:#545454 !default;
+$light-gray:#BEBEBE !default;
+$green:#ADCA28 !default;
+
+// Grid columns
+//
+// Set the number of columns and specify the width of the gutters.
+
+$grid-columns : 12 !default;
+$container-padding:.3rem !default;
+$grid-gutter-width :.3rem !default;
+
+// Z-index master list
+//
+// Warning: Avoid customizing these values. They're used for a bird's eye view
+// of components dependent on the z-axis and are designed to all work together.
+$zindex-dropdown : 1000 !default;
+$zindex-sticky : 1020 !default;
+$zindex-fixed : 1030 !default;
+$zindex-modal-backdrop : 1040 !default;
+$zindex-modal : 1050 !default;
+$zindex-popover : 1060 !default;
+$zindex-tooltip : 1070 !default;
+
+//============================================//	
+//
+// Managing responsive breakpoints
+//
+//********************************************//
+$breakpoints: ( 
+	'mobile': '(max-width: 767px)', 
+	'tablet': '(min-width: 768px)',
+	'desktop': '(min-width: 1024px)',
+	'large': '(min-width: 1200px)',
+	'xlarge': '(min-width: 1440px)',
+	'onlyTablet': '(min-width: 768px) and (max-width: 1023px)',
+	'noDesktop': '(max-width: 1023px)',
+);

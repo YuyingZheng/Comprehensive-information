@@ -1,0 +1,6 @@
+<!-- There are scripts -->
+<script src="assets/js/vendors/jquery-3.1.1.min.js"></script>
+<script src="assets/js/vendors/swiper.jquery.min.js"></script>
+<script defer src="assets/js/vendors/svgxuse.min.js"></script>
+<script src="assets/js/vendors/holder.min.js"></script>
+<script src="assets/js/site.js"></script>

@@ -67,6 +67,11 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   display: block;
 }
 
+.clearfix {
+  overflow: hidden;
+  *zoom: 1;
+}
+
 /*! 
     Method -- 1
 */

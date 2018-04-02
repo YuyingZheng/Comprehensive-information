@@ -1,0 +1,142 @@
+// @font-face
+$fonts-path: '../assets/fonts';
+@mixin fontface($fontfamily, $filename, $fontweight: normal, $fontstyle: normal) {
+    font-family: $fontfamily;
+    src: url('#{$fonts-path}/#{$filename}.eot');
+    src: url('#{$fonts-path}/#{$filename}.eot?#iefix') format('embedded-opentype'),
+    url('#{$fonts-path}/#{$filename}.woff2') format('woff2'),
+    url('#{$fonts-path}/#{$filename}.woff') format('woff'),
+    url('#{$fonts-path}/#{$filename}.ttf') format('truetype'),
+    url('#{$fonts-path}/#{$filename}.svg#{$filename}') format('svg');
+    font-weight: $fontweight;
+    font-style: $fontstyle;
+}
+
+//clearfix
+@mixin clearfix {
+    &:before,
+    &:after {
+        content: " ";
+        display: table;
+    }
+    &:after {
+        clear: both;
+    }
+}
+
+//float
+@mixin float-left {
+    float: left !important;
+}
+
+@mixin float-right {
+    float: right !important;
+}
+
+@mixin float-none {
+    float: none !important;
+}
+
+//placeholder
+@mixin placeholder($color) {
+    &:-moz-placeholder {
+        // Firefox 4-18
+        color: $color;
+        opacity: 1;
+    }
+    &::-moz-placeholder {
+        // Firefox 19+
+        color: $color;
+        opacity: 1;
+    }
+    &:-ms-input-placeholder {
+        // Internet Explorer 10+
+        color: $color;
+    }
+    &::-webkit-input-placeholder {
+        // Safari and Chrome
+        color: $color;
+    }
+}
+
+//opacity
+@mixin opacity($opacity) {
+    opacity: $opacity;
+    $opacity-ie: $opacity*100;
+    filter: alpha(opacity=$opacity-ie);
+}
+//text-overflow
+@mixin text-overflow($display:block) {
+    display: $display;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+//border-radius(one side)
+@mixin border-top-radius($radius) {
+    border-top-left-radius: $radius;
+    border-top-right-radius: $radius;
+}
+
+@mixin border-right-radius($radius) {
+    border-top-right-radius: $radius;
+    border-bottom-right-radius: $radius;
+}
+
+@mixin border-bottom-radius($radius) {
+    border-bottom-right-radius: $radius;
+    border-bottom-left-radius: $radius;
+}
+
+@mixin border-left-radius($radius) {
+    border-bottom-left-radius: $radius;
+    border-top-left-radius: $radius;
+}
+
+//triangle arrow
+@mixin triangleArrow($direction:"down",$size:10px,$color:#fff,$center:50%,$margin:-1px,$pseudo: after) {
+    position: relative;
+    &:#{$pseudo} {
+        position: absolute;
+        content: "";
+        width: 0;
+        height: 0;
+        @if $direction=="top" {
+            bottom: 100%;
+            left: $center;
+            margin-left: $size * -1;
+            margin-bottom: $margin;
+            border-left: $size solid transparent;
+            border-right: $size solid transparent;
+            border-bottom: $size solid $color;
+        }
+        @else if $direction=="right" {
+            left: 100%;
+            top: $center;
+            margin-left: $margin;
+            margin-top: $size * -1;
+            border-top: $size solid transparent;
+            border-bottom: $size solid transparent;
+            border-left: $size solid $color;
+        }
+        @else if $direction=="down" {
+            top: 100%;
+            left: $center;
+            margin-top: $margin;
+            margin-left: $size * -1;
+            border-left: $size solid transparent;
+            border-right: $size solid transparent;
+            border-top: $size solid $color;
+        }
+        @else if $direction=="left" {
+            right: 100%;
+            top: $center;
+            margin-right: $margin;
+            margin-top: $size * -1;
+            border-top: $size solid transparent;
+            border-bottom: $size solid transparent;
+            border-right: $size solid $color;
+        }
+    }
+}

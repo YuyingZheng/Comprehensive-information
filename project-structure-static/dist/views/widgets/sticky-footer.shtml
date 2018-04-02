@@ -1,0 +1,45 @@
+<div class="widget widget-sticky-footer">
+	<h3 class="title">The Flex Sticky Footer</h3>
+	<div class="box">
+		<h5 class="title">关于 Sticky Footer</h5>
+		<p>如果页面内容不够长的时候，页脚footer粘贴在视窗底部；如果内容足够长时，页脚footer会被内容向下推送。<br> 注意了这里所说的是，<span class="text-danger">页脚footer永远固定在页面的底部，而不是永远固定在显示器屏幕的底部。</span>这一点与我们常见的stick header是不同的。</p>
+
+		<p>实现sticky footer的方法有很多种，下面是几种常见的解决方案，不过他们仍然有其自己的局限性。</p>
+		<ul>
+			<li><a href="http://www.cssstickyfooter.com/" target="_blank">CSS Sticky Footer Layout</a></li>
+			<li><a href="http://blog.karenmenezes.com/2014/jan/14/ryan-faits-sticky-footer-responsive/" target="_blank">Ryan Fait's CSS Sticky Footer</a></li>
+			<li><a href="https://css-tricks.com/snippets/css/sticky-footer/" target="_blank">Sticky Footer</a></li>
+			<li><a href="https://pixelsvsbytes.com/2011/09/sticky-css-footers-the-flexible-way/" target="_blank">Sticky CSS footers: The flexible way</a></li>
+			<li><a href="http://mystrd.at/modern-clean-css-sticky-footer/" target="_blank">Modern Clean CSS “Sticky Footer”.(Boostrap)</a></li>
+		</ul>
+
+		<p>使用flexbox,完美实现sticky footer。</p>
+		<div class="code">
+			<h6 class="title">Html</h6>
+			<pre class="xml"><code><span class="tag">&lt;<span class="title">body</span> <span class="attribute">class</span>=<span class="value">"Site"</span>&gt;</span><br>  <span class="tag">&lt;<span class="title">header</span> <span class="attribute">class</span>=<span class="value">"Site-header"</span>&gt;</span>...<span class="tag">&lt;/<span class="title">header</span>&gt;</span><br>  <span class="tag">&lt;<span class="title">main</span> <span class="attribute">class</span>=<span class="value">"Site-content"</span>&gt;</span>...<span class="tag">&lt;/<span class="title">main</span>&gt;</span><br>  <span class="tag">&lt;<span class="title">footer</span> <span class="attribute">class</span>=<span class="value">"Site-footer"</span>&gt;</span>...<span class="tag">&lt;/<span class="title">footer</span>&gt;</span><br><span class="tag">&lt;/<span class="title">body</span>&gt;</span></code></pre>
+		</div>
+		<div class="code">
+			<h6 class="title">Css</h6>
+			<pre class="css"><code><span class="comment">/*<br>* 1. Avoid the IE 10-11 'min-height' bug.<br>* 2. Set 'flex-shrink' to '0' to prevent Chrome, Opera, and Safari <br>* from letting these items shrink to smaller than their content's default minimum size.<br>*/<br></span> <br><span class="class">.Site</span><span class="rules"> &#123;<br><span class="rule">  <span class="property">display</span>:<span class="value"> flex</span>;<br></span><span class="rule">  <span class="property">flex-direction</span>:<span class="value"> column</span>;<br></span><span class="rule">  <span class="property">height</span>:<span class="value"> 100vh</span>;  <span class="comment">/* 1 */</span><br></span>&#125;</span>  <br><br><span class="class">.Site-header</span>, <span class="class">.Site-footer</span><span class="rules"> &#123;<br><span class="rule">  <span class="property">flex-shrink</span>:<span class="value"> 0</span>;  <span class="comment">/* 2 */</span><br></span>&#125;</span>  <br><br><span class="class">.Site-content</span><span class="rules"> &#123;<br><span class="rule">  <span class="property">flex</span>:<span class="value"> 1 0 auto</span>;  <span class="comment">/* 2 */</span><br></span>&#125;</span></code></pre>
+		</div>
+		<br>
+
+		<h5 class="title">关于 Flex Nav</h5>
+		<div class="flex-navs">
+			<img src="assets/uploads/navs.png" alt="image">
+		</div>
+		<br><br>
+		<h5 class="title">Other Use</h5>
+		<ul>
+			<li>水平居中</li>
+			<li>垂直居中</li>
+			<li>等高</li>
+		</ul>
+	</div>
+</div>
+
+<style type="text/css">
+	.flex-navs img{
+		width: 100%;
+	}
+</style>

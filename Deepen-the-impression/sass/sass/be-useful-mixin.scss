@@ -37,7 +37,7 @@ $browser-default-font-size: 16;
 
 /* 3、clearfix */
 
-%clearfix {
+@mixin clearfix {
     *zoom: 1;
     &:before, &:after {
         content: " ";
@@ -49,7 +49,7 @@ $browser-default-font-size: 16;
 }
 
 .cleardiv {
-    @extend %clearfix;
+    @include clearfix();
 }
 
 
@@ -127,6 +127,7 @@ $browser-default-font-size: 16;
 }
 
 .div-border-top-radius {
+    width: 20px;
     @include border-top-radius(5px);
 }
 
@@ -320,26 +321,29 @@ $end-percent: 100%) {
     @include gradient-linear-h(red,blue);
 }
 /* 12、arrow-lazy http://codepen.io/MichaelArestad/pen/IxFGj */
-@mixin arrow-lazy($direction: top, $size: 10px, $color: #ccc, $center: 50%, $margin: -1px, $pseudo: before){
+@mixin arrow-lazy($direction:down,$size:10px,$color:#fff,$center:50%,$margin:-1px,$pseudo: after){
     position: relative;
-    border-color: $color;
-
-    &:#{$pseudo} {
+    &:#{$pseudo}{
         position: absolute;
         content: "";
         width: 0;
-        height: 0;
-        border-color: $color;
-
-        @if $direction == "right" {
-            top: $center;
-            left: 100%;
-            margin-left: $margin;
-            margin-top: $size * -1;
-            border-top: $size solid transparent;
-            border-bottom: $size solid transparent;
+        height:0;
+        @if $direction == "top"{
+            bottom:100%;
+            left: $center;
+            margin-left: $size * -1;
+            margin-bottom: $margin;
+            border-left: $size solid transparent;
+            border-right: $size solid transparent;
+            border-bottom:$size solid $color;
+        } @else if $direction =="right" {
+            left:100%;
+            top:$center;
+            margin-left:$margin;
+            margin-top:$size * -1;
+            border-top:$size solid transparent;
+            border-bottom:$size solid transparent;
             border-left: $size solid $color;
-            border-left-color: inherit;
         } @else if $direction == "down" {
             top: 100%;
             left: $center;
@@ -348,25 +352,14 @@ $end-percent: 100%) {
             border-left: $size solid transparent;
             border-right: $size solid transparent;
             border-top: $size solid $color;
-            border-top-color: inherit;
-        } @else if $direction == "left" {
-            top: $center;
-            right: 100%;
-            margin-right: $margin;
-            margin-top: $size * -1;
-            border-top: $size solid transparent;
-            border-bottom: $size solid transparent; 
-            border-right:$size solid $color;
-            border-right-color: inherit;
-        } @else {
-            bottom: 100%;
-            left: $center;
-            margin-bottom: $margin;
-            margin-left: $size * -1;
-            border-left: $size solid transparent;
-            border-right: $size solid transparent;
-            border-bottom: $size solid $color;
-            border-bottom-color: inherit;
+        } @else if $direction =="left"{
+            right:100%;
+            top:$center;
+            margin-right:$margin;
+            margin-top:$size * -1;
+            border-top:$size solid transparent;
+            border-bottom:$size solid transparent;
+            border-right: $size solid $color;
         }
     }
 }
@@ -451,3 +444,116 @@ h1 {
 .div-arrow-left{
     @include arrow($width:10px,$color:#00f,$deg:225deg);
 }
+/* new arrow */
+@mixin arrow_helper($arrowSize, $arrowColor, $margin, $side, $align) {
+    @if $side == "top" {
+      border-bottom-color: $arrowColor;
+      top: -2 * $arrowSize;
+    }
+    @if $side == "bottom" {
+      border-top-color: $arrowColor;
+      bottom: -2 * $arrowSize;
+    }
+    @if $side == "left" {
+      border-right-color: $arrowColor;
+      left: -2 * $arrowSize;
+    }
+    @if $side == "right" {
+      border-left-color: $arrowColor;
+      right: -2 * $arrowSize;
+    }
+    @if $side == "right" or $side == "left" {
+      @if $align == "center" {
+        top: 50%;
+        margin-top: -$arrowSize;
+      }
+      @else if $align == "top" {
+        top: $margin;
+      }
+      @else if $align == "bottom" {
+        bottom: $margin;
+      }
+    }
+    @if $side == "bottom" or $side == "top" {
+      @if $align == "center" {
+        right: 50%;
+        margin-right: -$arrowSize;
+      }
+      @else if $align == "left" {
+        left: $margin;
+      }
+      @else if $align == "right" {
+        right: $margin;
+      }
+    }
+  }
+  
+  @mixin arrow($side: "right", $align: "center", $size: 20px, $color: #f6f6f6, $borderColor: "none", $borderSize: 3px) {
+    $selector: "&:after, &:before";
+    @if $borderColor == "none" {
+      $selector: "&:after";
+    }
+    #{$selector} {
+      border: solid transparent;
+      content: " ";
+      height: 0;
+      width: 0;
+      position: absolute;
+      pointer-events: none;
+      visibility: visible;
+    }
+    
+    &:after {
+      border-width: $size;
+      @include arrow_helper($size, $color, $size, $side, $align);
+    }
+    
+    @if $borderColor != "none" {
+      &:before {
+        border-width: $borderSize + $size;
+        @include arrow_helper($size + $borderSize, $borderColor, $size - $borderSize, $side, $align);
+      }
+    }
+  }
+  .box-with-border, .box {
+    width: 28%;
+    height: 100px;
+    background: #4fade3;
+    margin: 24px;
+    display: inline-block;
+    position: relative;
+  }
+  .box-with-border {
+    border: 4px solid #4fade3;
+    background: #eee;
+  }
+  .box {
+    &.arrow-top-left {@include arrow('top','left', 10px, #4fade3)}
+    &.arrow-top-right {@include arrow('top','right', 10px, #4fade3)}
+    &.arrow-top-center {@include arrow('top','center', 10px, #4fade3)}
+    &.arrow-bottom-left {@include arrow('bottom','left', 10px, #4fade3)}
+    &.arrow-bottom-right {@include arrow('bottom','right', 10px, #4fade3)}
+    &.arrow-bottom-center {@include arrow('bottom','center', 10px, #4fade3)}
+    &.arrow-left-top {@include arrow('left','top', 10px, #4fade3)}
+    &.arrow-left-center {@include arrow('left','center', 10px, #4fade3)}
+    &.arrow-left-bottom {@include arrow('left','bottom', 10px, #4fade3)}
+    &.arrow-right-top {@include arrow('right','top', 10px, #4fade3)}
+    &.arrow-right-center {@include arrow('right','center', 10px, #4fade3)}
+    &.arrow-right-bottom {@include arrow('right','bottom', 10px, #4fade3)}
+  }
+  
+  
+  .box-with-border {
+    &.arrow-top-left {@include arrow('top','left', 10px, #eee, #4fade3, 6px)}
+    &.arrow-top-right {@include arrow('top','right', 10px, #eee, #4fade3, 6px)}
+    &.arrow-top-center {@include arrow('top','center', 10px, #eee, #4fade3, 6px)}
+    &.arrow-bottom-left {@include arrow('bottom','left', 10px, #eee, #4fade3, 6px)}
+    &.arrow-bottom-right {@include arrow('bottom','right', 10px, #eee, #4fade3, 6px)}
+    &.arrow-bottom-center {@include arrow('bottom','center', 10px, #eee, #4fade3, 6px)}
+    &.arrow-left-top {@include arrow('left','top', 10px, #eee, #4fade3, 6px)}
+    &.arrow-left-center {@include arrow('left','center', 10px, #eee, #4fade3, 6px)}
+    &.arrow-left-bottom {@include arrow('left','bottom', 10px, #eee, #4fade3, 6px)}
+    &.arrow-right-top {@include arrow('right','top', 10px, #eee, #4fade3, 6px)}
+    &.arrow-right-center {@include arrow('right','center', 10px, #eee, #4fade3, 6px)}
+    &.arrow-right-bottom {@include arrow('right','bottom', 10px, #eee, #4fade3, 6px)}
+  }

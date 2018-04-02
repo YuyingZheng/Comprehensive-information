@@ -1,4 +1,7 @@
 body {
-    -webkit-box-sizing: 0 0 1px blue;
+    
     box-sizing: 0 0 1px blue;
+}
+bodt{
+    opacity: .5;
 }
