@@ -1,22 +1,24 @@
 // @font-face
 $fonts-path: '../assets/fonts';
 @mixin fontface($fontfamily, $filename, $fontweight: normal, $fontstyle: normal) {
-    font-family: $fontfamily;
-    src: url('#{$fonts-path}/#{$filename}.eot');
-    src: url('#{$fonts-path}/#{$filename}.eot?#iefix') format('embedded-opentype'),
-    url('#{$fonts-path}/#{$filename}.woff2') format('woff2'),
-    url('#{$fonts-path}/#{$filename}.woff') format('woff'),
-    url('#{$fonts-path}/#{$filename}.ttf') format('truetype'),
-    url('#{$fonts-path}/#{$filename}.svg#{$filename}') format('svg');
-    font-weight: $fontweight;
-    font-style: $fontstyle;
+    @font-face {
+        font-family: $fontfamily;
+        src: url('#{$fonts-path}/#{$filename}.eot');
+        src: url('#{$fonts-path}/#{$filename}.eot?#iefix') format('embedded-opentype'),
+        url('#{$fonts-path}/#{$filename}.woff2') format('woff2'),
+        url('#{$fonts-path}/#{$filename}.woff') format('woff'),
+        url('#{$fonts-path}/#{$filename}.ttf') format('truetype'),
+        url('#{$fonts-path}/#{$filename}.svg#{$filename}') format('svg');
+        font-weight: $fontweight;
+        font-style: $fontstyle;
+    }
 }
 
 //clearfix
 @mixin clearfix {
     &:before,
     &:after {
-        content: " ";
+        content: "";
         display: table;
     }
     &:after {
@@ -65,9 +67,18 @@ $fonts-path: '../assets/fonts';
     $opacity-ie: $opacity*100;
     filter: alpha(opacity=$opacity-ie);
 }
+
+//text-hide
+@mixin text-hide {
+    font: 0/0 a;
+    color: transparent;
+    text-shadow: none;
+    background-color: transparent;
+    border: 0;
+}
+
 //text-overflow
-@mixin text-overflow($display:block) {
-    display: $display;
+@mixin text-ellipsis {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -94,8 +105,21 @@ $fonts-path: '../assets/fonts';
     border-top-left-radius: $radius;
 }
 
+//list-rest
+@mixin list-unstyle{
+    list-style-type: none;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-left: 0;
+}
+
 //triangle arrow
-@mixin triangleArrow($direction:"down",$size:10px,$color:#fff,$center:50%,$margin:-1px,$pseudo: after) {
+@mixin triangleArrow($direction:"down",
+$size:10px,
+$color:#fff,
+$center:50%,
+$margin:-1px,
+$pseudo: after) {
     position: relative;
     &:#{$pseudo} {
         position: absolute;

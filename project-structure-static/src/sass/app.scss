@@ -1,6 +1,17 @@
-@import 'base/*.scss';
-@import 'components/*.scss';
-@import 'vendors/*.scss';
-
-@import 'widgets/*.scss';
-
+// variables and mixins
+@import "utilities/variables";
+@import "utilities/function";
+@import "utilities/mixins";
+// Reset
+@import "utilities/normalize";
+//help
+@import "utilities/utilities";
+//fonts
+@import "utilities/fonts";
+//layout
+@import "layout/bootstrap-grid";
+@import "layout/page-layout";
+// components
+@import "components/*";
+//pages 
+@import "pages/*";

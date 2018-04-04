@@ -40,8 +40,8 @@ gulp.task('help', taskListing);
 //                                            Clean Task
 //========================================================================================================//
 
-//var cleanFolder = ['../dist/{css,views,js,pages,assets}/', '../dist/*.html'];
-var cleanFolder = ['../dist/'];
+//var cleanFolder = ['./dist/{css,views,js,pages,assets}/', './dist/*.html'];
+var cleanFolder = ['./dist/'];
 
 gulp.task('clean', function() {
     return gulp.src(cleanFolder, { read: false })
@@ -52,11 +52,11 @@ gulp.task('clean', function() {
 //                                            Html Task
 //========================================================================================================//
 
-var incHtmlSrc = '../src/views/**/*.shtml',
-    incHtmlDest = '../dist/views/',
-    pageHtmlSrc = '../src/*.shtml',
-    pageHtmlDest = '../dist/pages/',
-    buildPageDest = '../dist/';
+var incHtmlSrc = './src/views/**/*.shtml',
+    incHtmlDest = './dist/views/',
+    pageHtmlSrc = './src/*.shtml',
+    pageHtmlDest = './dist/pages/',
+    buildPageDest = './dist/';
 
 gulp.task('copy-html',function(){
     var copyIncHtml = gulp.src(incHtmlSrc)
@@ -70,7 +70,7 @@ gulp.task('copy-html',function(){
     return merge(copyIncHtml,copyPageHtml);
 });
 
-gulp.task('bulid-html',function(){
+/* gulp.task('bulid-html',function(){
     return gulp.src(pageHtmlSrc)
         .pipe(fileinclude({
             prefix: '@@',
@@ -81,10 +81,10 @@ gulp.task('bulid-html',function(){
             extname: '.html'
         }))
         .pipe(gulp.dest(buildPageDest));
-})  
+})   */
 
 gulp.task('html', function(cb) {
-    sequence('copy-html', 'bulid-html')(cb)
+    sequence('copy-html')(cb)
 });
 
 //========================================================================================================//
@@ -104,9 +104,9 @@ gulp.task('html', function(cb) {
     @import "some/path/file2.scss"; 
 */
 
-var cssSrc='../src/sass/app.scss',
-    cssDest='../dist/assets/css',
-    appCssDest="../dist/assets/css/app.css";
+var cssSrc='./src/sass/app.scss',
+    cssDest='./dist/assets/css',
+    appCssDest='./dist/assets/css/app.css';
 
 gulp.task('css-compile',function(){
     return gulp.src(cssSrc)
@@ -148,9 +148,9 @@ gulp.task('css', function(cb) {
 //                                            Scripts Task
 //========================================================================================================//
 
-var jsVendorSrc='../src/js/*/*.js'
-    jsSrc='../src/js/*.js',
-    jsDest='../dist/assets/js/';
+var jsVendorSrc='./src/js/*/*.js'
+    jsSrc='./src/js/*.js',
+    jsDest='./dist/assets/js/';
 
 
 gulp.task('script',function(){
@@ -193,10 +193,10 @@ new options:
 …
 */
 
-var imgSrc = '../src/assets/images/**/*.{png,jpg,gif,svg}',
-    imgDest = '../dist/assets/images/',
-    uploadImgSrc = '../src/assets/uploads/**/*.{png,jpg,gif,svg}',
-    uploadImgDest = '../dist/assets/uploads/'
+var imgSrc = './src/assets/images/**/*.{png,jpg,gif,svg}',
+    imgDest = './dist/assets/images/',
+    uploadImgSrc = './src/assets/uploads/**/*.{png,jpg,gif,svg}',
+    uploadImgDest = './dist/assets/uploads/'
 gulp.task('imgmin', function () {
     var imagesFolder = gulp.src(imgSrc)
         .pipe(newer(imgDest))
@@ -222,8 +222,8 @@ gulp.task('imgmin', function () {
 //fetches external SVGs referenced in "<use>" elements.
 //Add the code to the bottom of <body> , <script defer src="js/vendors/svgxuse.min.js"></script>
 
-var iconSrc = '../src/assets/icons/*.svg',
-    iconDest = '../dist/assets/icons/';
+var iconSrc = './src/assets/icons/*.svg',
+    iconDest = './dist/assets/icons/';
 
 gulp.task('svgicon', function() {
     return gulp.src(iconSrc)
@@ -240,10 +240,10 @@ gulp.task('svgicon', function() {
 //                                            Copy font and upload file(ex img) Task
 //========================================================================================================//
 
-var fontSrc='../src/assets/fonts/**',
-    fontDest='../dist/assets/fonts/',
-    uploadOtherSrc = ['../src/assets/uploads/**/*','!../src/assets/uploads/**/*.{png,jpg,gif,svg}'],
-    uploadOtherDest = '../dist/assets/uploads/'
+var fontSrc='./src/assets/fonts/**',
+    fontDest='./dist/assets/fonts/',
+    uploadOtherSrc = ['./src/assets/uploads/**/*','!./src/assets/uploads/**/*.{png,jpg,gif,svg}'],
+    uploadOtherDest = './dist/assets/uploads/'
 
 gulp.task('copyfiles', function () {
     var uploadsFolder = gulp.src(uploadOtherSrc)
@@ -269,18 +269,18 @@ gulp.task('build', function(cb) {
 //                                            Watch task
 //========================================================================================================//
 
-var watchHtml = ['../src/*.shtml', '../src/views/**/*.shtml'],
-    watchCss = '../src/sass/**/*.scss',
-    watchJs = '../src/js/**/*.js',
-    watchImg = ['../src/assets/images/**/*.{png,jpg,gif,svg}', '../src/assets/uploads/**/*.{png,jpg,gif,svg}'],
-    watchIcon = '../src/assets/icons/*.svg',
-    watchFontAndOtherUpLoad = ['../src/assets/fonts/**/*','../src/assets/uploads/**/*','!../src/assets/uploads/**/*.{png,jpg,gif,svg}']
-    serverFolders = '../dist/**/*';
+var watchHtml = ['./src/*.shtml', './src/views/**/*.shtml'],
+    watchCss = './src/sass/**/*.scss',
+    watchJs = './src/js/**/*.js',
+    watchImg = ['./src/assets/images/**/*.{png,jpg,gif,svg}', './src/assets/uploads/**/*.{png,jpg,gif,svg}'],
+    watchIcon = './src/assets/icons/*.svg',
+    watchFontAndOtherUpLoad = ['./src/assets/fonts/**/*','./src/assets/uploads/**/*','!./src/assets/uploads/**/*.{png,jpg,gif,svg}']
+    serverFolders = './dist/**/*';
 
 gulp.task('watch',function(){
     
     browserSync.init({
-        server: '../dist/',
+        server: './dist/',
         notify: false,
         port:2017
     }); 
