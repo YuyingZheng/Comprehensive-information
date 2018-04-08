@@ -332,6 +332,11 @@ template{
 	display: none;
 }
 
+html{
+	font-family: sans-serif;
+	font-size: 625%;
+}
+
 /* clearfix */
 .clearfix:before,
 .clearfix:after{
@@ -424,6 +429,7 @@ template{
 	text-transform: uppercase !important;
 }
 
+/* text-align */
 .text-left{
 	text-align: left !important;
 }

@@ -1,9 +1,11 @@
-// variables and mixins
+//variables and mixins
 @import "utilities/variables";
 @import "utilities/function";
 @import "utilities/mixins";
-// Reset
+//Reset
 @import "utilities/normalize";
+//base 
+@import "utilities/base";
 //help
 @import "utilities/utilities";
 //fonts
@@ -11,7 +13,9 @@
 //layout
 @import "layout/bootstrap-grid";
 @import "layout/page-layout";
-// components
+//components
 @import "components/*";
+//vendors
+@import 'vendors/*';
 //pages 
 @import "pages/*";

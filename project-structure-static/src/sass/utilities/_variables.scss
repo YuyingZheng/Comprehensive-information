@@ -62,18 +62,12 @@ $grid-breakpoints: (
   xl: 1200px
 ) !default;
 
-//============================================//	
-//
-// Managing responsive breakpoints
-//
-//********************************************//
-
+// responsive breakpoint
 $breakpoints: ( 
-	'mobile': '(max-width: 767px)', 
-	'tablet': '(min-width: 768px)',
-	'desktop': '(min-width: 1024px)',
-	'large': '(min-width: 1200px)',
-	'xlarge': '(min-width: 1440px)',
-	'onlyTablet': '(min-width: 768px) and (max-width: 1023px)',
-	'noDesktop': '(max-width: 1023px)',
-);
+	mobile: '(max-width: 767px)', 
+	tablet: '(min-width: 768px)',
+	desktop: '(min-width: 1024px)',
+	xlarge: '(min-width: 1200px)',
+	onlyTablet: '(min-width: 768px) and (max-width: 1023px)',
+	noDesktop: '(max-width: 1023px)'
+) !default;
