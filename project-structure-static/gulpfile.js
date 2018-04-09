@@ -52,26 +52,25 @@ gulp.task('clean', function() {
 //                                            Html Task
 //========================================================================================================//
 
-var incHtmlSrc = './src/views/*/*.{html,shtml}',
-    incHtmlDest = './dist/views/',
-    pageHtmlSrc = './src/views/*.{html,shtml}',
-    pageHtmlDest = './dist/views/pages/',
-    buildPageDest = './dist/views';
+var originalHtmlSrc = './src/views/*/*.{html,shtml}',
+    originalHtmlDest = './dist/views/',
+    originalPageSrc = './src/views/pages/*.{html,shtml}',
+    buildPageDest = './dist/views/';
 
 gulp.task('copy-html',function(){
-    var copyIncHtml = gulp.src(incHtmlSrc)
-        .pipe(newer(incHtmlDest))
-        .pipe(gulp.dest(incHtmlDest));
+    return gulp.src(originalHtmlSrc)
+        .pipe(newer(originalHtmlDest))
+        .pipe(gulp.dest(originalHtmlDest));
 
-    var copyPageHtml = gulp.src(pageHtmlSrc)
-        .pipe(newer(pageHtmlDest))
-        .pipe(gulp.dest(pageHtmlDest));
+    // var copyPageHtml = gulp.src(pageHtmlSrc)
+    //     .pipe(newer(pageHtmlDest))
+    //     .pipe(gulp.dest(pageHtmlDest));
 
-    return merge(copyIncHtml,copyPageHtml);
+    // return merge(copyIncHtml,copyPageHtml);
 });
 
 gulp.task('bulid-html',function(){
-    return gulp.src(pageHtmlSrc)
+    return gulp.src(originalPageSrc)
         .pipe(fileinclude({
             prefix: '@@',
             basepath: '@file'
