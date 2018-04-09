@@ -52,11 +52,11 @@ gulp.task('clean', function() {
 //                                            Html Task
 //========================================================================================================//
 
-var incHtmlSrc = './src/views/**/*.shtml',
+var incHtmlSrc = './src/views/*/*.{html,shtml}',
     incHtmlDest = './dist/views/',
-    pageHtmlSrc = './src/*.shtml',
-    pageHtmlDest = './dist/pages/',
-    buildPageDest = './dist/';
+    pageHtmlSrc = './src/views/*.{html,shtml}',
+    pageHtmlDest = './dist/views/pages/',
+    buildPageDest = './dist/views';
 
 gulp.task('copy-html',function(){
     var copyIncHtml = gulp.src(incHtmlSrc)
@@ -70,7 +70,7 @@ gulp.task('copy-html',function(){
     return merge(copyIncHtml,copyPageHtml);
 });
 
-/* gulp.task('bulid-html',function(){
+gulp.task('bulid-html',function(){
     return gulp.src(pageHtmlSrc)
         .pipe(fileinclude({
             prefix: '@@',
@@ -81,22 +81,16 @@ gulp.task('copy-html',function(){
             extname: '.html'
         }))
         .pipe(gulp.dest(buildPageDest));
-})   */
+}) 
 
 gulp.task('html', function(cb) {
-    sequence('copy-html')(cb)
+    sequence('copy-html','bulid-html')(cb)
 });
 
 //========================================================================================================//
 //                                            Css Task
 //========================================================================================================//
 /* 
-    *Note*
-    The css-comb plugin will make @font-face{src: url...; src: url...,url...,url...,..;} the 2 kind of "src"
-    in reverse order resulting in "@font-face" will be not working.
-    So you had better write them in reverse order in the '_02_fonts.scss' file before, then the css-comb plugin 
-    will make them in reverse order again. At last, we get the correct order.
-
     gulp-sass-bulk-import:gulp task to allow importing directories in your SCSS
     @import "some/path/*";
     becomes 
@@ -269,7 +263,7 @@ gulp.task('build', function(cb) {
 //                                            Watch task
 //========================================================================================================//
 
-var watchHtml = ['./src/*.shtml', './src/views/**/*.shtml'],
+var watchHtml = ['./src/*.{html,shtml}', './src/views/**/*.{html,shtml}'],
     watchCss = './src/sass/**/*.scss',
     watchJs = './src/js/**/*.js',
     watchImg = ['./src/assets/images/**/*.{png,jpg,gif,svg}', './src/assets/uploads/**/*.{png,jpg,gif,svg}'],
@@ -280,7 +274,10 @@ var watchHtml = ['./src/*.shtml', './src/views/**/*.shtml'],
 gulp.task('watch',function(){
     
     browserSync.init({
-        server: './dist/',
+        server: {
+            baseDir:'./dist',
+            index:'views/index.html'
+        },
         notify: false,
         port:2017
     }); 
@@ -288,7 +285,7 @@ gulp.task('watch',function(){
     gulp.watch(watchHtml,['html']);
     gulp.watch(watchCss,['css']);
     gulp.watch(watchJs,['script']);
-    gulp.watch(watchImg,['imgming']);
+    gulp.watch(watchImg,['imgmin']);
     gulp.watch(watchIcon,['svgicon']);
     gulp.watch(watchFontAndOtherUpLoad,['copyfiles']);
     gulp.watch(serverFolders).on('change',browserSync.reload);

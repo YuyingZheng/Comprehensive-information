@@ -333,8 +333,13 @@ template{
 }
 
 html{
-	font-family: sans-serif;
 	font-size: 625%;
+}
+
+body{
+	font: .16rem/1.15 "Roboto";
+	color: #545454;
+	background: #fff;
 }
 
 /* clearfix */
@@ -405,7 +410,7 @@ html{
 }
 
 .font-weight-semibold{
-	font-weight: 500 !important;
+	font-weight: 600 !important;
 }
 
 .font-weight-bold{
@@ -624,12 +629,12 @@ html{
 }
 
 @font-face{
-	font-family: "testfont";
+	font-family: "dancingScript";
 	font-style: normal;
 	font-weight: normal;
 
-	src: url("../assets/fonts/testfont.eot?#iefix") format("embedded-opentype"), url("../assets/fonts/testfont.woff2") format("woff2"), url("../assets/fonts/testfont.woff") format("woff"), url("../assets/fonts/testfont.ttf") format("truetype"), url("../assets/fonts/testfont.svgtestfont") format("svg");
-	src: url("../assets/fonts/testfont.eot");
+	src: url("../fonts/dancingscript-regular-webfont.eot");
+	src: url("../fonts/dancingscript-regular-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/dancingscript-regular-webfont.woff2") format("woff2"), url("../fonts/dancingscript-regular-webfont.woff") format("woff"), url("../fonts/dancingscript-regular-webfont.ttf") format("truetype"), url("../fonts/dancingscript-regular-webfont.svgdancingscript-regular-webfont") format("svg");
 }
 
 /*!

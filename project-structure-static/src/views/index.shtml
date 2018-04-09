@@ -1,0 +1,13 @@
+@@include('layouts/head.shtml');
+<body>
+    @@include('layouts/header.shtml');
+    <main class="main">
+        <div class="container">
+            @@include('components/component-1.shtml');
+        </div>
+    </main>
+    @@include('layouts/footer.shtml');
+    @@include('layouts/foot.shtml')
+</body>
+
+</html>

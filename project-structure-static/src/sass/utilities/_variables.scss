@@ -10,19 +10,6 @@ $gray:#545454 !default;
 $light-gray:#BEBEBE !default;
 $green:#ADCA28 !default;
 
-// Html
-//
-// font-size:625% => 1rem = 100px
-$px-to-rem: (100px / 16px) * 100%;
-$base-font-size: .16rem;
-
-// Body
-//
-// Settings for the `<body>` element.
-
-$body-bg : $white !default;
-$body-color : $gray !default;
-
 // Grid columns
 //
 // Set the number of columns and specify the width of the gutters.

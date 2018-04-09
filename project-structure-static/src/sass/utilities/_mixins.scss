@@ -1,14 +1,14 @@
 // @font-face
-$fonts-path: '../assets/fonts';
+$fonts-path: '../fonts';
 @mixin fontface($fontfamily, $filename, $fontweight: normal, $fontstyle: normal) {
     @font-face {
         font-family: $fontfamily;
-        src: url('#{$fonts-path}/#{$filename}.eot');
         src: url('#{$fonts-path}/#{$filename}.eot?#iefix') format('embedded-opentype'),
         url('#{$fonts-path}/#{$filename}.woff2') format('woff2'),
         url('#{$fonts-path}/#{$filename}.woff') format('woff'),
         url('#{$fonts-path}/#{$filename}.ttf') format('truetype'),
         url('#{$fonts-path}/#{$filename}.svg#{$filename}') format('svg');
+        src: url('#{$fonts-path}/#{$filename}.eot');
         font-weight: $fontweight;
         font-style: $fontstyle;
     }

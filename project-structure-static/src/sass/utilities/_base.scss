@@ -1,0 +1,22 @@
+// Html
+//
+// font-size:625% => 1rem = 100px
+$font-size-root: (100px / 16px) * 100%;
+$font-size-base: .16rem !default;
+$line-height-base: 1.15 !default; 
+$font-family-base:  "Roboto";
+// Body
+//
+// Settings for the `<body>` element.
+
+$body-bg : $white !default;
+$body-color : $gray !default;
+
+html{
+    font-size: $font-size-root;
+}
+body{
+    font: #{$font-size-base}/#{$line-height-base} $font-family-base;
+    background: $body-bg;
+    color: $gray;
+}
