@@ -195,33 +195,31 @@ sass3.3.0中新增的功能，用来跳出选择器嵌套的。默认所有的�
 
 /* @at-root (without: ...)
 all（表示所有），rule（表示常规css），media（表示media  跳出meadia 父级），support */
-@media screen{
-	.parent1{
-		color:#f00;
-	}
-	.child1{
-		width:200px;
-	}
+/* @media screen {
+    .parent1 {
+        color: #f00;
+        @at-root .child1 {
+            width: 200px;
+        }
+    }
 }
-
-@media screen{
-	.parent1{
-		color:#f00;
-	}
+@media screen {
+    .parent1 {
+        color: #f00;
+        @at-root(without: media) .child1 {
+            width: 200px;
+        }
+    }
 }
-.child1{
-	width:200px;
+@media screen {
+    .parent3 {
+        color: #f00;
+        @at-root(without: all) .child3 {
+            width: 200px;
+        }
+    }
 }
-
-@media screen{
-	.parent3{
-		color:#f00;
-	}
-}
-.child3{
-	width:200px;
-}
-
+ */
 /* 运算*/
 /* 在纯 CSS 中使用变量和 /， 你可以包住变量 */
 p{

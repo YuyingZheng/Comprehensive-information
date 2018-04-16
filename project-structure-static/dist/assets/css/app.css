@@ -2882,6 +2882,16 @@ html{
 	border-radius: .5rem;
 }
 
+.btn.blue{
+	background: blue;
+}
+
+.btn-wrapper{
+	display: block;
+	font-size: 20px;
+	text-align: center !important;
+}
+
 .icon{
 	display: inline-block;
 	width: .32rem;

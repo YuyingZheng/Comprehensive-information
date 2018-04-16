@@ -1,0 +1,747 @@
+@charset "UTF-8";
+/*!　
+标准的CSS注释 /* comment  ，会保留到编译后的文件。
+
+单行注释 // comment，只保留在SASS源文件中，编译后被省略。
+
+在/*后面加一个感叹号，表示这是"重要注释"。即使是压缩模式编译，也会保留这行注释，通常可以用于声明版权信息。
+重要注释！*/
+/******1、
+嵌套
+*******/
+/* line 14, ../sass/grammar.scss */
+#main p {
+  color: #00ff00;
+  width: 97%;
+}
+/* line 17, ../sass/grammar.scss */
+#main p .redbox {
+  background-color: #ff0000;
+  color: #000000;
+  height: 20px;
+  position: relative;
+  -webkit-box-shadow: 1px 2px #cccccc;
+  box-shadow: 1px 2px #cccccc;
+  -webkit-transform: translate(50px, 100px);
+  transform: translate(50px, 100px);
+}
+
+/*******
+ &表示父元素选择器
+*******/
+/* line 33, ../sass/grammar.scss */
+#mian {
+  color: red;
+}
+/* line 35, ../sass/grammar.scss */
+#mian a {
+  font-weight: bold;
+  text-decoration: none;
+}
+/* line 38, ../sass/grammar.scss */
+#mian a:hover {
+  text-decoration: underline;
+}
+/* line 41, ../sass/grammar.scss */
+body.firefox #mian a {
+  font-weight: normal;
+}
+
+/* 嵌套属性 （没啥用）*/
+/* line 49, ../sass/grammar.scss */
+.fakeshadow {
+  border-style: solid;
+  border-left-width: 4px;
+  border-left-color: #888;
+  border-right-width: 2px;
+  border-right-color: #ccc;
+}
+
+/* line 62, ../sass/grammar.scss */
+.funky {
+  font-family: fantasy;
+  font-size: 30em;
+  font-weight: bold;
+}
+
+/* line 69, ../sass/grammar.scss */
+.funky {
+  font: 2px/3px;
+  font-family: fantasy;
+  font-size: 30em;
+  font-weight: bold;
+}
+
+/* Variables-变量 { !default 默认变量 }
+设置默认值，默认变量的价值在进行组件化开发的时候会非常有用。
+*/
+/* line 81, ../sass/grammar.scss */
+div.default {
+  width: 200px;
+}
+
+/* line 85, ../sass/grammar.scss */
+div.no-default {
+  width: 300px;
+}
+
+/* 变量的值如果是 null 的话，会被 !default 当做没有值： */
+/* line 92, ../sass/grammar.scss */
+#main {
+  content: "Non-null content";
+}
+
+/* 特殊变量 作为属性或者值一部分使用 /#/{/$variables/}形式使用*/
+/* 应用于class和属性 */
+/* line 104, ../sass/grammar.scss */
+.border-top {
+  border-top: 1px solid #ccc;
+}
+
+/* 应用于复杂的属性值 */
+/* line 110, ../sass/grammar.scss */
+.body {
+  font: 12px/1.5;
+}
+
+/* 多值变量 多值变量分为list类型和map类型，简单来说list类型有点像js中的数组，而map类型有点像js中的对象。*/
+/*list类型 
+list数据可通过空格，逗号或小括号分隔多个值，可用nth($var,$index)取值
+*/
+/* line 126, ../sass/grammar.scss */
+div {
+  padding: 10px 9px 8px 7px;
+  padding: 8px;
+  margin: 5px 10px, 0 auto;
+  margin: 0 auto;
+  margin: 5px 10px 0 auto;
+  margin: 5px 10px;
+}
+
+/* map类型 
+map数据以key和value成对出现，其中value又可以是list。
+格式为：$map: (key1: value1, key2: value2, key3: value3);。可通过map-get($map,$key)取值。map-merge函数用于map和新加的键值融合
+*/
+/* line 141, ../sass/grammar.scss */
+.twitter {
+  background-color: #55acee;
+}
+
+/* line 144, ../sass/grammar.scss */
+.facebook {
+  background-color: #3b5998;
+}
+
+/* line 149, ../sass/grammar.scss */
+h1 {
+  font-size: 2em;
+}
+
+/* line 149, ../sass/grammar.scss */
+h2 {
+  font-size: 1.5em;
+}
+
+/* line 149, ../sass/grammar.scss */
+h3 {
+  font-size: 1.2em;
+}
+
+/* line 154, ../sass/grammar.scss */
+.dribble {
+  color: #ea4c89;
+}
+
+/* line 154, ../sass/grammar.scss */
+.facebook {
+  color: #3b5998;
+}
+
+/* line 154, ../sass/grammar.scss */
+.Github {
+  color: #171515;
+}
+
+/* line 154, ../sass/grammar.scss */
+.google {
+  color: #db4437;
+}
+
+/* line 154, ../sass/grammar.scss */
+.twitter {
+  color: #55acee;
+}
+
+/* 全局变量 !global
+1、目前变量机制
+在选择器中声明的变量会覆盖外面全局声明的变量。(测试结果不会覆盖 只有加了关键字!global)
+*/
+/* line 166, ../sass/grammar.scss */
+.body {
+  font-size: 14px;
+  color: #fff;
+}
+
+/* line 172, ../sass/grammar.scss */
+p {
+  font-size: 12px;
+  color: #fff;
+}
+
+/* line 177, ../sass/grammar.scss */
+.body {
+  font-size: 14px;
+}
+
+/* line 181, ../sass/grammar.scss */
+p {
+  font-size: 12px;
+}
+
+/* @at-root
+sass3.3.0中新增的功能，用来跳出选择器嵌套的。默认所有的嵌套，继承所有上级选择器，
+但有了这个就可以跳出所有上级选择器。
+ */
+/* line 190, ../sass/grammar.scss */
+.at-root {
+  background-color: #666;
+}
+/* line 192, ../sass/grammar.scss */
+.item {
+  color: red;
+}
+
+/* 无意义 */
+/* line 198, ../sass/grammar.scss */
+.content-header {
+  color: red;
+}
+/* line 201, ../sass/grammar.scss */
+.content-content {
+  color: blue;
+}
+
+/* line 206, ../sass/grammar.scss */
+.content-header {
+  color: red;
+}
+
+/* @at-root (without: ...)
+all（表示所有），rule（表示常规css），media（表示media  跳出meadia 父级），support */
+/* @media screen {
+    .parent1 {
+        color: #f00;
+        @at-root .child1 {
+            width: 200px;
+        }
+    }
+}
+@media screen {
+    .parent1 {
+        color: #f00;
+        @at-root(without: media) .child1 {
+            width: 200px;
+        }
+    }
+}
+@media screen {
+    .parent3 {
+        color: #f00;
+        @at-root(without: all) .child3 {
+            width: 200px;
+        }
+    }
+}
+ */
+/* 运算*/
+/* 在纯 CSS 中使用变量和 /， 你可以包住变量 */
+/* line 242, ../sass/grammar.scss */
+p {
+  font: 12px/30px;
+}
+
+/* line 247, ../sass/grammar.scss */
+p {
+  color: #050709;
+  color: #020406;
+}
+
+/* line 252, ../sass/grammar.scss */
+p {
+  color: rgba(255, 0, 0, 0.8);
+  background-color: rgba(255, 0, 0, 0.2);
+}
+
+/* line 256, ../sass/grammar.scss */
+p:before {
+  content: "Foo Bar";
+  font-family: sans-serif;
+}
+
+/* line 260, ../sass/grammar.scss */
+p:before {
+  content: "I ate 15 pies!";
+}
+
+/*混合(mixin) */
+/* line 270, ../sass/grammar.scss */
+.opacity {
+  opacity: 0.5;
+  filter: alpha(opacity=50);
+  opacity: 0.8;
+  filter: alpha(opacity=80);
+}
+
+/* line 278, ../sass/grammar.scss */
+.transition {
+  -webkit-transition: all 0.4s ease;
+  transition: all 0.4s ease;
+}
+
+/* line 286, ../sass/grammar.scss */
+.imgtext-h li {
+  border-bottom: 1px solid #ccc;
+  padding-top: 200px;
+  padding-bottom: 200px;
+}
+
+/* line 289, ../sass/grammar.scss */
+.imgtext-h-default {
+  border-bottom: 1px dashed #ccc;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+/* line 296, ../sass/grammar.scss */
+.box {
+  border: 1px solid #ccc;
+  -webkit-box-shadow: 0 2px 2px rgba(0, 0, 0, 0.3), 0 3px 3px rgba(0, 0, 0, 0.3), 0 4px 4px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.3), 0 3px 3px rgba(0, 0, 0, 0.3), 0 4px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* content 它可以使@mixin接受一整块样式，接受的样式从@content开始。*/
+@media only screen and (max-width: 480px) {
+  /* line 309, ../sass/grammar.scss */
+  .body {
+    color: red;
+    font-size: 15px;
+  }
+
+  /* line 313, ../sass/grammar.scss */
+  h1 {
+    fontSize: 20px;
+  }
+}
+/* line 318, ../sass/grammar.scss */
+.show-mobile .body {
+  color: blue;
+}
+@media only screen and (max-width: 480px) {
+  /* line 317, ../sass/grammar.scss */
+  .show-mobile {
+    font-size: 20px;
+  }
+  /* line 322, ../sass/grammar.scss */
+  .show-mobile .body {
+    color: red;
+    font-size: 15px;
+  }
+}
+
+@media only screen and (max-width: 780px) {
+  /* line 330, ../sass/grammar.scss */
+  .body {
+    color: red;
+    font-size: 15px;
+  }
+
+  /* line 334, ../sass/grammar.scss */
+  h1 {
+    fontSize: 20px;
+  }
+}
+/* line 339, ../sass/grammar.scss */
+* html {
+  color: red;
+}
+/* line 345, ../sass/grammar.scss */
+* html #logo {
+  background-image: url(/logo.gif);
+}
+
+/* line 355, ../sass/grammar.scss */
+.colors {
+  background-color: red;
+  color: white;
+  border-color: red;
+}
+
+/* 继承 与mixin差别：继承是给继承元素额外添加一完整的样式如xxx{},mixin是讲样式加在里面*/
+/* line 362, ../sass/grammar.scss */
+.border-style, div.border {
+  border: 1px solid #ccc;
+  margin-top: 10px;
+}
+
+/* line 366, ../sass/grammar.scss */
+div.border {
+  border: 1px solid #ccc;
+  margin-top: 9px;
+}
+
+/* line 372, ../sass/grammar.scss */
+.error, .seriousError, .criticalError {
+  border: 1px #f00;
+  background-color: #fdd;
+}
+
+/* line 376, ../sass/grammar.scss */
+.error.intrusion, .intrusion.seriousError, .intrusion.criticalError {
+  background-image: url("/image/hacked.png");
+}
+
+/* line 379, ../sass/grammar.scss */
+.seriousError, .criticalError {
+  border-width: 3px;
+}
+
+/* 多重扩展 (Multiple Extends) */
+/* line 385, ../sass/grammar.scss */
+.error, .seriousError, .criticalError {
+  border: 1px #f00;
+  background-color: #fdd;
+}
+
+/* line 389, ../sass/grammar.scss */
+.attention, .seriousError, .criticalError {
+  font-size: 3em;
+  background-color: #ff0;
+}
+
+/* line 393, ../sass/grammar.scss */
+.seriousError, .criticalError {
+  border-width: 3px;
+}
+
+/* line 398, ../sass/grammar.scss */
+.seriousError, .criticalError {
+  border-width: 3px;
+}
+
+/* 链式扩展（Chaining Extends） */
+/* line 403, ../sass/grammar.scss */
+.error, .seriousError, .criticalError {
+  border: 1px #f00;
+  background-color: #fdd;
+}
+
+/* line 407, ../sass/grammar.scss */
+.seriousError, .criticalError {
+  border-width: 3px;
+}
+
+/* line 411, ../sass/grammar.scss */
+.criticalError {
+  position: fixed;
+  top: 10%;
+  bottom: 10%;
+  left: 10%;
+  right: 10%;
+}
+
+/* 指令中的@extend (@extend in Directives) */
+@media print {
+  /* line 421, ../sass/grammar.scss */
+  .error1, .seriousError1 {
+    border: 1px #f00;
+    background-color: #fdd;
+  }
+
+  /* line 425, ../sass/grammar.scss */
+  .seriousError1 {
+    border-width: 3px;
+  }
+}
+/*  .error2 {
+    border: 1px #f00;
+    background-color: #fdd;
+  }
+@media print {
+  .seriousError2 {
+    @extend .error2;
+    border-width: 3px;
+  }
+}   error*/
+/* 
+**占位符 % */
+/* line 448, ../sass/grammar.scss */
+.clearfix, .global-width-01,
+.global-width-02,
+.global-width-03 {
+  *zoom: 1;
+}
+/* line 450, ../sass/grammar.scss */
+.clearfix:after, .global-width-01:after,
+.global-width-02:after,
+.global-width-03:after, .clearfix:before, .global-width-01:before,
+.global-width-02:before,
+.global-width-03:before {
+  display: table;
+  content: "";
+}
+/* line 455, ../sass/grammar.scss */
+.clearfix:after, .global-width-01:after,
+.global-width-02:after,
+.global-width-03:after {
+  clear: both;
+}
+
+/* line 463, ../sass/grammar.scss */
+.global-width-01,
+.global-width-02,
+.global-width-03 {
+  margin: 0 auto;
+}
+
+/* if语句 */
+/* line 474, ../sass/grammar.scss */
+.ib {
+  display: inline-block;
+  *display: inline;
+  *zoom: 1;
+}
+
+/* line 481, ../sass/grammar.scss */
+p {
+  color: green;
+}
+
+/* 三目 if($condition, $if_true, $if_false)*/
+/* $width=@if(true,1px,2px);
+.ifDiv{width:$width};
+ */
+/*@for through include end*/
+/* line 503, ../sass/grammar.scss */
+.itme-1 {
+  width: 2em;
+}
+
+/* line 503, ../sass/grammar.scss */
+.itme-2 {
+  width: 4em;
+}
+
+/* line 503, ../sass/grammar.scss */
+.itme-3 {
+  width: 6em;
+}
+
+/* to no include end */
+/* line 511, ../sass/grammar.scss */
+.itme-1 {
+  width: 2em;
+}
+
+/* line 511, ../sass/grammar.scss */
+.itme-2 {
+  width: 4em;
+}
+
+/* @each @each $var in <list or map>*/
+/* 一维 */
+/* line 526, ../sass/grammar.scss */
+.cat-icon {
+  background: url("/images/cat.jpg");
+}
+
+/* line 526, ../sass/grammar.scss */
+.dog-icon {
+  background: url("/images/dog.jpg");
+}
+
+/* line 526, ../sass/grammar.scss */
+.pig-icon {
+  background: url("/images/pig.jpg");
+}
+
+/* line 526, ../sass/grammar.scss */
+.chicken-icon {
+  background: url("/images/chicken.jpg");
+}
+
+/* 二维 */
+/* line 545, ../sass/grammar.scss */
+.cat-icon {
+  background-image: url("/images/cat.png");
+  border: 2px solid black;
+  cursor: default;
+}
+
+/* line 545, ../sass/grammar.scss */
+.dog-icon {
+  background-image: url("/images/dog.png");
+  border: 2px solid blue;
+  cursor: pointer;
+}
+
+/* line 545, ../sass/grammar.scss */
+.pig-icon {
+  background-image: url("/images/pig.png");
+  border: 2px solid white;
+  cursor: move;
+}
+
+/*map*/
+/* line 559, ../sass/grammar.scss */
+.cat {
+  width: 20em;
+}
+
+/* line 559, ../sass/grammar.scss */
+.dog {
+  width: 30em;
+}
+
+/* line 559, ../sass/grammar.scss */
+.chicken {
+  width: 25em;
+}
+
+/*Function*/
+/* line 566, ../sass/grammar.scss */
+body {
+  font-size: 62.5%;
+}
+
+/* line 574, ../sass/grammar.scss */
+div {
+  font-size: 10;
+  color: #e6e6e6;
+}
+
+/* line 578, ../sass/grammar.scss */
+.test {
+  font-size: 1rem;
+  color: #b3b3b3;
+  color: #e6e6e6;
+}
+
+/* 字符串函数 */
+/*  unquote($string)：删除字符串中的引号；
+    quote($string)：给字符串添加引号。*/
+/*    数字函数
+    percentage($value)：将一个不带单位的数转换成百分比值；
+    round($value)：将数值四舍五入，转换成一个最接近的整数；
+    ceil($value)：将大于自己的小数转换成下一位整数；
+    floor($value)：将一个数去除他的小数部分；
+    abs($value)：返回一个数的绝对值；
+    min($numbers…)：找出几个数值之间的最小值；
+    max($numbers…)：找出几个数值之间的最大值。
+ */
+/*  List函数
+
+列表函数主要包括一些对列表参数的函数使用，主要包括以下几种：
+
+    length($list)：返回一个列表的长度值；
+    nth($list, $n)：返回一个列表中指定的某个标签值
+    join($list1, $list2, [$separator])：将两个列给连接在一起，变成一个列表；
+    append($list1, $val, [$separator])：将某个值放在列表的最后；
+    zip($lists…)：将几个列表结合成一个多维的列表；
+    index($list, $value)：返回一个值在列表中的位置值。
+ */
+/* pxToRem function */
+/* line 628, ../sass/grammar.scss */
+.html {
+  font-size: 16px;
+  width: 3rem;
+  height: 2rem;
+}
+
+/* pxToRem mixin */
+/* line 640, ../sass/grammar.scss */
+.html2 {
+  font-size: 16px;
+  font-size: 1rem;
+}
+
+/* pxtoem  mixin*/
+/* line 682, ../sass/grammar.scss */
+.emdiv {
+  padding: 0.5em 1em 3em 2em;
+  box-shadow: inset 0em 0em 0em 0.0625em #2a9022, inset 0em 0em 0.1875em #459966;
+  padding: 0.9375em 0.9375em;
+}
+
+/* @warn */
+/* while */
+/* line 694, ../sass/grammar.scss */
+.item-6 {
+  width: 12em;
+}
+
+/* line 694, ../sass/grammar.scss */
+.item-4 {
+  width: 8em;
+}
+
+/* line 694, ../sass/grammar.scss */
+.item-2 {
+  width: 4em;
+}
+
+/* line 705, ../sass/grammar.scss */
+.page-title {
+  font-family: Arial;
+  font-size: 20px;
+  font-weight: bold;
+  color: #ff0000;
+  padding: 4px;
+  margin-top: 10px;
+}
+
+/* line 718, ../sass/grammar.scss */
+.primary {
+  color: #ff0000;
+  background-color: #00ff00;
+  border-color: #0000ff;
+}
+
+/* @content */
+/* line 728, ../sass/grammar.scss */
+* html #logo {
+  background-image: url(/logo.gif);
+}
+/* line 731, ../sass/grammar.scss */
+* html .content-test {
+  height: 20px;
+  width: 20px;
+}
+
+/* -- */
+/* line 743, ../sass/grammar.scss */
+.color {
+  background-color: blue;
+  color: white;
+  border-color: blue;
+}
+
+/* line 752, ../sass/grammar.scss */
+.pop_bg {
+  background: #000;
+  /* The Fallback */
+  background: rgba(0, 0, 0, 0.3);
+}
+
+/* line 766, ../sass/grammar.scss */
+.pop_up {
+  position: relative;
+}
+/* line 757, ../sass/grammar.scss */
+.pop_up:before {
+  position: absolute;
+  content: "";
+  top: 20px;
+  bottom: 20px;
+  left: 20px;
+  right: 20px;
+}

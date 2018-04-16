@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>SVG Test Demo</title>
+    <script src="picturefill.min.js"></script>
     <style>
         html {
             font-size: 62.5%;
@@ -26,7 +27,7 @@
         .icon {
             display: inline-block;
             width: 3.2rem;
-            height: 3.2rem;
+            height: 3.3rem;
             stroke-width: 0;
             stroke: currentColor;
             fill: currentColor;
@@ -35,6 +36,14 @@
 </head>
 
 <body>
+    <header>
+        <a class="logo">
+            <picture>
+                <source srcset="./image/Roboto.png, ./image/Roboto1.png 2x">
+                <img srcset="./image/Roboto.png" alt="roboto-logo">
+            </picture>
+        </a>
+    </header>
     <ul id="icon-list">
         <li>
             <svg class="icon icon-arrow-right">
@@ -75,6 +84,21 @@
         <li>
             <svg class="icon icon-scroll-top">
                 <use xlink:href="dist/icons.svg#icon-ic_mail"></use>
+            </svg>
+        </li>
+        <li>
+            <svg class="icon icon-favorite">
+                <use xlink:href="dist/icons.svg#icon-favorite"></use>
+            </svg>
+        </li>
+        <li>
+            <svg class="icon icon-cancel">
+                <use xlink:href="dist/icons.svg#icon-cancel"></use>
+            </svg>
+        </li>
+        <li>
+            <svg class="icon icon-Oval">
+                <use xlink:href="dist/icons.svg#icon-Oval"></use>
             </svg>
         </li>
     </ul>

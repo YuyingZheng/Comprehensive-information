@@ -1,0 +1,117 @@
+@charset "UTF-8";
+/* line 1, ../sass/extend.scss */
+.error, .seriousError, .criticalError {
+  border: 1px solid #f00;
+  background-color: #fdd;
+}
+
+/* line 6, ../sass/extend.scss */
+.seriousError, .criticalError {
+  border-width: 3px;
+}
+
+/* line 11, ../sass/extend.scss */
+.error, .seriousError, .criticalError {
+  border: 1px solid #f00;
+  background-color: #fdd;
+}
+
+/* line 16, ../sass/extend.scss */
+.error.intrusion, .intrusion.seriousError, .intrusion.criticalError {
+  background-image: url("/image/hacked.png");
+}
+
+/* line 20, ../sass/extend.scss */
+.seriousError, .criticalError {
+  border-width: 3px;
+}
+
+/* Extending(延伸) Complex Selectors */
+/* line 27, ../sass/extend.scss */
+a:hover, .hoverlink {
+  text-decoration: underline;
+}
+
+/* line 35, ../sass/extend.scss */
+.comment a.user:hover, .comment .user.hoverlink {
+  font-weight: bold;
+}
+
+/* Multiple Extends */
+/* line 40, ../sass/extend.scss */
+.error, .seriousError, .criticalError {
+  border: 1px #f00;
+  background-color: #fdd;
+}
+
+/* line 45, ../sass/extend.scss */
+.attention, .seriousError, .criticalError {
+  font-size: 3em;
+  background-color: #ff0;
+}
+
+/* line 50, ../sass/extend.scss */
+.seriousError, .criticalError {
+  border-width: 3px;
+}
+
+/* Chaining Extends */
+/* line 57, ../sass/extend.scss */
+.error, .seriousError, .criticalError {
+  border: 1px #f00;
+  background-color: #fdd;
+}
+
+/* line 62, ../sass/extend.scss */
+.seriousError, .criticalError {
+  border-width: 3px;
+}
+
+/* line 67, ../sass/extend.scss */
+.criticalError {
+  position: fixed;
+  top: 10%;
+  bottom: 10%;
+  left: 10%;
+  right: 10%;
+}
+
+    /* #admin .tabbar a {
+  font-weight: bold;
+}
+#demo .overview .fakelink {
+  @extend a;
+} */
+/* @extend-Only Selectors  */
+/*% */
+/* line 86, ../sass/extend.scss */
+#context a.notice {
+  color: blue;
+  font-weight: bold;
+  font-size: 2em;
+}
+
+/* media */
+@media print {
+  /* line 98, ../sass/extend.scss */
+  .error1, .seriousError1 {
+    border: 1px #f00;
+    background-color: #fdd;
+  }
+
+  /* line 102, ../sass/extend.scss */
+  .seriousError1 {
+    border-width: 3px;
+  }
+}
+/* .error1 {
+    border: 1px #f00;
+    background-color: #fdd;
+}
+
+@media print {
+    .seriousError1 {
+        @extend .error1;
+        border-width: 3px;
+    }
+} 错误*/

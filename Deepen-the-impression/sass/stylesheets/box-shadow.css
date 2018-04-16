@@ -1,0 +1,25 @@
+@charset "UTF-8";
+/* line 1, ../sass/box-shadow.scss */
+.box-shadow-6 {
+  box-shadow: -10px 0 10px red, 10px 0 10px yellow, 0 -10px 10px blue, 0 10px 10px green;
+  /*底边阴影*/
+}
+
+/* line 9, ../sass/box-shadow.scss */
+.box-shadow-7 {
+  box-shadow: 0 0 10px 5px black, 0 0 10px 20px red;
+}
+
+/* line 13, ../sass/box-shadow.scss */
+.box-shadow-8 {
+  box-shadow: 0 0 10px 20px red, 0 0 10px 5px black;
+}
+
+/* line 22, ../sass/box-shadow.scss */
+.box {
+  border: 1px solid #ccc;
+  -webkit-box-shadow: 0 2px 2px rgba(0, 0, 0, 0.3), 0 3px 3px rgba(0, 0, 0, 0.3), 0 4px 4px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.3), 0 3px 3px rgba(0, 0, 0, 0.3), 0 4px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* c */

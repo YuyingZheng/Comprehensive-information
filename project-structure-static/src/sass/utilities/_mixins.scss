@@ -164,3 +164,77 @@ $pseudo: after) {
         }
     }
 }
+//new arrow
+@mixin arrow_helper($direction, $align, $alignPosition, $arrowSize, $arrowColor) {
+    @if $direction=="top" {
+        border-width: 0 $arrowSize $arrowSize;
+        border-bottom-color: $arrowColor;
+        top: -$arrowSize;
+    }
+    @if $direction=="bottom" {
+        border-width: $arrowSize $arrowSize 0;
+        border-top-color: $arrowColor;
+        bottom: -$arrowSize;
+    }
+    @if $direction=="left" {
+        border-width: $arrowSize $arrowSize $arrowSize 0;
+        border-right-color: $arrowColor;
+        left: -$arrowSize;
+    }
+    @if $direction=="right" {
+        border-width: $arrowSize 0 $arrowSize $arrowSize;
+        border-left-color: $arrowColor;
+        right: -$arrowSize;
+    }
+    @if $direction=="bottom" or $direction=="top" {
+        @if $align=="center" {
+            right: 50%;
+            margin-right: -$arrowSize;
+        }
+        @else if $align=="left" {
+            left: $alignPosition;
+        }
+        @else if $align=="right" {
+            right: $alignPosition;
+        }
+    }
+    @if $direction=="right" or $direction=="left" {
+        @if $align=="center" {
+            top: 50%;
+            margin-top: -$arrowSize;
+        }
+        @else if $align=="top" {
+            top: $alignPosition;
+        }
+        @else if $align=="bottom" {
+            bottom: $alignPosition;
+        }
+    }
+}
+
+@mixin arrow($direction: "top", $align:"center", $alignPosition: 50%, $size: 20px, $color: #f6f6f6, $borderColor: "none", $borderSize: 3px) {
+    $selector: "&:after, &:before";
+    @if $borderColor=="none" {
+        $selector: "&:after";
+    }
+    #{$selector} {
+        content: " ";
+        height: 0;
+        width: 0;
+        border: solid transparent;
+        position: absolute;
+        pointer-events: none;
+        visibility: visible;
+    }
+    &:after {
+        @include arrow_helper($direction, $align, $alignPosition, $size, $color);
+    }
+    @if $borderColor !="none" {
+        @if $alignPosition !=50% {
+            $alignPosition : $alignPosition - $borderSize;
+        }
+        &:before {
+            @include arrow_helper($direction, $align, $alignPosition, $size + $borderSize, $borderColor);
+        }
+    }
+}
