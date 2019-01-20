@@ -1,0 +1,162 @@
+Node.js --> 运行在服务端的JS
+Node.js --> 事件驱动I/O服务端JS环境, 基于Google的V8引擎，V8引擎执行Js速度非常快，性能非常好
+
+ Node.js 应用是由哪几部分组成的：
+ 1.引入required模块
+ 2.创建服务器
+ 3.接收请求与响应请求
+
+
+ npm 随同NodeJs一起安装的包管理工具，能解决NodeJs代码部署上的很多问题：
+ 1.从NPM服务器下载别人编写的第三方包到本地使用 
+ 2.从NPM服务器下载并安装别人编写命令行程序到本地使用
+ 3.将自己编写的包或者命令行程序山传到NPM服务器供别人使用
+
+ 1.2点有什么不同???
+
+
+ Node.js回调函数：
+ Node.js异步编程的直接体现就是回调
+ 回调函数再完成任务后就会被调用，Node所有API都支持回调函数
+
+ Node.js事件循环 ？？？？？
+ Node.js是单进程单线程应用程序，但V8引擎提供的异步执行回调接口，能处理大量的并发==》故性能非常高
+几乎每个API都是支持回调函数
+所有事件机制都是用设计模式中观察者模式实现
+进入一个while(true)的事件循环，直到没有事件观察者退出，每个异步事件都生成一个事件观察者，如果有事件发生就调用该回调函数。
+
+事件驱动程序：
+Node.js 使用事件驱动模型，当web server接收到请求，就把它关闭然后进行处理，然后去服务下一个web请求。
+当这个请求完成，它被放回处理队列，当到达队列开头，这个结果被返回给用户。
+这个模型非常高效可扩展性非常强，因为webserver一直接受请求而不等待任何读写操作。（这也被称之为非阻塞式IO或者事件驱动IO）
+
+
+Node.js Buffer类
+Js语言自身只有字符串数据类型，没有二进制数据类型
+但在处理TCP流或文件流时，必须是用到二进制数据。因此在Node.js中
+定义一个Buffer类，该类用来创建一个专门存放二进制数据的缓冲区
+
+Node.js Stream类
+Stream是一个抽象接口。
+Stream有四种流类型：
+1.Readable-可读操作
+2.Writable-可写操作
+3.Duplex-可读可写操作
+4.Transfor-操作被写入数据，然后读出结果
+
+所有Stream对象都是EventEmitter的实例。常用的事件有：
+data--当有数据可读时触发
+end-没有更多的数据可读时触发
+error-在接收和写入过程中发生错误时触发
+finish-所有数据已被写入到底层系统时触发
+
+管道流
+管道提供了一个输出流到输入流的机制。通常我们用于从一个流中获取数据并将数据传递到另一个流中。
+
+链式流
+链式是通过连接输出流到另一个流并创建多个流操作链的机制。
+链式流一般用于管道操作。
+
+Node.js模块系统
+模块是Node.js应用程序的基本组成部分，文件和模块是一一对应的。
+即一个nodejs文件就是一个模块，这个文件可能是js代码，json或者编译过的C/C++扩展。
+
+Node.js 的 require 方法中的文件查找策略如下：？？？？
+http://www.runoob.com/nodejs/nodejs-module-system.html
+
+
+Node.js函数
+在js中，一个函数可以作为另一个函数的参数。
+Node.js中函数的使用与Js类似
+
+eg: 函数传递让服务器工作
+var http = require("http")
+
+http.createServer(function(request, response){
+    response.writeHead(200，{"Content-Type": "text/plain"});
+    response.write("hello world");
+    response.end();
+}).listen(8888)
+
+Node.js路由
+我们所需要的所有数据都会包含在request对象中，该对象作为onRequest() 回调函数的第一个参数传递。
+为了解析这些数据，我们需要额外的Node.js模块，他们分别是url和qureystring模块
+
+
+Node.js 全局对象
+Js中有一个特殊的对象，称为全局对象。
+浏览器Js中全局对象 --> window
+Node.js中全局对象 --> global
+所有全局变量（除了global对象以外）都是global对象的属性
+
+Global作为全局变量的宿主，全局变量的定义：
+1.在最外层定义的变量
+2.全局对象的属性
+3.隐式定义的变量（未定义直接赋值的变量）
+注意： 永远使用 var 定义变量以避免引入全局变量，因为全局变量会污染 命名空间，提高代码的耦合风险。
+
+__filename 表示当前正在执行的脚本的文件名。它将输出文件所在位置的绝对路径。
+__dirname 表示当前执行脚本所在的目录。
+var t = setTimeout(cb, ms)全局函数在指定的毫秒数ms后执行指定函数cb; setTimeout只执行一次指定函数.
+clearTimeout(t) 全局函数用于停止一个之前通过 setTimeout() 创建的定时器。
+var q = setInterval(cb, ms)全局函数在指定的毫秒数ms后执行指定函数cb
+clearInterval(q)清除定时器
+setInterval() 方法会不停地调用函数，直到 clearInterval() 被调用或窗口被关闭。
+console用于提供控制台标准输出，它是由IE的Js姻亲提供的调试工具，后来逐渐成为浏览器的实施标准
+Node.js 沿用了这个标准，提供了与习惯行为一致的console对象，用于向标准输出流（stdout）或标准错误流（stderr）输出字符。
+console.log()
+console.info() 除了在chrome中只会输出文字外，其余的会显示一个蓝色的惊叹号。
+console.error() 控制台在出现错误时会显示是红色的叉子。
+console.warn() 控制台出现有黄色的惊叹号。
+console.dir()
+console.time(label)
+console.timeEnd(label)
+console.trace(message)
+console.assert(value)
+
+
+process->一个全局变量，global对象的属性 （描述当前Node.js 进程状态的对象）
+process的事件：
+exit
+beforeExit
+uncaughException
+Singal
+
+process属性：
+stdout
+stderr
+stdin
+argv
+excePath
+exceArg
+env --返回一个对象，成员为当前shell的环境变量
+exitCode
+version node的版本
+versions 一个属性包含了Node的版本和依赖
+config 一个包含用来编译当前Node执行文件的Js配置选项的对象。
+Pid
+title
+arch
+platform
+mainModule
+
+process的方法：
+abort()
+chdir(directory)
+cwd()
+exit()
+getgid()
+setgid()
+getuid()
+setuid(id)
+getgroups()
+setgroups(groups)
+initgroups(user, extra_group)
+kill(pid[, signal])
+memoryUsage()
+nextTick(callback)一旦当前事件循环结束，调用回调函数
+umask()设置或读取进程文件的掩码
+uptime()返回 Node 已经运行的秒数。
+hrtime()返回当前进程的高分辨时间，形式为 [seconds, nanoseconds]数组。
+
+Node.js常用工具

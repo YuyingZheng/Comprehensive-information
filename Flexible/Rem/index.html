@@ -10,4 +10,12 @@
 <body>
     <p>响应式布局的单位我们第一时间会想到通过rem单位来实现适配，但是它还需要内嵌一段脚本去动态计算跟元素大小。</p>
 </body>
+<script>
+    (function(){
+    console.log(1);
+    setTimeout(function() { console.log(2) }, 1000);
+    setTimeout(function () { console.log(3) }, 0);
+    console.log(4);
+    })();
+</script>
 </html>

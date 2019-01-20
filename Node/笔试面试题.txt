@@ -1,0 +1,39 @@
+1.设计模式分哪些，并分别介绍一下啊原理？
+
+2.域名注册，流程
+godaddy.com
+买域名->注册（域名与服务器Ip对上）
+用户输入域名 -> dns服务器 -> 广找域名解析 -> 找到对应服务器Ip
+
+3.笔试题
+var request = function (url) {
+	return new Promise((resolve, reject) => {
+        httpRequest = new XMLHttpRequest();
+        if (!httpRequest) {
+          alert('Giving up :( Cannot create an XMLHTTP instance');
+          reject();
+        }
+        httpRequest.onreadystatechange = () => {
+            if (httpRequest.readyState === XMLHttpRequest.DONE) {
+				if (httpRequest.status === 200) {
+                    // Everything is good, the response was received.
+                    resolve(httpRequest.responseText);
+				} else {
+                    // Not ready yet.
+                    reject(httpRequest);
+                }
+            }
+		};
+        httpRequest.open('GET', url);
+        httpRequest.send();
+    });
+}
+
+
+
+4.设计模式面试题
+https://www.imooc.com/article/70847
+https://www.cnblogs.com/tugenhua0707/p/5198407.html
+
+5.面试题
+https://blog.csdn.net/qq_22944825/article/details/78169321
