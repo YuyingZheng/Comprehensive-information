@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="id=edge">
+    <title>5. TO DO List</title>
+    <script src="../../vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        请输入todo文本：<input v-model="newTodoText" v-on:keyup.enter="addTodo">
+        <ul>
+            <li v-for="(todo, index) in todos">
+                {{ todo.title }}
+                <button v-on:click="removeTodo(index)">X</button>
+            </li>
+        </ul>
+    </div>
+    <script src="index.js"></script>
+</body>
+</html>

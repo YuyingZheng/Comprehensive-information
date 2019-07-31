@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<script src="../vue.js"></script>
+	<!-- <script src="https://cdn.jsdelivr.net/npm/vue"></script> -->
+	<title>1.1-Vue-Sharing-Demo</title>
+
+	<style>
+		section+section {
+			margin-top: 60px;
+		}
+
+		/* [v-cloak] {
+			display: none;
+		} */
+	</style>
+</head>
+<!-- 1.双向绑定
+2. data、（在组件里用函数返回） computed、 watch
+3. 如何获取api的数据绑定到页面上
+  3.1数组为什么要用Key标识
+	key是你这个标签的唯一标识，vue在渲染时，不是全部重新渲染， Vue 会尽可能高效地渲染元素，通常会复用已有元素而不是从头开始渲染。是利用virtral dom算法，在新旧nodes
+	对比vnodes; 如果没有标识的话，vue会尽可能的复用一样的标签（相同的类型元素)，重复的key会造成渲染错误
+	例子；https://cn.vuejs.org/v2/guide/conditional.html
+4. 生命周期例子
+5. 经常遇到的坑 -->
+
+
+<body>
+
+	<div id="app-1" class="bind-content">
+		<section class="vmodel">
+			<p>{{ message }}</p>
+			firstName: <input v-model="firstName">
+			lastName: <input v-model="lastName">
+			<label for="fullName">{{ fullName }}</label>
+		</section>
+
+		<section class="computed">
+			<span>{{ person }}</span>
+			<button @click="addNewProperty">+add</button>
+		</section>
+
+		<section class="api">
+			<ul class="list">
+				<li v-for="item in siteArr" :key="item.siteId" :value="item.name">{{ item.name }}</li>
+			</ul>
+		</section>
+	</div>
+	</div>
+
+	<script type="text/javascript">
+		var app = new Vue({
+			el: '#app-1',
+			data() {
+				return {
+					message: 'hello vue',
+					firstName: 'yuying',
+					lastName: 'zheng',
+					person: {
+						age: 12,
+						sex: "female"
+					},
+					siteArr: [{
+						siteId: '1',
+						name: 'yuying'
+					}, {
+						siteId: '2',
+						name: 'uzuuzu'
+					}]
+				}
+			},
+
+			computed: {
+				fullName: function () {
+					return this.lastName + ' ' + this.firstName
+				}
+			},
+
+			methods: {
+				addNewProperty() {
+					Vue.set(this.person, 'nickName', 'yy')
+					// this.person.nickName = 'yy'
+				},
+
+				getData() {
+					fetch('http://172.16.11.173:8077/mid-platform/common/getSiteList.json?unionId=P0000000000000000000000000013', {
+							methods: 'get',
+							headers: new Headers({
+								'token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiJpbml0XzAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMiIsInBkblR5cGUiOiIwMyIsImlhdCI6MTU1ODA3NDg0ODA2MCwiZXh0IjoxNTU4MDc4NDQ4MDYwfQ.9nEfVu5FfdEZuxgtA9TXbu02RyFBp9wP5bxikP3aDYs'
+							})
+						})
+						.then(response => {
+							response.json().then(data => {
+								this.siteArr = data.data
+							})
+						})
+				}
+			},
+
+			mounted() {
+				this.getData()
+			},
+
+			watch: {
+				firstName(newValue, oldValue) {
+					console.log('oldValue:', oldValue)
+					console.log('newValue:', newValue)
+				}
+			}
+		})
+	</script>
+</body>
+
+</html>

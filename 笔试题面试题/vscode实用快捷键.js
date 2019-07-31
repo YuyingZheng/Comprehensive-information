@@ -2,8 +2,11 @@
 // 2. 在不同文件之间回到上一个光标的位置 Control + - (win 待测试)
 // 3. 代码移动 Option + shift + 上下
 /* 4. 添加注释 单行注释 '//' (Cmd + /) (win Ctrl + /) 
-               块注释 /**/ Option+ Shift + A (alt + shift + a) */
+               块注释 '/**/' Option+ Shift + A (alt + shift + a) */
              
 /*  5. 定义和实现 f12跳到函数的定义处 
                cmd+f12（win Ctrl + f12）跳到函数的实现处 */
+
+6. 引用跳转  想知道函数或则类被谁引用了，这时你只需要将光标移动到函数或者类上面，然后按下shift + f12
+            Vs Code 就会打开一个引用列表和一个内嵌的编辑器，在这个引用列表，你选中某个引用，vs code 就会
            

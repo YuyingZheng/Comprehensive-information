@@ -532,3 +532,223 @@
   setTimeout(function () { console.log(3) }, 0);
   console.log(4);
 })();
+
+
+
+/*
+单页面应用 多页面
+*/
+
+;(function() {
+  /* 单页面应用（SPA）单页面仅需刷新局部资源，公共资源（js, css）仅需加载一次, 常用于QQ空间，PC端官网，购物等网站
+     多页面应用（MPA）多页面跳转刷新所有资源，每个公共资源(js css) 都需要选择性加载，常用于app或客户端等
+     https://juejin.im/post/5a0ea4ec6fb9a0450407725c
+  */
+})
+
+/*
+watch 和 computed 和 mounted的区别, vue的生命周期
+*/
+;(function(){
+  /*
+  ①从属性名上，computed是计算属性，也就是依赖其它的属性计算所得出最后的值。watch是去监听一个值的变化，然后执行相对应的函数。
+  ②从实现上，computed的值在getter执行后是会缓存的，只有在它依赖的属性值改变之后，下一次获取computed的值时才会重新调用对应的getter来计算。watch在每次监听的值变化时，都会执行回调。其实从这一点来看，都是在依赖的值变化之后，去执行回调。很多功能本来就很多属性都可以用，只不过有更适合的。如果一个值依赖多个属性（多对一），用computed肯定是更加方便的。如果一个值变化后会引起一系列操作，或者一个值变化会引起一系列值的变化（一对多），用watch更加方便一些。
+  ③watch的回调里面会传入监听属性的新旧值，通过这两个值可以做一些特定的操作。computed通常就是简单的计算。
+  ④watch和computed并没有哪个更底层，watch内部调用的是vm.$watch，它们的共同之处就是每个定义的属性都单独建立了一个Watcher对象。 
+  5.computed不能和data重复定义， watch需要现在data中先定义
+  */
+})
+
+生命周期钩子不会再被调用？？？？
+
+this.$route.params.id
+
+1.动态路由匹配
+  1.1 路由参数 this.$route.params 
+              $route.hash(当前路由的 hash 值 (带 #))   $route.query(url中的查询参数)
+  1.2 响应路由参数的变化 watch:{
+                  '$route'(to, from) {
+                    //对路由变化作出响应
+                  }
+                } 
+            beforeRouteUpdate(to, from, next) {
+              // react to route changes...
+              // don't forget to call next()
+            }
+  1.3 捕获所有路由或404 Not found 路由
+    使用通配符的时候, 通配符的路由应该放在最后，使用通配符时，$route.params内会自动添加一个pathmMatch(包含了url通过通配符被匹配的部分)
+    路由{ path: '*' } 通常用于客服端404错误 ？？？？？？
+
+  1.4 匹配优先级
+    同一个路径可以匹配多个路由，匹配优先级： 谁先定义的，谁的优先级就最高
+
+2. 嵌套路由
+
+3. 编程式的导航
+  借助router的实例方法
+  this.$router.push() 向History栈添加一个新的记录 当点击<router-link>时，这个方法会在内部调用,相当于调用.push()方法
+  this.$router.replace() 不会向history栈添加一个新的记录，会替换当前的记录
+  this.$router.go(n) 是在 history 记录中向前或者后退多少步 类似window.history.go(n) //如果history记录不够用，那就默默地失败吧
+
+4. 命名视图
+   嵌套命名视图
+
+5. 重定向和别名
+   redirect
+
+6. 路由组件传参
+   布尔模式
+   对象模式
+   函数模式
+7.HTML5 History 模式
+  vue-router默认hash模式 ---- 使用URL的hash来模拟一个完整的URL,于是 URL改变时，页面不会重新加载
+  为了避免很丑的hash, 我们可以用路由的history模式，这种模式充分利用history.pushState API来完成URL跳转而无需重新加载页面
+
+  警告：你应该在Vue应用里面覆盖所有的路由情况，然后再给出一个404页面
+
+8. 导航守卫
+  导航表示路由正在发生变化，vue-router提供的导航主要用来通过跳转或者取消的方式守卫导航
+  注：参数或查询的改变并不会触发进入/离开的导航守卫。可以通过观察$route的对象来应对这些变化，或者beforeRouteUpdate的组件内守卫
+
+  全局前置守卫
+  const router = new VueRouter({...})
+  router.beforeEach((to , from, next)=> {
+    // ...
+  })
+  全局解析守卫
+  router.beforeResolve() 导航被确认之前，同时在所有组件内守卫和异步路由组件被解析之后，解析守卫就被调用了
+
+  全局后置钩子 不会接受next函数也不会改变导航本身
+  router.afterEach((to, from)=> {
+    // ...
+  })
+  路由独享的守卫 可以在路由配置上直接定义beforeEnter守卫
+   beforeEnter: (to, from, next) => {
+     // ...
+   }
+  组件内的守卫  可以在路由组件内直接定义以下三个路由导航守卫
+
+  beforeRouterEnter(to, from, next) {
+    // 在渲染该组件的对应路由被confirm前调用
+    // 不！能！ 获取组件实例 'this'
+    // 因为当守卫执行前，组件实例还没被创建
+  }
+  // beforeRouterEnter() 不！能！ 获取组件实例 'this'
+  // 不过你可以通过传一个回调给next来访问组件实例
+  // 在导航被确认的时候执行回调，并且把组件实例作为回调方法的参数
+  // 该钩子函数时支持给next传递回调的唯一守卫。
+  beforeRouterEnter(to, from, next) {
+    next(vm => {
+      // 通过'vm' 访问组件实例
+    })
+  }
+
+  beforeRouteUpdate(to, from, next) {
+    // 在当前路由改变，但是该组件被复用时调用
+    // example: 对于一个带有动态参数的的路径/foo/:id, 在/foo/1和/foo/2 之间跳转的时候
+    // 由于渲染同样的Foo组件，因此组件实例会被复用，此时就会调用这个钩子函数
+    // 可以访问组件实例this
+
+  beforeRouterLeave(to, from, next) {
+    // 导航离开该组件的对应路由时调用
+    // 可以访问组件实例 this
+  }
+  }
+  完整的导航解析流程
+
+  1.导航被触发
+  2.在失活的组件里调用离开守卫
+  3.调用全局的beforeEach守卫
+  4.在重用的组件里调用beforeRouteUpdate 守卫
+  5.在路由配置里调用beforeEnter
+  6.解析异步路由组件
+  7.在被激活的组件里调用beforeRouteEnter
+  8.调用全局的beforeResolve守卫
+  9.导航被确认
+  10. 调用全局的afterEach钩子
+  11. 触发DOM更新
+  12. 用创建好的实例调用beforeRouteEnter守卫中传给next的回调函数
+
+路由元信息
+定义路由的时候可以配置meta字段，是一个对象
+
+过渡动效
+<router-view>是基本的动态组件，所以可以用<transition>组件给它添加一些过渡效果
+  这个会给所有路由设置一样的过渡效果
+<transition>
+   <router-view></router-view>
+</transition>
+
+  单个路由的过渡
+  在各自组件内使用<transition>并设置不同的name
+
+  基于路由的动态过渡
+  还可以基于当前路由与目标路由的变化关系，动态设置过渡效果
+  <transition :name="transitionName">
+  <router-view></router-view>
+  </transition>
+
+获取数据
+ 导航完成后获取数据
+   马上导航和渲染组件，然后在组件的created钩子中获取数据，这让我们有机会在数据获取期间展示一个Loading 状态。
+
+ 导航完成之前获取数据
+   在导航进入新的路由前获取数据。在接下来的组件的beforeRouteEnter守卫中获取数据，当数据获取成功后只调用next方法
+   在为后面的视图获取数据时，用户会停留在当前的界面，因此在获取数据期间，显示一些进度条或者别的指示。如果数据获取失败，同样有必要展示一些全局的错误提醒。
+
+
+滚动行为 （这个功能只在支持history.pushState）的浏览器中可用
+const router = new  VueRouter({
+  routes: [...],
+  scrollBehavior(to, from, savedPosition) {
+    // savedPosition 当且仅当popstate导航（通过浏览器的前进/后退 按钮触发）时才有用   
+    return { x:0, y: 0}
+})
+
+路由懒加载
+当打包构建应用时，js包会变得非常大，影响页面加载。把不同路由对应的组件分割成不同的代码
+块，只有路由被访问才加载对应组件-->高效
+
+
+function imgLoad(url) {
+  return new Promise(function(resolve, reject){
+    var request = new XMLHttpRequest();
+    request.open('GET', url)
+    request.responseType = 'blob';
+    request.onload = function() {
+      if (request.status === 200) {
+        resolve(request.response)
+      } else {
+        reject(Error('Image didn\'t load successfully; error code:' +request.statusText)
+          )
+      }
+    };
+    request.onerror = function () {
+      reject(Error('There was a network error.'))
+    };
+    request.send();
+  })
+}
+
+
+JS 函数 
+闭包： 多层嵌套函数 递归地包含了所有包含它的函数作用域--》作用域链
+
+
+var reg = /(-?d+)(d{3})/
+reg.test(num) num = num.replace(reg, '$1,$2')
+num = num + ''
+return num
+
+navigator.userAgent  addEventListener
+
+
+function flatten(arr) {
+  while(arr.some(item=>Array.isArray(item))) {
+   console.log(...arr)
+    arr = [].concat(...arr)
+  }
+  console.log(arr)
+}
+
+flatten([2, [3, 4]])

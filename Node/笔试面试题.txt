@@ -37,3 +37,22 @@ https://www.cnblogs.com/tugenhua0707/p/5198407.html
 
 5.面试题
 https://blog.csdn.net/qq_22944825/article/details/78169321
+
+
+
+6.JS基础，原理
+
+let const 和 var 的区别
+1. var是函数作用域，存在变量提升;
+   let是块作用域，let申明的变量不是全局对象的属性，故window.变量名（x）; let重新定义一个变量
+   const 只可在申明时赋值，不可随意修改
+2. let 和 const 是为了弥补var的缺陷而设计
+
+ map和foreach的区别 
+1. map不会改变原数组，会得到一个新的数组并返回，forEach会改变原来的数组，返回Underfined
+2. map适用于你要改变数据值. forEach适用于你不想改变数组值，而只是想用数据做一些事情 -->比如打印
+3. forEach比Map慢
+
+学习的过程中，一边做对比，一边学习
+
+vue生命周期
